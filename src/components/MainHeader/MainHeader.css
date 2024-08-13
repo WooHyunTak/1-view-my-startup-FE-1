@@ -28,7 +28,8 @@
   padding: 21px 17px;
 }
 
-@media only screen and (max-width: 1190px) {
+/*Tablet width 1199~744px*/
+@media only screen and (max-width: 1199px) {
   .MainHeader {
     height: 60px;
   }
@@ -38,6 +39,7 @@
   }
 }
 
+/*Mobile width 743px-375px*/
 @media only screen and (max-width: 743px) {
   .MainHeader {
     height: 56px;
