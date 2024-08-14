@@ -1,0 +1,61 @@
+.logo {
+  width: 112px;
+  height: auto;
+}
+
+.MainHeader {
+  display: flex;
+  justify-content: center;
+  border: 1px solid var(--black-100);
+  height: 70px;
+}
+
+.MainHeader .header-container {
+  display: flex;
+  max-width: 1200px;
+  width: 100%;
+  align-items: center;
+  gap: 40px;
+}
+
+.MainHeader nav ul {
+  display: flex;
+}
+
+.MainHeader nav li {
+  font-size: var(--15px);
+  font-weight: 600;
+  padding: 21px 17px;
+}
+
+/*Tablet width 1199~744px*/
+@media only screen and (max-width: 1199px) {
+  .MainHeader {
+    height: 60px;
+  }
+  .MainHeader .header-container {
+    padding-left: 24px;
+    gap: 24px;
+  }
+}
+
+/*Mobile width 743px-375px*/
+@media only screen and (max-width: 743px) {
+  .MainHeader {
+    height: 56px;
+  }
+  .MainHeader .header-container {
+    padding-left: 16px;
+    gap: 16px;
+  }
+  .MainHeader nav li {
+    padding: 19px 8px;
+    font-size: var(--13px);
+    font-weight: 700;
+  }
+  .logo {
+    max-width: 64px;
+    width: 100%;
+    height: auto;
+  }
+}
