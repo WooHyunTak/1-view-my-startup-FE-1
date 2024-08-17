@@ -1,26 +1,27 @@
-import { TableRow } from "../TableRow/TableRow";
+import { TableData } from "../TableData/TableData";
 import "./Table.css";
 
-export function Table({ list }) {
+export function Table({ list, tableHeaders }) {
   return (
     <table className="Table">
       <thead>
         <tr>
-          <th className="rank">순위</th>
-          <th className="field-company-name">기업 명</th>
-          <th className="field-company-description">기업 소개</th>
-          <th>카테고리</th>
-          <th>누적 투자 금액</th>
-          <th>매출액</th>
-          <th>고용인원</th>
+          {tableHeaders.map((header) => {
+            const fieldName = `field-${header.className}`;
+            return <th className={fieldName}>{header.colName}</th>;
+          })}
         </tr>
       </thead>
 
       <tbody>
         {list.map((item, index) => {
           return (
-            <tr id={item.id} className="TableRow">
-              <TableRow item={item} rank={index + 1} />
+            <tr key={item.id} className="table-row">
+              {tableHeaders.map((header) => {
+                return (
+                  <TableData item={item} rank={index + 1} header={header} />
+                );
+              })}
             </tr>
           );
         })}

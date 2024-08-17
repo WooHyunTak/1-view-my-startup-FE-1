@@ -26,6 +26,28 @@ function Home() {
     }
   }, [orderBy, keyword, lastId]);
 
+  const tableHeaders = [
+    { colName: "순위", className: "rank", field: "rank" },
+    { colName: "기업명", className: "company-name", field: "name" },
+    {
+      colName: "기업소개",
+      className: "company-description",
+      field: "description",
+    },
+    { colName: "카테고리", className: "category", field: "categories" },
+    {
+      colName: "누적 투자 금액",
+      className: "actual-investment",
+      field: "actualInvestment",
+    },
+    { colName: "매출액", className: "revenue", field: "revenue" },
+    {
+      colName: "고용인원",
+      className: "total-employees",
+      field: "totalEmployees",
+    },
+  ];
+
   useEffect(() => {
     init();
   });
@@ -35,7 +57,7 @@ function Home() {
       <div>
         <h2>전체 스타트업 목록</h2>
       </div>
-      <Table list={companyList} />
+      <Table list={companyList} tableHeaders={tableHeaders} />
     </section>
   );
 }

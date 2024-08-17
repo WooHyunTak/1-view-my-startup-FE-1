@@ -1,13 +1,13 @@
-tbody .TableRow:not(:last-child) {
+tbody .table-row:not(:last-child) {
   border-bottom: 1px solid var(--grey-300);
 }
 
-.TableRow td {
+.table-row td {
   text-align: center;
   vertical-align: middle;
 }
 
-.TableRow .company-name {
+.table-row .company-name-container {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -15,14 +15,14 @@ tbody .TableRow:not(:last-child) {
   width: 100%;
 }
 
-.TableRow .company-name span {
+.table-row .company-name-container span {
   color: #fff;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
 
-.TableRow .company-name .circle-crop {
+.table-row .company-name-container .circle-crop {
   min-width: 32px;
   height: auto;
   border-radius: 50%;
@@ -32,19 +32,19 @@ tbody .TableRow:not(:last-child) {
   overflow: hidden;
 }
 
-.TableRow .company-name img {
+.table-row .company-name-container img {
   width: 100%;
 }
 
-.TableRow .description {
+.table-row .company-description {
   width: 100%;
 }
 
-.TableRow td {
+.table-row td {
   padding: 15px;
 }
 
-.TableRow .description span {
+.table-row .company-description span {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
