@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
 import { getCompanies } from "../services/companyApi";
 import { Table } from "../components/Table/Table";
+import { DropDown } from "../components/DropDown/DropDown";
 
 function Home() {
-  const [orderBy, setOrderby] = useState("");
+  const [orderBy, setOrderBy] = useState("");
   const [keyword, setKeyword] = useState("");
   const [companyList, setCompanyList] = useState([]);
   const [lastId, setLastId] = useState("");
@@ -56,6 +57,7 @@ function Home() {
     <section className="Home">
       <div>
         <h2>전체 스타트업 목록</h2>
+        <DropDown orderBy={orderBy} setOrderBy={setOrderBy} />
       </div>
       <Table list={companyList} tableHeaders={tableHeaders} />
     </section>
