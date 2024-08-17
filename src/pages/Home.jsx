@@ -3,6 +3,8 @@ import { getCompanies } from "../services/companyApi";
 import { Table } from "../components/Table/Table";
 import { DropDown } from "../components/DropDown/DropDown";
 
+import "./Home.css";
+
 function Home() {
   const [orderBy, setOrderBy] = useState("");
   const [keyword, setKeyword] = useState("");
@@ -51,13 +53,17 @@ function Home() {
 
   useEffect(() => {
     init();
-  });
+  }, [init]);
 
   return (
     <section className="Home">
-      <div>
+      <div className="top-bar">
         <h2>전체 스타트업 목록</h2>
-        <DropDown orderBy={orderBy} setOrderBy={setOrderBy} />
+        <DropDown
+          orderBy={orderBy}
+          setOrderBy={setOrderBy}
+          buttonType="typeOne"
+        />
       </div>
       <Table list={companyList} tableHeaders={tableHeaders} />
     </section>

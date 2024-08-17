@@ -1,24 +1,21 @@
 import { useState, useRef, useEffect } from "react";
 import dropDownIcon from "../../assets/icon/ic_toggle.svg";
 
+import { optionsByType } from "./buttonOptions";
 import "./DropDown.css";
 
-export function DropDown({ orderBy, setOrderBy }) {
+export function DropDown({ orderBy, setOrderBy, buttonType }) {
   const [isOpen, setIsOpen] = useState(false);
   const dropDownRef = useRef(0);
 
-  const options = [
-    { value: "highestInvestment", label: "누적 투자금액 높은순" },
-    { value: "lowestInvestment", label: "누적 투자금액 낮은순" },
-    { value: "highestRevenue", label: "매출액 높은순" },
-    { value: "lowestRevenue", label: "매출액 낮은순" },
-    { value: "highestEmployees", label: "고용 인원 많은순" },
-    { value: "lowestEmployees", label: "고용 인원 적은순" },
-  ];
+  const typeSize = optionsByType[buttonType].size;
+  const options = optionsByType[buttonType].options;
 
   const displayCurrentOrder = (order) => {
     const selectedOption = options.find((option) => option.value === order);
-    return selectedOption ? selectedOption.label : "매출액 높은순";
+    return selectedOption
+      ? selectedOption.label
+      : optionsByType[buttonType].defaultSort;
   };
 
   const toggleDropDown = () => {
@@ -30,6 +27,7 @@ export function DropDown({ orderBy, setOrderBy }) {
     setIsOpen(false);
   };
 
+  //버튼 외 다른 공간 클릭하면 드롭다운 메뉴 닫힘.
   const handleClickOutside = (e) => {
     if (dropDownRef.current && !dropDownRef.current.contains(e.target)) {
       setIsOpen(false);
@@ -44,7 +42,7 @@ export function DropDown({ orderBy, setOrderBy }) {
   }, [dropDownRef]);
 
   return (
-    <div className="DropDown">
+    <div className={`DropDown ${typeSize}`}>
       <button onClick={toggleDropDown} ref={dropDownRef}>
         {displayCurrentOrder(orderBy)}
         <img src={dropDownIcon} alt="drop down icon" />
