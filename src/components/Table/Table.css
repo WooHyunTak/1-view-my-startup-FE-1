@@ -1,0 +1,68 @@
+.Table {
+  font-size: var(--14px);
+  border-collapse: collapse;
+  min-width: 1200px;
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  border-spacing: 0;
+  table-layout: fixed;
+  margin-top: 16px;
+}
+
+.Table,
+.Table th,
+.Table td {
+  border: none;
+}
+
+.Table thead {
+  background-color: var(--black-100);
+  font-weight: 500;
+  width: 100%;
+}
+
+.Table thead::after {
+  content: ".";
+  display: block;
+  background-color: var(--black-400);
+  color: var(--black-400);
+}
+
+.Table thead tr th:first-child {
+  border-bottom-left-radius: 4px;
+}
+
+.Table thead tr th:last-child {
+  border-bottom-right-radius: 4px;
+}
+
+.Table tbody tr:first-child td:first-child {
+  border-top-left-radius: 4px;
+}
+
+.Table tbody tr:first-child td:last-child {
+  border-top-right-radius: 4px;
+}
+
+.Table tbody {
+  background-color: var(--black-300);
+  color: var(--grey-100);
+}
+
+.Table th {
+  padding: 11px;
+  white-space: nowrap;
+}
+
+.Table thead .field-company-name {
+  width: 213px;
+}
+
+.Table thead .field-company-description {
+  width: 304px;
+}
+
+.Table thead .rank {
+  width: 68px;
+}
