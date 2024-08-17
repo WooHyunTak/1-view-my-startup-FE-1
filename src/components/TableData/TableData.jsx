@@ -55,10 +55,10 @@ export function TableData({ item, rank, header }) {
   };
 
   return (
-    <td>
+    <>
       {header.field === "rank"
         ? rank
         : renderTableData(header.className, header.field)}
-    </td>
+    </>
   );
 }

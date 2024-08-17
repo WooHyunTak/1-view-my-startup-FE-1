@@ -1,12 +1,11 @@
 .Table {
   font-size: var(--14px);
   border-collapse: collapse;
-  min-width: 1200px;
-  width: 100%;
+  width: clamp(696px, 100%, 1200px);
   border-radius: 4px;
   overflow: hidden;
   border-spacing: 0;
-  table-layout: fixed;
+  table-layout: auto;
   margin-top: 16px;
 }
 
@@ -19,7 +18,6 @@
 .Table thead {
   background-color: var(--black-100);
   font-weight: 500;
-  width: 100%;
 }
 
 .Table thead::after {
@@ -55,14 +53,30 @@
   white-space: nowrap;
 }
 
+/*table 고정 콜럼 3개 순위, 기업명, 기업설명 너비 관리*/
 .Table thead .field-company-name {
-  width: 213px;
+  width: clamp(150px, 100%, 213px);
 }
 
 .Table thead .field-company-description {
-  width: 304px;
+  width: clamp(180px, 100%, 304px);
 }
 
 .Table thead .field-rank {
   width: 68px;
+}
+
+@media only screen and (max-width: 1199px) {
+  .Table thead th.field-rank,
+  .Table tbody td.field-rank {
+    display: none;
+  }
+}
+@media only screen and (max-width: 743px) {
+  .Table {
+    font-size: var(--13px);
+  }
+  .table-container {
+    overflow-x: scroll;
+  }
 }
