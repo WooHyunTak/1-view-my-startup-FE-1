@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { getInvestmentStatus } from "../services/companyApi";
+import { getSelectionStatus } from "../services/companyApi";
 import { Table } from "../components/Table/Table";
 import { DropDown } from "../components/DropDown/DropDown";
 
@@ -13,7 +13,7 @@ function ComparisonStatus() {
 
   const init = useCallback(async () => {
     try {
-      const data = await getInvestmentStatus({ orderBy, cursor });
+      const data = await getSelectionStatus({ orderBy, cursor });
 
       const { list, nextCursor } = data;
       setCompanyList(list);
