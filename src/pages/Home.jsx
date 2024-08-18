@@ -29,6 +29,7 @@ function Home() {
     }
   }, [orderBy, keyword, lastId]);
 
+  //테이블 헤더 정의
   const tableHeaders = [
     { colName: "순위", className: "rank", field: "rank" },
     { colName: "기업명", className: "company-name", field: "name" },

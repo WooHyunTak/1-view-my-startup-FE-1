@@ -1,23 +1,11 @@
 import defaultImg from "../../assets/default_company_img.svg";
-
+import { convertToUnit } from "../../utils/convertToUnit";
 import "./TableData.css";
 
 export function TableData({ item, rank, header }) {
   const logoImg = item.brandImg ? item.brandImage : defaultImg;
 
-  const convertToUnit = (value) => {
-    const amount = Number(value);
-    if (amount || !NaN) {
-      if (amount >= 100000000) {
-        return amount / 100000000 + "억";
-      } else if (amount >= 10000000) {
-        return amount / 10000000 + "천만원";
-      }
-    } else {
-      return "N/A";
-    }
-  };
-
+  // 테이블 필드마다 필요한 디자인이 다르기 때문에 어느 필드냐에 따라 다르게 렌더.
   const renderTableData = (className, field) => {
     const value = item[field];
     if (value === undefined || value === null) {
@@ -54,6 +42,7 @@ export function TableData({ item, rank, header }) {
     }
   };
 
+  // 테이블 헤더에 순위가 정의된 테이블이면 rank 필드도 렌더 아니면 스킵
   return (
     <>
       {header.field === "rank"

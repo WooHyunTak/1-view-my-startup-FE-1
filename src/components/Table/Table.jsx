@@ -1,10 +1,12 @@
 import { TableData } from "../TableData/TableData";
+import { ColGroup } from "./ColGroup";
 import "./Table.css";
 
 export function Table({ list, tableHeaders }) {
   return (
     <div className="table-container">
       <table className="Table">
+        <ColGroup columns={tableHeaders} />
         <thead>
           <tr>
             {tableHeaders.map((header) => {

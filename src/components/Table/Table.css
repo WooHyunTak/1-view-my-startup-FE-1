@@ -5,7 +5,7 @@
   border-radius: 4px;
   overflow: hidden;
   border-spacing: 0;
-  table-layout: auto;
+  table-layout: fixed;
   margin-top: 16px;
 }
 
@@ -27,19 +27,19 @@
   color: var(--black-400);
 }
 
-.Table thead tr th:first-child {
+.Table thead tr th:first-of-type {
   border-bottom-left-radius: 4px;
 }
 
-.Table thead tr th:last-child {
+.Table thead tr th:first-of-type {
   border-bottom-right-radius: 4px;
 }
 
-.Table tbody tr:first-child td:first-child {
+.Table tbody tr:first-of-type td:first-of-type {
   border-top-left-radius: 4px;
 }
 
-.Table tbody tr:first-child td:last-child {
+.Table tbody tr:first-of-type td:last-of-type {
   border-top-right-radius: 4px;
 }
 
@@ -53,23 +53,41 @@
   white-space: nowrap;
 }
 
-/*table 고정 콜럼 3개 순위, 기업명, 기업설명 너비 관리*/
-.Table thead .field-company-name {
-  width: clamp(150px, 100%, 213px);
+/*colgroup으로 table 고정 콜럼 3개 순위, 기업명, 기업설명 너비 관리*/
+.Table .col-company-name {
+  width: 210px;
 }
-
-.Table thead .field-company-description {
-  width: clamp(180px, 100%, 304px);
+.Table .col-company-description {
+  width: 304px;
 }
-
-.Table thead .field-rank {
+.Table .col-rank {
   width: 68px;
+}
+.Table .col-rest {
+  width: auto;
 }
 
 @media only screen and (max-width: 1199px) {
+  /*전체 스타트업 목록에서 타블렛 사이즈에서 순위 컬럼 제거*/
   .Table thead th.field-rank,
-  .Table tbody td.field-rank {
+  .Table tbody td.field-rank,
+  .Table .col-rank {
     display: none;
+  }
+
+  /*제거된 첫번째 컬럼 대신 두번째 컬럼에 border-radius 재추가*/
+  .Table thead tr th:nth-of-type(2) {
+    border-bottom-left-radius: 4px;
+  }
+  .Table tbody tr:first-of-type td:nth-of-type(2) {
+    border-top-left-radius: 4px;
+  }
+
+  .Table .col-company-name {
+    width: 150px;
+  }
+  .Table .col-company-description {
+    width: 180px;
   }
 }
 @media only screen and (max-width: 743px) {
@@ -77,6 +95,6 @@
     font-size: var(--13px);
   }
   .table-container {
-    overflow-x: scroll;
+    overflow-x: auto;
   }
 }
