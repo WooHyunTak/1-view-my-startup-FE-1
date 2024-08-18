@@ -1,3 +1,5 @@
+//orderBy하나로 상태 관리 하기때문에 fetch에 필요한 요청쿼리 2개를 이어줌
+//호출 Api에서 split으로 sortBy, order로 나누고 요청
 // value는 setOrder()에 넣어줄 값
 // label은 dropdown 버튼에 보여질 부분
 const typeOneOptions = [
@@ -9,9 +11,7 @@ const typeOneOptions = [
   { value: "totalEmployees_asc", label: "고용 인원 적은순" },
 ];
 
-//orderBy하나로 상태 관리 하기때문에 fetch에 필요한 요청쿼리 2개를 이어줌
-//호출 Api에서 나눠줄 예정
-// ?orderBy=selectedCount&scending=asc
+// ?sortBy=selectedCount&order=asc
 const typeTwoOptions = [
   { value: "selectedCount_desc", label: "나의 기업 선택 횟수 높은순" },
   { value: "selectedCount_asc", label: "나의 기업 선택 횟수 낮은순" },

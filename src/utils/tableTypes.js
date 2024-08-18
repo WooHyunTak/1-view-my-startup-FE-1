@@ -1,3 +1,5 @@
+//테이블 헤더 정의, 이 테이블 헤더 기준으로 테이블과 테이블 데이터 렌더링.
+//prop으로 내려줄 tableHeaders <Table tableHeaders={companyListTableHeader}/>
 export const companyListTableHeader = [
   { colName: "순위", className: "rank", field: "rank" },
   { colName: "기업명", className: "company-name", field: "name" },
@@ -20,6 +22,7 @@ export const companyListTableHeader = [
   },
 ];
 
+//투자현황 페이지 테이블 헤더
 export const InvestmentStatusTableHeader = [
   { colName: "순위", className: "rank", field: "rank" },
   { colName: "기업명", className: "company-name", field: "name" },
@@ -46,6 +49,7 @@ export const InvestmentStatusTableHeader = [
   },
 ];
 
+//비교현황 페이지 테이블 헤더
 export const comparisonStatusTableHeader = [
   { colName: "순위", className: "rank", field: "rank" },
   { colName: "기업명", className: "company-name", field: "name" },

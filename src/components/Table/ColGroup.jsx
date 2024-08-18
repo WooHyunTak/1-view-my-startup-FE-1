@@ -1,4 +1,5 @@
 export function ColGroup({ columns }) {
+  // 컬럼 너비 커스텀을 위해 colgroup 추가. rank, name, description은 고정 너비.
   return (
     <colgroup>
       {columns.map((column, index) => {

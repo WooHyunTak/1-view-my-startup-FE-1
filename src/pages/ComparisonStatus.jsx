@@ -4,6 +4,7 @@ import { Table } from "../components/Table/Table";
 import { DropDown } from "../components/DropDown/DropDown";
 
 import { comparisonStatusTableHeader } from "../utils/tableTypes";
+import "./Home.css";
 
 function ComparisonStatus() {
   const [orderBy, setOrderBy] = useState("selectedCount_desc");
