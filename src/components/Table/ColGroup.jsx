@@ -1,7 +1,7 @@
 export function ColGroup({ columns }) {
   return (
     <colgroup>
-      {columns.map((column) => {
+      {columns.map((column, index) => {
         if (
           column.field === "rank" ||
           column.field === "name" ||
@@ -11,7 +11,7 @@ export function ColGroup({ columns }) {
             <col key={column.field} className={`col-${column.className}`} />
           );
         } else {
-          return <col className="col-rest" />;
+          return <col key={`rest-${index}`} className="col-rest" />;
         }
       })}
     </colgroup>

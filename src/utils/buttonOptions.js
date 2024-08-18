@@ -1,12 +1,12 @@
 // value는 setOrder()에 넣어줄 값
 // label은 dropdown 버튼에 보여질 부분
 const typeOneOptions = [
-  { value: "highestInvestment", label: "누적 투자금액 높은순" },
-  { value: "lowestInvestment", label: "누적 투자금액 낮은순" },
-  { value: "highestRevenue", label: "매출액 높은순" },
-  { value: "lowestRevenue", label: "매출액 낮은순" },
-  { value: "highestEmployees", label: "고용 인원 많은순" },
-  { value: "lowestEmployees", label: "고용 인원 적은순" },
+  { value: "actualInvestment_desc", label: "누적 투자금액 높은순" },
+  { value: "actualInvestment_asc", label: "누적 투자금액 낮은순" },
+  { value: "revenue_desc", label: "매출액 높은순" },
+  { value: "revenue_asc", label: "매출액 낮은순" },
+  { value: "totalEmployees_desc", label: "고용 인원 많은순" },
+  { value: "totalEmployees_asc", label: "고용 인원 적은순" },
 ];
 
 //orderBy하나로 상태 관리 하기때문에 fetch에 필요한 요청쿼리 2개를 이어줌

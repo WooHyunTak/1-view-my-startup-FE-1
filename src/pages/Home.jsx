@@ -3,22 +3,24 @@ import { getCompanies } from "../services/companyApi";
 import { Table } from "../components/Table/Table";
 import { DropDown } from "../components/DropDown/DropDown";
 
+import { companyListTableHeader } from "../utils/tableTypes";
+
 import "./Home.css";
 
 function Home() {
-  const [orderBy, setOrderBy] = useState("");
-  const [keyword, setKeyword] = useState("");
+  const [orderBy, setOrderBy] = useState("revenue_desc");
   const [companyList, setCompanyList] = useState([]);
-  const [lastId, setLastId] = useState("");
-  const [hasNext, setHasNext] = useState(0);
+  const [keyword, setKeyword] = useState("");
+  const [cursor, setCursor] = useState("");
+  const [nextCursor, setNextCursor] = useState(null);
 
   const init = useCallback(async () => {
     try {
-      const data = await getCompanies({ keyword, orderBy, lastId });
+      const data = await getCompanies({ orderBy, cursor });
 
       const { list, nextCursor } = data;
       setCompanyList(list);
-      setHasNext(data.length);
+      setNextCursor(nextCursor || null);
     } catch (err) {
       console.error(err.message);
 
@@ -27,30 +29,7 @@ function Home() {
         console.log(err.response.data);
       }
     }
-  }, [orderBy, keyword, lastId]);
-
-  //테이블 헤더 정의
-  const tableHeaders = [
-    { colName: "순위", className: "rank", field: "rank" },
-    { colName: "기업명", className: "company-name", field: "name" },
-    {
-      colName: "기업소개",
-      className: "company-description",
-      field: "description",
-    },
-    { colName: "카테고리", className: "category", field: "categories" },
-    {
-      colName: "누적 투자 금액",
-      className: "actual-investment",
-      field: "actualInvestment",
-    },
-    { colName: "매출액", className: "revenue", field: "revenue" },
-    {
-      colName: "고용인원",
-      className: "total-employees",
-      field: "totalEmployees",
-    },
-  ];
+  }, [orderBy, cursor]);
 
   useEffect(() => {
     init();
@@ -66,7 +45,11 @@ function Home() {
           buttonType="typeOne"
         />
       </div>
-      <Table list={companyList} tableHeaders={tableHeaders} />
+      <Table
+        list={companyList}
+        tableHeaders={companyListTableHeader}
+        tableName="company-list"
+      />
     </section>
   );
 }

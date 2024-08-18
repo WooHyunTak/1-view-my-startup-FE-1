@@ -30,6 +30,7 @@ export function TableData({ item, rank, header }) {
           </div>
         );
 
+      case "virtual-investment":
       case "actual-investment":
       case "revenue":
         return convertToUnit(value);
@@ -37,8 +38,18 @@ export function TableData({ item, rank, header }) {
       case "total-employees":
         return `${value}명`;
 
+      case "selected-count":
+      case "compared-count":
+        return value.toLocaleString();
+
+      //카테고리가 빈배열이거나 undefined, null 이면 n/a
+      case "categories":
+        return item.categories && item.categories.length > 0
+          ? item.categories[0]
+          : "N/A";
+
       default:
-        return field === "categories" && item.categories[0].name;
+        return typeof value === "number" ? value.toLocaleString() : value;
     }
   };
 

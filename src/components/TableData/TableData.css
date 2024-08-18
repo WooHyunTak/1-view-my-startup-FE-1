@@ -44,6 +44,7 @@ tbody .table-row:not(:last-child) {
   padding: 15px;
 }
 
+/* 기업 소개 2줄 이상되면 ...으로 축약 */
 .table-row .company-description span {
   display: -webkit-box;
   -webkit-box-orient: vertical;

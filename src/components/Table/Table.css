@@ -69,17 +69,17 @@
 
 @media only screen and (max-width: 1199px) {
   /*전체 스타트업 목록에서 타블렛 사이즈에서 순위 컬럼 제거*/
-  .Table thead th.field-rank,
-  .Table tbody td.field-rank,
-  .Table .col-rank {
+  .Table.company-list thead th.field-rank,
+  .Table.company-list tbody td.field-rank,
+  .Table.company-list .col-rank {
     display: none;
   }
 
   /*제거된 첫번째 컬럼 대신 두번째 컬럼에 border-radius 재추가*/
-  .Table thead tr th:nth-of-type(2) {
+  .Table.company-list thead tr th:nth-of-type(2) {
     border-bottom-left-radius: 4px;
   }
-  .Table tbody tr:first-of-type td:nth-of-type(2) {
+  .Table.company-list tbody tr:first-of-type td:nth-of-type(2) {
     border-top-left-radius: 4px;
   }
 
@@ -88,6 +88,11 @@
   }
   .Table .col-company-description {
     width: 180px;
+  }
+
+  .Table thead tr .field-virtual-investment {
+    white-space: normal;
+    padding: 0;
   }
 }
 @media only screen and (max-width: 743px) {
