@@ -1,0 +1,88 @@
+.DropDown.small,
+.DropDown.small ul {
+  max-width: 168px;
+  width: 100%;
+}
+
+.DropDown.large,
+.DropDown.large ul {
+  max-width: 264px;
+  width: 100%;
+}
+
+.DropDown {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.DropDown,
+.DropDown ul {
+  color: var(--grey-100);
+  font-size: var(--14px);
+  font-weight: 400;
+}
+
+.DropDown button {
+  display: flex;
+  background-color: var(--black-400);
+  padding: 12px 10px;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  border: 1px solid var(--grey-200);
+  width: 100%;
+}
+
+.DropDown.large button {
+  padding: 12px 16px;
+}
+
+.DropDown ul {
+  width: 100%;
+  position: absolute;
+  margin-top: 58px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--grey-200);
+  background-color: var(--black-400);
+}
+
+.DropDown ul li {
+  padding: 11.5px;
+  width: 100%;
+  text-align: center;
+}
+
+.DropDown ul li:hover {
+  background-color: var(--grey-400);
+}
+
+.DropDown ul li:not(:last-child) {
+  border-bottom: 1px solid var(--grey-200);
+}
+
+@media only screen and (max-width: 743px) {
+  .DropDown.small,
+  .DropDown.small ul {
+    max-width: 146px;
+  }
+  .DropDown.large,
+  .DropDown.large ul {
+    max-width: 241px;
+  }
+  .DropDown,
+  .DropDown ul {
+    color: var(--grey-100);
+    font-size: var(--12px);
+  }
+  .DropDown ul {
+    margin-top: 48px;
+  }
+  .DropDown button {
+    padding: 8px;
+    font-size: var(--12px);
+  }
+}

@@ -1,0 +1,56 @@
+tbody .table-row:not(:last-child) {
+  border-bottom: 1px solid var(--grey-300);
+}
+
+.table-row td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table-row .company-name-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.table-row .company-name-container span {
+  color: #fff;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.table-row .company-name-container .circle-crop {
+  min-width: 32px;
+  height: auto;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.table-row .company-name-container img {
+  width: 100%;
+}
+
+.table-row .company-description {
+  width: 100%;
+}
+
+.table-row td {
+  padding: 15px;
+}
+
+/* 기업 소개 2줄 이상되면 ...으로 축약 */
+.table-row .company-description span {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  text-align: left;
+}
