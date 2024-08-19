@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { getCompanies } from "../services/companyApi";
 import { Table } from "../components/Table/Table";
 import { DropDown } from "../components/DropDown/DropDown";
+import { Pagination } from "../components/Pagination/Pagination";
 
 import { companyListTableHeader } from "../utils/tableTypes";
 
@@ -10,17 +11,18 @@ import "./Home.css";
 function Home() {
   const [orderBy, setOrderBy] = useState("revenue_desc");
   const [companyList, setCompanyList] = useState([]);
-  const [keyword, setKeyword] = useState("");
-  const [cursor, setCursor] = useState("");
-  const [nextCursor, setNextCursor] = useState(null);
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
+  const [totalPages, setTotalPages] = useState(0);
 
   const init = useCallback(async () => {
     try {
-      const data = await getCompanies({ orderBy, cursor });
+      const data = await getCompanies({ orderBy, page, limit });
 
-      const { list, nextCursor } = data;
+      const { list, totalCount } = data;
       setCompanyList(list);
-      setNextCursor(nextCursor || null);
+      //totalPages = 전체 페이지 버튼 수
+      setTotalPages(Math.ceil(totalCount / limit));
     } catch (err) {
       console.error(err.message);
 
@@ -29,7 +31,7 @@ function Home() {
         console.log(err.response.data);
       }
     }
-  }, [orderBy, cursor]);
+  }, [orderBy, page, limit]);
 
   useEffect(() => {
     init();
@@ -49,6 +51,11 @@ function Home() {
         list={companyList}
         tableHeaders={companyListTableHeader}
         tableName="company-list"
+      />
+      <Pagination
+        currentPage={page}
+        setCurrentPage={setPage}
+        totalPages={totalPages}
       />
     </section>
   );
