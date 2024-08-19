@@ -16,12 +16,12 @@ export async function getCompanies({
   limit = 10,
   orderBy = "revenue_desc",
   keyword = "",
-  nextCursor,
+  page = 1,
 }) {
   const { sortBy, order } = splitSortOption(orderBy);
   try {
     const res = await instance.get("/api/companies", {
-      params: { nextCursor, limit, sortBy, order, keyword },
+      params: { page, limit, sortBy, order, keyword },
     });
     return res.data;
   } catch (error) {
@@ -32,12 +32,12 @@ export async function getCompanies({
 export async function getInvestmentStatus({
   limit = 10,
   orderBy = "virtualInvestment_desc",
-  nextCursor,
+  page = 1,
 }) {
   const { sortBy, order } = splitSortOption(orderBy);
   try {
     const res = await instance.get("/api/companies/investments/status", {
-      params: { nextCursor, limit, sortBy, order },
+      params: { page, limit, sortBy, order },
     });
     return res.data;
   } catch (error) {
@@ -48,12 +48,12 @@ export async function getInvestmentStatus({
 export async function getSelectionStatus({
   limit = 10,
   orderBy = "selectedCount_desc",
-  nextCursor,
+  page = 1,
 }) {
   const { sortBy, order } = splitSortOption(orderBy);
   try {
     const res = await instance.get("/api/comparisons/selections", {
-      params: { nextCursor, limit, sortBy, order },
+      params: { page, limit, sortBy, order },
     });
     return res.data;
   } catch (error) {

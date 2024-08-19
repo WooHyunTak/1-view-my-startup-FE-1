@@ -2,23 +2,25 @@ import { useState, useEffect, useCallback } from "react";
 import { getInvestmentStatus } from "../services/companyApi";
 import { Table } from "../components/Table/Table";
 import { DropDown } from "../components/DropDown/DropDown";
+import { Pagination } from "../components/Pagination/Pagination";
 
-import "./Home.css";
 import { InvestmentStatusTableHeader } from "../utils/tableTypes";
+import "./Home.css";
 
 function InvestmentStatus() {
   const [orderBy, setOrderBy] = useState("virtualInvestment_desc");
   const [companyList, setCompanyList] = useState([]);
-  const [cursor, setCursor] = useState("");
-  const [nextCursor, setNextCursor] = useState(null);
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
+  const [totalPages, setTotalPages] = useState(0);
 
   const init = useCallback(async () => {
     try {
-      const data = await getInvestmentStatus({ orderBy, cursor });
+      const data = await getInvestmentStatus({ orderBy, page, limit });
 
-      const { list, nextCursor } = data;
+      const { list, totalCount } = data;
       setCompanyList(list);
-      setNextCursor(nextCursor || null);
+      setTotalPages(Math.ceil(totalCount / limit));
     } catch (err) {
       console.error(err.message);
 
@@ -27,7 +29,7 @@ function InvestmentStatus() {
         console.log(err.response.data);
       }
     }
-  }, [orderBy, cursor]);
+  }, [orderBy, limit, page]);
 
   useEffect(() => {
     init();
@@ -44,6 +46,12 @@ function InvestmentStatus() {
         />
       </div>
       <Table list={companyList} tableHeaders={InvestmentStatusTableHeader} />
+
+      <Pagination
+        currentPage={page}
+        setCurrentPage={setPage}
+        totalPages={totalPages}
+      />
     </section>
   );
 }
