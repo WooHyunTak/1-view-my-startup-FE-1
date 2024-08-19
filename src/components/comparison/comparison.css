@@ -88,3 +88,32 @@
   padding: 13px 48px 13px 48px;
   border-radius: 50px;
 }
+
+.CompanyItem {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.CompanyItem-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.CompanyItem-name {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.09px;
+}
+
+.CompanyItem-categories {
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16.71px;
+  color: var(--grey-200);
+}
