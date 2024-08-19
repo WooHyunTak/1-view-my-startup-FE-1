@@ -4,7 +4,6 @@ import ic_search from "../../assets/icon/ic_search.svg";
 import default_company_img from "../../assets/default_company_img.svg";
 import "./SelectComparisonCompany.css";
 import { getCompanies } from "../../services/companyApi.js";
-import { json } from "react-router-dom";
 
 function RecentCompanies({ companyItem = {}, onStorage, onAddClick }) {
   const { name, categories } = companyItem;

@@ -63,15 +63,14 @@ function Comparison() {
     if (storageItems) {
       setResentCompanies(JSON.parse(storageItems));
     }
-  });
+  }, []);
 
   useEffect(() => {
-    console.log(resentCompanies);
     localStorage.setItem(
       "localStorageSelectId",
       JSON.stringify(resentCompanies)
     );
-  });
+  }, [resentCompanies]);
 
   return (
     <div className="Comparison">
