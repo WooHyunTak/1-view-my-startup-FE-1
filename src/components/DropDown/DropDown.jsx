@@ -50,6 +50,8 @@ export function DropDown({ orderBy, setOrderBy, buttonType }) {
 
   // 컴포넌트가 마운트(virtual DOM에 추가 -> DOM에 추가)될 때, document에 클릭 이벤트 리스너 추가
   // 언마운트(virtual DOM에서 삭제 -> DOM에서 삭제)될 때 리스너 제거
+  // useRef는 상태를 관리하지만, 그 상태가 변경되더라도 컴포넌트를 다시 렌더링하지 않으므로
+  // 의존성 배열에 추가할 필요 없음
   useEffect(() => {
     document.addEventListener("click", handleClickOutside); // 외부 클릭 감지
     return () => {
