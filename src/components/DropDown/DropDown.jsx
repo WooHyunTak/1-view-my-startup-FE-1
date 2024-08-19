@@ -55,7 +55,7 @@ export function DropDown({ orderBy, setOrderBy, buttonType }) {
     return () => {
       document.removeEventListener("click", handleClickOutside); // 클린업 함수
     };
-  }, [dropDownRef]);
+  }, []);
 
   return (
     <div className={`DropDown ${typeSize}`}>
