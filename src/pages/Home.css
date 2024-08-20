@@ -1,11 +1,44 @@
-.Home {
+.Home,
+.InvestmentStatus,
+.ComparisonStatus {
   display: flex;
   flex-direction: column;
 }
 
-.Home .top-bar {
+.InvestmentStatus .top-bar,
+.ComparisonStatus .top-bar {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
+
+.Home .top-bar {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr minmax(min-content, 448px) minmax(
+      min-content,
+      168px
+    );
+  gap: 1rem;
+}
+
+@media only screen and (max-width: 534px) {
+  .Home .top-bar {
+    grid-template-columns: auto auto;
+    grid-template-areas:
+      "t t"
+      "s d";
+    gap: 8px;
+  }
+  .Home .top-bar-title {
+    grid-area: t;
+  }
+
+  .Home .top-bar .SearchBar {
+    grid-area: s;
+  }
+
+  .Home .top-bar .DropDown {
+    grid-area: d;
+  }
 }

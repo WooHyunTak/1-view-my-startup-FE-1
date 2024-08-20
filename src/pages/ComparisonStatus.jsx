@@ -53,13 +53,13 @@ function ComparisonStatus() {
   }, [init]);
 
   return (
-    <section className="Home">
+    <section className="ComparisonStatus">
       <div className="top-bar">
         <h2>비교 현황</h2>
         <DropDown
           orderBy={queryParams.orderBy}
           setOrderBy={handleQueryParamsChange}
-          buttonType="typeOne"
+          buttonType="typeTwo"
         />
       </div>
       <Table list={companyList} tableHeaders={comparisonStatusTableHeader} />
