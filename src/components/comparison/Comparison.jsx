@@ -16,13 +16,29 @@ function CompanyItem({ items }) {
   );
 }
 
+const myCompanyModalObj = {
+  type: "myCompany",
+  title: "나의 기업 선택하기",
+  subTitle: "최근 선택된 기업",
+  items: [],
+};
+
+const comparisonModalObj = {
+  type: "comparison",
+  title: "비교할 기업 선택하기",
+  subTitle: "선택한 기업",
+  items: [],
+};
+
 function Comparison() {
   const [myCompany, setMyCompany] = useState();
   const [comparisonCompanies, setComparisonCompanies] = useState([]);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [resentCompanies, setResentCompanies] = useState([]);
+  const [modalContent, setModalContent] = useState(myCompanyModalObj);
 
   const handelResentCompanies = (obj) => {
+    if (modalContent.type !== "myCompany") return;
     if (resentCompanies.length > 5) {
       setResentCompanies((prev) => {
         const nextArray = prev.filter((item) => item.id !== obj.id);
@@ -49,13 +65,38 @@ function Comparison() {
   };
 
   const handleAddMyCompany = (obj) => {
-    setMyCompany(obj);
+    if (modalContent.type === "myCompany") {
+      setMyCompany(obj);
+    } else {
+      console.log(obj);
+      setComparisonCompanies((prev) => [...prev, obj]);
+    }
   };
-
-  const handleClick = () => {};
 
   const handleClear = () => {
     setMyCompany();
+  };
+
+  const handleAllClear = () => {
+    setMyCompany();
+    setComparisonCompanies([]);
+  };
+
+  const onModalValues = (obj) => {
+    setModalContent(obj);
+  };
+
+  const handleOpenComparisonModal = () => {
+    comparisonModalObj.items = comparisonCompanies;
+    onModalValues(comparisonModalObj);
+    console.log(comparisonModalObj);
+    handelOpenDialog();
+  };
+
+  const handleOpenMyCompanyModal = () => {
+    myCompanyModalObj.items = resentCompanies;
+    onModalValues(myCompanyModalObj);
+    handelOpenDialog();
   };
 
   useEffect(() => {
@@ -80,11 +121,12 @@ function Comparison() {
         onAddClick={handleAddMyCompany}
         resentCompanies={resentCompanies}
         onResentCompanies={handelResentCompanies}
+        content={modalContent}
       />
       <div>
         <div className="head-container">
           <h2>나의 기업을 선택해 주세요!</h2>
-          <button className="comparison-btn">
+          <button onClick={handleAllClear} className="comparison-btn">
             <img src={restart_icon} alt="초기화" />
             전체 초기화
           </button>
@@ -101,7 +143,10 @@ function Comparison() {
             )}
             {!myCompany && (
               <div className="add-company">
-                <button onClick={handelOpenDialog} className="add-company-btn">
+                <button
+                  onClick={handleOpenMyCompanyModal}
+                  className="add-company-btn"
+                >
                   <img src={add_icon} alt="기업추가하기아이콘" />
                 </button>
                 <p>기업 추가</p>
@@ -114,15 +159,18 @@ function Comparison() {
         <div>
           <div className="head-container">
             <h2>어떤 기업이 궁금하세요? (최대 5개)</h2>
-            <button className="comparison-btn">기업추가하기</button>
+            <button
+              className="comparison-btn"
+              onClick={handleOpenComparisonModal}
+            >
+              기업추가하기
+            </button>
           </div>
           <div className="out-container">
             <div className="items-container"></div>
           </div>
           <div className="bottom-btn-container">
-            <button className="comparison-submit-btn" onClick={handleClick}>
-              기업 비교하기
-            </button>
+            <button className="comparison-submit-btn">기업 비교하기</button>
           </div>
         </div>
       )}

@@ -5,36 +5,6 @@ import default_company_img from "../../assets/default_company_img.svg";
 import "./SelectComparisonCompany.css";
 import { getCompanies } from "../../services/companyApi.js";
 
-function RecentCompanies({ companyItem = {}, onStorage, onAddClick }) {
-  const { name, categories } = companyItem;
-
-  const onCompanyClick = () => {
-    onStorage(companyItem);
-    onAddClick(companyItem);
-  };
-
-  return (
-    <div className="item-list-container">
-      <div className="item-content-container">
-        <img
-          className="select-company-modal-img"
-          src={default_company_img}
-          alt="기업 기본 이미지"
-        />
-        <p className="select-company-modal-name">{name}</p>
-        <div className="select-company-modal-categories">
-          {categories.map((item, index) => (
-            <p key={index}>{item}</p>
-          ))}
-        </div>
-      </div>
-      <button onClick={onCompanyClick} className="select-company-modal-btn">
-        선택하기
-      </button>
-    </div>
-  );
-}
-
 function CompaniesList({ companyItem = {}, onStorage, onAddClick }) {
   const { name, categories } = companyItem;
 
@@ -71,10 +41,13 @@ function SelectComparisonCompany({
   onAddClick,
   resentCompanies,
   onResentCompanies,
+  content = {},
 }) {
   const defaultValues = {
     limit: 5,
   };
+
+  const { title, subTitle, items = [] } = content;
 
   const [queryObj, setQueryObj] = useState(defaultValues);
   const [Companies, setCompanies] = useState([]);
@@ -123,7 +96,7 @@ function SelectComparisonCompany({
     <dialog ref={dialogRef} className="select-comparison-company">
       <div className="select-comparison-modal-container">
         <div className="select-comparison-modal-header">
-          <h2>나의 기업 선택하기</h2>
+          <h2>{title}</h2>
           <img onClick={handleClose} src={ic_delete} alt="닫기 이미지" />
         </div>
         <div className="search-company-container">
@@ -148,16 +121,18 @@ function SelectComparisonCompany({
             />
           </div>
         </div>
-        <h2>최근 선택된 기업 ({resentCompanies.length})</h2>
-        {resentCompanies.map((item) => (
-          <RecentCompanies
+        <h2>
+          {subTitle} ({items.length})
+        </h2>
+        {items.map((item) => (
+          <CompaniesList
             key={item.id}
             companyItem={item}
             onStorage={handleStorage}
             onAddClick={onAddClick}
-          ></RecentCompanies>
+          ></CompaniesList>
         ))}
-        {!resentCompanies && <h3>최근 선택한 기업이 없습니다.</h3>}
+        {!items && <h3>선택한 기업이 없습니다.</h3>}
         <h2>검색 결과 ({totalCount})</h2>
         {Companies.map((item) => (
           <CompaniesList
