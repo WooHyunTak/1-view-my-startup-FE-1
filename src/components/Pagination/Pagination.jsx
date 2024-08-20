@@ -4,7 +4,7 @@ import nextBtnIcon from "../../assets/icon/ic_arrow_right.svg";
 import "./Pagination.css";
 
 // page, setPage를 currentPage, setCurrentPage로 내려줌
-export function Pagination({ currentPage, setCurrentPage, totalPages }) {
+export function Pagination({ currentPage, setCurrentPage, totalPages, size }) {
   let pageNumbers = [];
 
   let startPage;
@@ -46,7 +46,7 @@ export function Pagination({ currentPage, setCurrentPage, totalPages }) {
     setCurrentPage((prevPage) => prevPage + 1);
   };
   return (
-    <ul className="Pagination">
+    <ul className={`Pagination ${size}`}>
       <li>
         <button onClick={prevBtnClick} disabled={currentPage <= 1}>
           <img src={prevBtnIcon} alt="left button" />

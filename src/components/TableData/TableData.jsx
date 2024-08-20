@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import defaultImg from "../../assets/default_company_img.svg";
 import "./TableData.css";
 
-export function TableData({ item, rank, header }) {
+export function TableData({ item, header }) {
   const logoImg = item.brandImg ? item.brandImage : defaultImg;
 
   // 테이블 필드마다 필요한 디자인이 다르기 때문에 어느 필드냐에 따라 다르게 렌더.
@@ -21,7 +21,12 @@ export function TableData({ item, rank, header }) {
               <img src={logoImg} alt={`${value} logo`} />
             </div>
             <span>
-              <Link to={`/companies/${item.id}`}>{value}</Link>
+              <Link
+                className="link-to-detail-page"
+                to={`/companies/${item.id}`}
+              >
+                {value}
+              </Link>
             </span>
           </div>
         );
@@ -38,6 +43,9 @@ export function TableData({ item, rank, header }) {
       case "revenue":
         return convertToUnit(value);
 
+      case "investment-amount":
+        return convertToUnit(value);
+
       case "total-employees":
         return `${value}명`;
 
@@ -45,8 +53,17 @@ export function TableData({ item, rank, header }) {
       case "compared-count":
         return value.toLocaleString();
 
+      case "investment-comment":
+        //저기 <span> 이웃으로 버튼 컴포넌트 넣으시면 될거같아요!
+        // <div><span>value</span> <MoreButton/>   </div>
+        return (
+          <div className={className}>
+            <span>{value}</span>
+          </div>
+        );
+
       //카테고리가 빈배열이거나 undefined, null 이면 n/a
-      case "categories":
+      case "category":
         return item.categories && item.categories.length > 0
           ? item.categories[0]
           : "N/A";
@@ -60,7 +77,7 @@ export function TableData({ item, rank, header }) {
   return (
     <>
       {header.field === "rank"
-        ? rank
+        ? item.rank
         : renderTableData(header.className, header.field)}
     </>
   );
