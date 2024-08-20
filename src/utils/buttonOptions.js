@@ -15,8 +15,8 @@ const typeOneOptions = [
 const typeTwoOptions = [
   { value: "selectedCount_desc", label: "나의 기업 선택 횟수 높은순" },
   { value: "selectedCount_asc", label: "나의 기업 선택 횟수 낮은순" },
-  { value: "actualInvestment_desc", label: "실제 누적 투자 금액 높은순" },
-  { value: "actualInvestment_asc", label: "실제 누적 투자 금액 낮은순" },
+  { value: "comparedCount_desc", label: "비교 기업 선택 횟수 높은순" },
+  { value: "comparedCount_asc", label: "비교 기업 선택 횟수 높은순" },
 ];
 
 //?sortBy=virtualInvestment?order=desc
