@@ -39,6 +39,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 16px;
 }
 
 .cancel-btn {
@@ -111,6 +112,46 @@
 }
 
 .CompanyItem-categories {
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16.71px;
+  color: var(--grey-200);
+}
+
+.ComparisonItem {
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--grey-400);
+  gap: 4px;
+  width: 126px;
+  height: 187px;
+  border-radius: 8px;
+}
+
+.ComparisonItem-delete {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.ComparisonItem-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.ComparisonItem-name {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.09px;
+}
+
+.ComparisonItem-categories {
   margin-top: 4px;
   font-size: 14px;
   font-weight: 500;

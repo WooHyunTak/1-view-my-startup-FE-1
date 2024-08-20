@@ -2,13 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import ic_delete from "../../assets/icon/ic_delete.svg";
 import ic_search from "../../assets/icon/ic_search.svg";
 import default_company_img from "../../assets/default_company_img.svg";
-import "./SelectComparisonCompany.css";
+import "./SelectMyCompany.css";
 import { getCompanies } from "../../services/companyApi.js";
 import { Pagination } from "../Pagination/Pagination.jsx";
 
 function CompaniesList({ companyItem = {}, onStorage, onAddClick }) {
   const { name, categories } = companyItem;
 
+  //로컬스토리지 저장과 나의 기업 상태를 저장한다.
   const onCompanyClick = () => {
     onStorage(companyItem);
     onAddClick(companyItem);
@@ -24,9 +25,7 @@ function CompaniesList({ companyItem = {}, onStorage, onAddClick }) {
         />
         <p className="select-company-modal-name">{name}</p>
         <div className="select-company-modal-categories">
-          {categories.map((item, index) => (
-            <p key={index}>{item}</p>
-          ))}
+          <p>{categories[0]}</p>
         </div>
       </div>
       <button onClick={onCompanyClick} className="select-company-modal-btn">
@@ -36,20 +35,19 @@ function CompaniesList({ companyItem = {}, onStorage, onAddClick }) {
   );
 }
 
+//API 호출 기본값
 const defaultParams = {
   page: 1,
   limit: 5,
 };
 
-function SelectComparisonCompany({
+function SelectMyCompany({
   isOpen = false,
   onClose,
   onAddClick,
+  resentCompanies,
   onResentCompanies,
-  content = {},
 }) {
-  const { title, subTitle, items = [] } = content;
-
   const [queryObj, setQueryObj] = useState(defaultParams);
   const [Companies, setCompanies] = useState([]);
   const [keyword, setKeyword] = useState("");
@@ -58,6 +56,7 @@ function SelectComparisonCompany({
 
   const handleClose = () => onClose();
 
+  //최신 선택기업리스트를 로컬스토리지로 저장전에 State로 우선 관리한다.
   const handleStorage = (obj) => {
     onResentCompanies(obj);
   };
@@ -88,6 +87,7 @@ function SelectComparisonCompany({
     }
   };
 
+  //모달 다이얼로그 Ref 관리 -> 모달 open상태와 API호루 쿼리의 의존성 부여
   useEffect(() => {
     isOpen ? dialogRef.current.showModal() : dialogRef.current.close();
     handleSearch();
@@ -97,7 +97,7 @@ function SelectComparisonCompany({
     <dialog ref={dialogRef} className="select-comparison-company">
       <div className="select-comparison-modal-container">
         <div className="select-comparison-modal-header">
-          <h2>{title}</h2>
+          <h2>나의 기업 선택하기</h2>
           <img onClick={handleClose} src={ic_delete} alt="닫기 이미지" />
         </div>
         <div className="search-company-container">
@@ -122,10 +122,8 @@ function SelectComparisonCompany({
             />
           </div>
         </div>
-        <h2>
-          {subTitle} ({items.length})
-        </h2>
-        {items.map((item) => (
+        <h2>최근 선택된 기업 ({resentCompanies.length})</h2>
+        {resentCompanies.map((item) => (
           <CompaniesList
             key={item.id}
             companyItem={item}
@@ -133,7 +131,7 @@ function SelectComparisonCompany({
             onAddClick={onAddClick}
           ></CompaniesList>
         ))}
-        {!items && <h3>선택한 기업이 없습니다.</h3>}
+        {!resentCompanies && <h3>선택한 기업이 없습니다.</h3>}
         <h2>검색 결과 ({totalCount})</h2>
         {Companies.map((item) => (
           <CompaniesList
@@ -150,4 +148,4 @@ function SelectComparisonCompany({
   );
 }
 
-export default SelectComparisonCompany;
+export default SelectMyCompany;
