@@ -35,13 +35,6 @@ function CompaniesList({ companyItem = {}, onStorage, onAddClick }) {
   );
 }
 
-//API 호출 기본값
-const defaultParams = {
-  page: 1,
-  limit: 5,
-  totalPages: 0,
-};
-
 function SelectMyCompany({
   isOpen = false,
   onClose,
@@ -49,6 +42,12 @@ function SelectMyCompany({
   resentCompanies,
   onResentCompanies,
 }) {
+  //API 호출 기본값
+  const defaultParams = {
+    page: 1,
+    limit: 5,
+    totalPages: 0,
+  };
   const [queryObj, setQueryObj] = useState(defaultParams);
   const [Companies, setCompanies] = useState([]);
   const [keyword, setKeyword] = useState("");
@@ -92,8 +91,11 @@ function SelectMyCompany({
   //모달 다이얼로그 Ref 관리 -> 모달 open상태와 API호루 쿼리의 의존성 부여
   useEffect(() => {
     isOpen ? dialogRef.current.showModal() : dialogRef.current.close();
+  }, [isOpen]);
+
+  useEffect(() => {
     handleSearch();
-  }, [isOpen, queryObj]);
+  }, []);
 
   return (
     <dialog ref={dialogRef} className="select-comparison-company">

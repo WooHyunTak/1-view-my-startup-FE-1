@@ -53,17 +53,17 @@ function CheckInComparison({ myCompany = {}, comparisonIds = [] }) {
 
   const loadComparisonRankData = async () => {
     try {
-      const data = await api.getComparison(rankParams, myCompany.id);
+      const data = await api.getComparisonRank(rankParams, myCompany.id);
       setComparisonRankItem(data);
     } catch (error) {
       console.log(error.message);
     }
   };
 
-  useEffect(() => {
-    loadComparisonData();
-    loadComparisonRankData();
-  }, [comparisonParams, rankParams]);
+  //   useEffect(() => {
+  //     loadComparisonData();
+  //     loadComparisonRankData();
+  //   }, []);
 
   return (
     <div className="CheckInComparison">
@@ -100,6 +100,7 @@ function CheckInComparison({ myCompany = {}, comparisonIds = [] }) {
           />
         </div>
       </div>
+
       <div>
         <div className="head-container">
           <h2>기업 순위 확인하기</h2>
