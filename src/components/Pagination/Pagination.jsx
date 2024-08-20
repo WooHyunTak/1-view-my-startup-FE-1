@@ -43,13 +43,11 @@ export function Pagination({ setCurrentPage, queryParams, size }) {
   //이전 버튼 -1씩 이동
   const prevBtnClick = () => {
     setCurrentPage("page", currentPage - 1);
-    console.log(currentPage);
   };
 
   // 다음 버튼 +1씩 이동
   const nextBtnClick = () => {
     setCurrentPage("page", currentPage + 1);
-    console.log(currentPage);
   };
   return (
     <ul className={`Pagination ${size}`}>
