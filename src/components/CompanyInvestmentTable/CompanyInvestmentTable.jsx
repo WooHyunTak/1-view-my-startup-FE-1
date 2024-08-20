@@ -8,9 +8,8 @@ import "./CompanyInvestmentTable.css";
 function CompanyInvestmentTable({
   totalAmount,
   currentInvestments,
-  page,
-  setPage,
-  totalPages,
+  setCurrentPage,
+  queryParams,
 }) {
   return (
     <div className="CompanyInvestmentTable">
@@ -26,9 +25,8 @@ function CompanyInvestmentTable({
           tableName="investment-list"
         />
         <Pagination
-          currentPage={page}
-          setCurrentPage={setPage}
-          totalPages={totalPages}
+          setCurrentPage={setCurrentPage}
+          queryParams={queryParams}
           size="small"
         />
       </div>
