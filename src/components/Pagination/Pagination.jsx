@@ -4,7 +4,10 @@ import nextBtnIcon from "../../assets/icon/ic_arrow_right.svg";
 import "./Pagination.css";
 
 // page, setPage를 currentPage, setCurrentPage로 내려줌
-export function Pagination({ currentPage, setCurrentPage, totalPages, size }) {
+export function Pagination({ setCurrentPage, queryParams, size }) {
+  //page이름 currentPage로 re-assign
+  const { page: currentPage, totalPages } = queryParams;
+
   let pageNumbers = [];
 
   let startPage;
@@ -34,16 +37,19 @@ export function Pagination({ currentPage, setCurrentPage, totalPages, size }) {
   }
 
   const handlePageClick = (pageNum) => {
-    setCurrentPage(pageNum);
+    setCurrentPage("page", pageNum);
   };
+
   //이전 버튼 -1씩 이동
   const prevBtnClick = () => {
-    setCurrentPage((prevPage) => prevPage - 1);
+    setCurrentPage("page", currentPage - 1);
+    console.log(currentPage);
   };
 
   // 다음 버튼 +1씩 이동
   const nextBtnClick = () => {
-    setCurrentPage((prevPage) => prevPage + 1);
+    setCurrentPage("page", currentPage + 1);
+    console.log(currentPage);
   };
   return (
     <ul className={`Pagination ${size}`}>
