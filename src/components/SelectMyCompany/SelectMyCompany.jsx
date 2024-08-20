@@ -39,6 +39,7 @@ function CompaniesList({ companyItem = {}, onStorage, onAddClick }) {
 const defaultParams = {
   page: 1,
   limit: 5,
+  totalPages: 0,
 };
 
 function SelectMyCompany({
@@ -82,6 +83,7 @@ function SelectMyCompany({
       const { list, totalCount = 0 } = await getCompanies(queryObj);
       setCompanies(list);
       setTotalCount(totalCount);
+      handleValues("totalPages", Math.ceil(totalCount / queryObj.limit));
     } catch (error) {
       console.log(error.message);
     }
@@ -142,8 +144,12 @@ function SelectMyCompany({
           ></CompaniesList>
         ))}
         {!Companies.length && <h3>기업정보가 없습니다.</h3>}
+        <Pagination
+          setCurrentPage={handleValues}
+          queryParams={queryObj}
+          size="small"
+        />
       </div>
-      <Pagination></Pagination>
     </dialog>
   );
 }

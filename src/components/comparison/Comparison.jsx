@@ -14,22 +14,30 @@ function CompanyItem({ item }) {
   return (
     <div className="CompanyItem">
       <img className="CompanyItem-img" src={defaultImg} alt="기업 이미지" />
-      <h2 className="CompanyItem-name">{name}</h2>
-      <p className="CompanyItem-categories">{categories}</p>
+      <h2 className="CompanyItem-name ellipsis">{name}</h2>
+      <p className="CompanyItem-categories ellipsis">{categories}</p>
     </div>
   );
 }
 
 //비교하고자 선택한 기업의 정보를 리스트에 보여준다
 //위 컴포넌트와 디자인은 같지만 기능이 달라 별도로 분리함
-function ComparisonItem({ item }) {
+function ComparisonItem({ item = {}, onDelete }) {
   const { name, categories } = item;
+
+  const handleDelete = () => onDelete(item.id);
+
   return (
     <div className="ComparisonItem">
-      <img className="ComparisonItem-delete" src={ic_minus} alt="삭제" />
+      <img
+        onClick={handleDelete}
+        className="ComparisonItem-delete"
+        src={ic_minus}
+        alt="삭제"
+      />
       <img className="ComparisonItem-img" src={defaultImg} alt="기업 이미지" />
-      <h2 className="ComparisonItem-name">{name}</h2>
-      <p className="ComparisonItem-categories">{categories}</p>
+      <span className="ComparisonItem-name ellipsis">{name}</span>
+      <p className="ComparisonItem-categories ellipsis">{categories[0]}</p>
     </div>
   );
 }
@@ -95,9 +103,9 @@ function Comparison() {
   };
 
   //비교기업의 객체배열의 선택한 요소 삭제
-  const handleDeleteComparisonCompany = (obj) => {
+  const handleDeleteComparisonCompany = (id) => {
     setComparisonCompanies((prev) => {
-      const nextArray = prev.filter((item) => item.id !== obj.id);
+      const nextArray = prev.filter((item) => item.id !== id);
       return nextArray;
     });
   };
@@ -197,7 +205,11 @@ function Comparison() {
           <div className="out-container">
             <div className="items-container">
               {comparisonCompanies.map((item) => (
-                <ComparisonItem item={item} />
+                <ComparisonItem
+                  key={item.id}
+                  item={item}
+                  onDelete={handleDeleteComparisonCompany}
+                />
               ))}
             </div>
           </div>

@@ -117,6 +117,7 @@ function SelectComparisonCompany({
       const { list, totalCount = 0 } = await getCompanies(queryObj);
       setCompanies(list);
       setTotalCount(totalCount);
+      handleValues("totalPages", Math.ceil(totalCount / queryObj.limit));
     } catch (error) {
       console.log(error.message);
     }
@@ -176,7 +177,11 @@ function SelectComparisonCompany({
           ></CompaniesList>
         ))}
         {!Companies.length && <h3>기업정보가 없습니다.</h3>}
-        <Pagination></Pagination>
+        <Pagination
+          setCurrentPage={handleValues}
+          queryParams={queryObj}
+          size="small"
+        />
         <button onClick={handleClose} className="select-comparison-complete">
           확인
         </button>
