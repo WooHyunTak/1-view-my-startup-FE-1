@@ -6,7 +6,9 @@ export function ColGroup({ columns }) {
         if (
           column.field === "rank" ||
           column.field === "name" ||
-          column.field === "description"
+          column.field === "description" ||
+          column.field === "amount" ||
+          column.filed === "comment"
         ) {
           return (
             <col key={column.field} className={`col-${column.className}`} />

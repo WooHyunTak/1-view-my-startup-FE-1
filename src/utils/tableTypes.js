@@ -70,3 +70,20 @@ export const comparisonStatusTableHeader = [
     field: "comparedCount",
   },
 ];
+
+//기업 상세 투자자 테이블
+export const investmentTableHeader = [
+  { colName: "투자자 이름", className: "investor-name", field: "name" },
+  { colName: "순위", className: "investment-rank", field: "rank" },
+  {
+    colName: "투자 금액",
+    className: "investment-amount",
+    field: "amount",
+  },
+
+  {
+    colName: "투자 코멘트",
+    className: "investment-comment",
+    field: "comment",
+  },
+];
