@@ -1,9 +1,13 @@
 import "./CompanyDetail.css";
 import CompanyHeader from "../components/CompanyHeader/CompanyHeader";
+import CompanyInfo from "../components/CompanyInfo/CompanyInfo";
+import formatDescription from "../utils/formatDescription";
 
 import { getCompany } from "../services/companyApi";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+
+import "./CompanyDetail.css";
 
 function CompanyDetail() {
   const { companyId } = useParams(); // URL에서 companyId 추출
@@ -42,11 +46,20 @@ function CompanyDetail() {
   const categoryNames = company.categories
     .map((category) => category.name)
     .join(", ");
-  const description = company.description;
+  const actualInvestment = company.actualInvestment;
+  const revenue = company.revenue;
+  const employees = company.totalEmployees;
+  const description = formatDescription(company.description);
 
   return (
     <div className="CompanyDetail">
       <CompanyHeader name={name} categoryNames={categoryNames} />
+      <CompanyInfo
+        actualInvestment={actualInvestment}
+        revenue={revenue}
+        employees={employees}
+        description={description}
+      />
     </div>
   );
 }
