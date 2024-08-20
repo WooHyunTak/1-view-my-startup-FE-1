@@ -6,13 +6,12 @@ const instance = axios.create({
 });
 
 export async function getComparison(params = {}, item = {}) {
-  const res = await instance.post("/api/comparisons", { item }, { params });
-
+  const res = await instance.post("/api/comparisons", item, { params });
   return res.data;
 }
 
 export async function getComparisonRank(params = {}, id) {
-  const res = await instance.get(`/api/comparisons/rank:${id}`, {
+  const res = await instance.get(`/api/comparisons/rank/${id}`, {
     params,
   });
 

@@ -34,7 +34,12 @@ function CompaniesList({ companyItem = {}, onStorage, onAddClick }) {
     </div>
   );
 }
-
+//API 호출 기본값
+const defaultParams = {
+  page: 1,
+  limit: 5,
+  totalPages: 0,
+};
 function SelectMyCompany({
   isOpen = false,
   onClose,
@@ -42,12 +47,6 @@ function SelectMyCompany({
   resentCompanies,
   onResentCompanies,
 }) {
-  //API 호출 기본값
-  const defaultParams = {
-    page: 1,
-    limit: 5,
-    totalPages: 0,
-  };
   const [queryObj, setQueryObj] = useState(defaultParams);
   const [Companies, setCompanies] = useState([]);
   const [keyword, setKeyword] = useState("");
@@ -82,7 +81,7 @@ function SelectMyCompany({
       const { list, totalCount = 0 } = await getCompanies(queryObj);
       setCompanies(list);
       setTotalCount(totalCount);
-      handleValues("totalPages", Math.ceil(totalCount / queryObj.limit));
+      // handleValues("totalPages", Math.ceil(totalCount / queryObj.limit));
     } catch (error) {
       console.log(error.message);
     }
@@ -95,7 +94,7 @@ function SelectMyCompany({
 
   useEffect(() => {
     handleSearch();
-  }, []);
+  }, [queryObj]);
 
   return (
     <dialog ref={dialogRef} className="select-comparison-company">

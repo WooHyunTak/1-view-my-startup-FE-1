@@ -75,6 +75,13 @@ function SelectedCompaniesList({ companyItem = {}, onDeleteClick }) {
   );
 }
 
+//API 호출 기본값
+const defaultParams = {
+  page: 1,
+  limit: 5,
+  totalPages: 0,
+};
+
 function SelectComparisonCompany({
   isOpen = false,
   onClose,
@@ -82,11 +89,6 @@ function SelectComparisonCompany({
   onDeleteClick,
   comparisonCompanies = [],
 }) {
-  //API 호출 기본값
-  const defaultParams = {
-    page: 1,
-    limit: 5,
-  };
   const [queryObj, setQueryObj] = useState(defaultParams);
   const [Companies, setCompanies] = useState([]);
   const [keyword, setKeyword] = useState("");
@@ -96,6 +98,7 @@ function SelectComparisonCompany({
   const handleClose = () => onClose();
 
   const handleValues = (name, value) => {
+    console.log("확인");
     setQueryObj((prev) => ({
       ...prev,
       [name]: value,
@@ -116,7 +119,8 @@ function SelectComparisonCompany({
       const { list, totalCount = 0 } = await getCompanies(queryObj);
       setCompanies(list);
       setTotalCount(totalCount);
-      handleValues("totalPages", Math.ceil(totalCount / queryObj.limit));
+      // handleValues("totalPages", Math.ceil(totalCount / queryObj.limit));
+      console.log(totalCount);
     } catch (error) {
       console.log(error.message);
     }

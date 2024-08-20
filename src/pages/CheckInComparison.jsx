@@ -3,8 +3,13 @@ import defaultImg from "../assets/default_company_img.svg";
 import AlertModal from "../components/AlertModal/AlertModal.jsx";
 import { DropDown } from "../components/DropDown/DropDown.jsx";
 import * as api from "../services/comparisonApi.js";
-import { ComparisonTableHeader } from "../utils/tableTypes.js";
+import {
+  ComparisonTableHeader,
+  companyListTableHeader,
+} from "../utils/tableTypes.js";
 import { Table } from "../components/Table/Table.jsx";
+import { useLocation } from "react-router-dom";
+import "./CheckInComparison.css";
 
 //내가 선택한 기업의 정보를 리스트에 보여준다
 function CompanyItem({ item }) {
@@ -26,7 +31,9 @@ const defaultParams = {
   order: "asc",
 };
 
-function CheckInComparison({ myCompany = {}, comparisonIds = [] }) {
+function CheckInComparison() {
+  const location = useLocation();
+  const { myCompany, comparisonIds } = location.state || {};
   const [alertMeg, setAlertMeg] = useState(false);
   const [comparisonParams, setComparisonParams] = useState(defaultParams);
   const [rankParams, setRankParams] = useState(defaultParams);
@@ -34,7 +41,7 @@ function CheckInComparison({ myCompany = {}, comparisonIds = [] }) {
   const [comparisonRankItem, setComparisonRankItem] = useState([]);
 
   const reqComparison = {
-    comparisonIds: comparisonIds,
+    comparisonIds: [...comparisonIds, myCompany.id],
   };
 
   //모달 핸들링
@@ -60,10 +67,10 @@ function CheckInComparison({ myCompany = {}, comparisonIds = [] }) {
     }
   };
 
-  //   useEffect(() => {
-  //     loadComparisonData();
-  //     loadComparisonRankData();
-  //   }, []);
+  useEffect(() => {
+    loadComparisonData();
+    loadComparisonRankData();
+  }, []);
 
   return (
     <div className="CheckInComparison">
@@ -75,7 +82,9 @@ function CheckInComparison({ myCompany = {}, comparisonIds = [] }) {
       <div>
         <div className="head-container">
           <h2>내가 선택한 기업</h2>
-          <button className="comparison-btn">다른 기업 비교하기</button>
+          <button className="check-in-different-btn check-in-btn">
+            다른 기업 비교하기
+          </button>
         </div>
         <div className="out-container">
           <div className="items-container">
@@ -108,15 +117,17 @@ function CheckInComparison({ myCompany = {}, comparisonIds = [] }) {
         </div>
         <div>
           <Table
-            list={comparisonItem}
-            tableHeaders={ComparisonTableHeader}
+            list={comparisonRankItem}
+            tableHeaders={companyListTableHeader}
             //   tableName="company-list"
           />
         </div>
       </div>
 
       <div className="bottom-btn-container">
-        <button className="comparison-submit-btn">기업 비교하기</button>
+        <button className="check-in-investment-btn check-in-btn">
+          나의 기업에 투자하기
+        </button>
       </div>
     </div>
   );
