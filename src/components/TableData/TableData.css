@@ -54,3 +54,12 @@ tbody .table-row:not(:last-child) {
   white-space: normal;
   text-align: left;
 }
+
+.link-to-detail-page {
+  color: #fff;
+}
+
+.link-to-detail-page:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

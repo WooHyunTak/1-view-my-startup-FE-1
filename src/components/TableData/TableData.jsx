@@ -21,7 +21,12 @@ export function TableData({ item, header }) {
               <img src={logoImg} alt={`${value} logo`} />
             </div>
             <span>
-              <Link to={`/companies/${item.id}`}>{value}</Link>
+              <Link
+                className="link-to-detail-page"
+                to={`/companies/${item.id}`}
+              >
+                {value}
+              </Link>
             </span>
           </div>
         );
@@ -46,7 +51,7 @@ export function TableData({ item, header }) {
         return value.toLocaleString();
 
       //카테고리가 빈배열이거나 undefined, null 이면 n/a
-      case "categories":
+      case "category":
         return item.categories && item.categories.length > 0
           ? item.categories[0]
           : "N/A";
