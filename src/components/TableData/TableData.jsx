@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import defaultImg from "../../assets/default_company_img.svg";
 import "./TableData.css";
 
-export function TableData({ item, rank, header }) {
+export function TableData({ item, header }) {
   const logoImg = item.brandImg ? item.brandImage : defaultImg;
 
   // 테이블 필드마다 필요한 디자인이 다르기 때문에 어느 필드냐에 따라 다르게 렌더.
@@ -60,7 +60,7 @@ export function TableData({ item, rank, header }) {
   return (
     <>
       {header.field === "rank"
-        ? rank
+        ? item.rank
         : renderTableData(header.className, header.field)}
     </>
   );
