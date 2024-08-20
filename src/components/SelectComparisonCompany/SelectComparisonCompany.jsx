@@ -98,7 +98,6 @@ function SelectComparisonCompany({
   const handleClose = () => onClose();
 
   const handleValues = (name, value) => {
-    console.log("확인");
     setQueryObj((prev) => ({
       ...prev,
       [name]: value,
@@ -120,7 +119,6 @@ function SelectComparisonCompany({
       setCompanies(list);
       setTotalCount(totalCount);
       // handleValues("totalPages", Math.ceil(totalCount / queryObj.limit));
-      console.log(totalCount);
     } catch (error) {
       console.log(error.message);
     }
