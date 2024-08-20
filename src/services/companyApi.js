@@ -29,6 +29,15 @@ export async function getCompanies({
   }
 }
 
+export async function getCompany(id) {
+  try {
+    const res = await instance.get(`/api/companies/${id}`);
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
 export async function getInvestmentStatus({
   limit = 10,
   orderBy = "virtualInvestment_desc",

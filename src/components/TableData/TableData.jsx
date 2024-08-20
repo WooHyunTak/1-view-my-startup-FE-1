@@ -1,5 +1,6 @@
-import defaultImg from "../../assets/default_company_img.svg";
 import { convertToUnit } from "../../utils/convertToUnit";
+import { Link } from "react-router-dom";
+import defaultImg from "../../assets/default_company_img.svg";
 import "./TableData.css";
 
 export function TableData({ item, rank, header }) {
@@ -19,7 +20,9 @@ export function TableData({ item, rank, header }) {
             <div className="circle-crop">
               <img src={logoImg} alt={`${value} logo`} />
             </div>
-            <span>{value}</span>
+            <span>
+              <Link to={`/companies/${item.id}`}>{value}</Link>
+            </span>
           </div>
         );
 

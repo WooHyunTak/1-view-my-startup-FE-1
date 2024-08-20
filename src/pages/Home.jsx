@@ -15,6 +15,8 @@ function Home() {
   const [limit, setLimit] = useState(10);
   const [totalPages, setTotalPages] = useState(0);
 
+  // 데이터를 불러오는 함수.
+  // useCallback 사용해서 필요할 때만 함수를 재생성
   const init = useCallback(async () => {
     try {
       const data = await getCompanies({ orderBy, page, limit });
@@ -31,8 +33,10 @@ function Home() {
         console.log(err.response.data);
       }
     }
-  }, [orderBy, page, limit]);
+  }, [orderBy, page, limit]); // orderBy, page, keyword가 변경될 때만 함수가 재생성
 
+  // 컴포넌트가 처음 렌더링될 때,
+  // 그리고 init 함수가 변결될 때 실행
   useEffect(() => {
     init();
   }, [init]);
