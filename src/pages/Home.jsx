@@ -52,7 +52,7 @@ function Home() {
         console.log(err.response.data);
       }
     }
-  }, [queryParams]); // orderBy, page, keyword가 변경될 때만 함수가 재생성
+  }, [queryParams]); // queryParams가 변경될 때만 함수가 재생성
 
   // 컴포넌트가 처음 렌더링될 때,
   // 그리고 init 함수가 변결될 때 실행

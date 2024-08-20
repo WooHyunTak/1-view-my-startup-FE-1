@@ -18,7 +18,6 @@ export function SearchBar({ setKeyword }) {
     // 사용자가 글자 조합을 끝내고 enter를 쳤을때만 검색 가능
     if (e.key === "Enter" && !e.nativeEvent.isComposing) {
       setKeyword("keyword", search);
-      console.log(search);
     }
   };
 
