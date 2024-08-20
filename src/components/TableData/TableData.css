@@ -40,6 +40,17 @@ tbody .table-row:not(:last-child) {
   width: 100%;
 }
 
+.table-row .investment-comment {
+  display: flex;
+  justify-content: space-between;
+}
+
+.table-row .investment-comment span {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
 .table-row td {
   padding: 15px;
 }

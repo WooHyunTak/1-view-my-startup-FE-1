@@ -43,12 +43,24 @@ export function TableData({ item, header }) {
       case "revenue":
         return convertToUnit(value);
 
+      case "investment-amount":
+        return convertToUnit(value);
+
       case "total-employees":
         return `${value}명`;
 
       case "selected-count":
       case "compared-count":
         return value.toLocaleString();
+
+      case "investment-comment":
+        //저기 <span> 이웃으로 버튼 컴포넌트 넣으시면 될거같아요!
+        // <div><span>value</span> <MoreButton/>   </div>
+        return (
+          <div className={className}>
+            <span>{value}</span>
+          </div>
+        );
 
       //카테고리가 빈배열이거나 undefined, null 이면 n/a
       case "category":
