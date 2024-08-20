@@ -1,6 +1,7 @@
-import "./CompanyDetail.css";
 import CompanyHeader from "../components/CompanyHeader/CompanyHeader";
 import CompanyInfo from "../components/CompanyInfo/CompanyInfo";
+import CompanyInvestmentTable from "../components/CompanyInvestmentTable/CompanyInvestmentTable";
+
 import formatDescription from "../utils/formatDescription";
 
 import { getCompany } from "../services/companyApi";
@@ -11,15 +12,38 @@ import "./CompanyDetail.css";
 
 function CompanyDetail() {
   const { companyId } = useParams(); // URL에서 companyId 추출
-  const [company, setCompany] = useState(null); // 회사 데이터를 저장할 상태
-  const [loading, setLoading] = useState(true); // 로딩 상태 관리
-  const [error, setError] = useState(null); // 에러 상태 관리
+  const [companyData, setCompanyData] = useState({
+    name: "",
+    categoryNames: "",
+    revenue: "",
+    employees: "",
+    description: "",
+    investments: [],
+  });
+
+  const [page, setPage] = useState(1);
+  const [limit] = useState(5);
+  const [totalPages, setTotalPages] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     async function fetchCompany() {
       try {
         const data = await getCompany(companyId);
-        setCompany(data);
+        setCompanyData({
+          name: data.name,
+          categoryNames: data.categories
+            .map((category) => category.name)
+            .join(", "),
+          actual: data.actualInvestment,
+          revenue: data.revenue,
+          employees: data.employees,
+          description: formatDescription(data.description),
+          investments: data.investments,
+        });
+
+        setTotalPages(Math.ceil(data.investments.length / limit));
       } catch (err) {
         setError("Failed to load company data");
         console.error(err.message);
@@ -35,30 +59,47 @@ function CompanyDetail() {
 
     // 컴포넌트가 마운트되면 데이터 가져오기 시작
     fetchCompany();
-  }, [companyId]); // companyId가 변결될 때마다 다시 실행
+  }, [companyId, limit]);
 
   if (loading) return <div>Loading...</div>; // 로딩 중일 때 메시지 표시
   if (error) return <div>{error}</div>; // 에러 발생 시 메시지 표시
-  if (!company) return <div>No company data available</div>; // company가 null일 경우 처리
+  if (!companyData) return <div>No company data available</div>; // company가 null일 경우 처리
 
   // 상세페이지에 필요한 정보
-  const name = company.name;
-  const categoryNames = company.categories
-    .map((category) => category.name)
-    .join(", ");
-  const actualInvestment = company.actualInvestment;
-  const revenue = company.revenue;
-  const employees = company.totalEmployees;
-  const description = formatDescription(company.description);
+  const {
+    name,
+    categoryNames,
+    actual,
+    revenue,
+    employees,
+    description,
+    investments,
+  } = companyData;
+
+  // 페이지네이션 위해서 현재 페이지에 해당하는 투자 데이터 추출
+  const startIdx = (page - 1) * limit;
+  const currentInvestments = investments.slice(startIdx, startIdx + limit);
+
+  // 투자 총 금액
+  const totalAmount = investments
+    .map((investment) => Number(investment.amount))
+    .reduce((sum, amount) => sum + amount, 0);
 
   return (
     <div className="CompanyDetail">
       <CompanyHeader name={name} categoryNames={categoryNames} />
       <CompanyInfo
-        actualInvestment={actualInvestment}
+        actualInvestment={actual}
         revenue={revenue}
         employees={employees}
         description={description}
+      />
+      <CompanyInvestmentTable
+        totalAmount={totalAmount}
+        currentInvestments={currentInvestments}
+        page={page}
+        setPage={setPage}
+        totalPages={totalPages}
       />
     </div>
   );
