@@ -38,7 +38,7 @@ function CompaniesList({ companyItem = {}, onStorage, onAddClick }) {
 
 const defaultParams = {
   page: 1,
-  limit: 10,
+  limit: 5,
 };
 
 function SelectComparisonCompany({
@@ -46,7 +46,10 @@ function SelectComparisonCompany({
   onClose,
   onAddClick,
   onResentCompanies,
+  content = {},
 }) {
+  const { title, subTitle, items = [] } = content;
+
   const [queryObj, setQueryObj] = useState(defaultParams);
   const [Companies, setCompanies] = useState([]);
   const [keyword, setKeyword] = useState("");

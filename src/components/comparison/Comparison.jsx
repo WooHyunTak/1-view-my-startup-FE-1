@@ -130,7 +130,6 @@ function Comparison() {
         onAddClick={handleAddMyCompany}
         resentCompanies={resentCompanies}
         onResentCompanies={handelResentCompanies}
-        content={modalContent}
       />
       <AlertModal
         isAlertMeg={alertMeg}
