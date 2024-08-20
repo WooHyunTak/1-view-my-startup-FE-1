@@ -54,14 +54,14 @@ export async function getInvestmentStatus({
   }
 }
 
-export async function getSelectionStatus({
+export async function getComparisonStatus({
   limit = 10,
   orderBy = "selectedCount_desc",
   page = 1,
 }) {
   const { sortBy, order } = splitSortOption(orderBy);
   try {
-    const res = await instance.get("/api/comparisons/selections", {
+    const res = await instance.get("/api/comparisons/status", {
       params: { page, limit, sortBy, order },
     });
     return res.data;

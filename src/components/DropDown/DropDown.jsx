@@ -36,7 +36,7 @@ export function DropDown({ orderBy, setOrderBy, buttonType }) {
   // 사용자가 드롭다운 메뉴를 클릭했을 때 호출되는 함수
   // 선택한 정렬 기준을 `setOrderBy`를 통해 업데이트하고, 드롭다운을 닫음
   const handleSorting = (option) => {
-    setOrderBy(option);
+    setOrderBy("orderBy", option);
     setIsOpen(false);
   };
 

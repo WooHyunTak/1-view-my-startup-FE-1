@@ -81,7 +81,7 @@ export function TableData({ item, header }) {
   return (
     <>
       {header.field === "rank"
-        ? item.rank
+        ? `${item.rank}위`
         : renderTableData(header.className, header.field)}
     </>
   );

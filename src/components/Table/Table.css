@@ -46,6 +46,7 @@
 .Table tbody {
   background-color: var(--black-300);
   color: var(--grey-100);
+  font-weight: 400;
 }
 
 .Table th {
@@ -56,6 +57,8 @@
 /*colgroup으로 table 고정 콜럼 3개 순위, 기업명, 기업설명 너비 관리*/
 .Table .col-company-name {
   width: 210px;
+  color: #fff;
+  font-weight: 500;
 }
 .Table .col-company-description {
   width: 304px;

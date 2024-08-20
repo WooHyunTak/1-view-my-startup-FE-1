@@ -1,0 +1,123 @@
+.select-comparison-company::backdrop {
+  background: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
+}
+
+.select-comparison-modal-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.select-comparison-company {
+  width: 496px;
+  margin: auto;
+  padding: 24px;
+  border-radius: 16px;
+  background-color: var(--black-300);
+}
+
+.select-comparison-modal-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.select-comparison-company h2,
+h3 {
+  color: #ffffff;
+}
+
+.search-company-container {
+  position: relative;
+}
+
+.search-company-input {
+  width: 448px;
+  height: 48px;
+  padding: 12px;
+  border-radius: 10px;
+  color: #ffffff;
+  border: 1px solid var(--grey-200);
+}
+
+.search-img-container {
+  align-items: center;
+  justify-content: space-between;
+  top: 12px;
+  right: 12px;
+  width: 52px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  gap: 12px;
+}
+
+.search-company-reset {
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--grey-300);
+}
+
+.search-company-search {
+  width: 24px;
+  height: 24px;
+}
+
+.item-list-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-list-container p {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.09px;
+}
+
+.select-company-modal-category {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16.71px;
+}
+
+.item-content-container {
+  display: flex;
+  align-items: center;
+}
+
+.select-company-modal-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+.select-company-modal-name {
+  margin-left: 16px;
+  color: #ffffff;
+}
+
+.select-company-modal-categories {
+  margin-left: 8px;
+  display: flex;
+  gap: 5px;
+  color: var(--grey-200);
+}
+
+.select-company-modal-btn {
+  width: 104px;
+  height: 48px;
+  border-radius: 10px;
+  border: 1px solid var(--orange);
+  background-color: var(--black-300);
+  color: var(--orange);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.09px;
+}
+
+.select-company-modal-btn:hover {
+  border: 1px solid var(--grey-100);
+  color: var(--grey-100);
+}

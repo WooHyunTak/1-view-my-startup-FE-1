@@ -1,0 +1,43 @@
+.alert-modal::backdrop {
+  background: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
+}
+
+.alert-modal {
+  width: 496px;
+  margin: auto;
+  padding: 24px;
+  border-radius: 16px;
+  background-color: var(--black-300);
+  min-height: 186px;
+}
+
+.alert-modal-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 140px;
+  align-items: center;
+  justify-content: center;
+}
+
+.alert-modal-message {
+  color: #ffffff;
+  height: auto;
+  margin-bottom: 32px;
+}
+
+.alert-modal-btn-container {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  bottom: 0;
+  width: 100%;
+}
+
+.alert-btn {
+  width: 194px;
+  height: 48px;
+  padding: 13px 48px;
+  border-radius: 50px;
+  bottom: 0;
+}

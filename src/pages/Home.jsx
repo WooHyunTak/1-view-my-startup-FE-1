@@ -3,28 +3,47 @@ import { getCompanies } from "../services/companyApi";
 import { Table } from "../components/Table/Table";
 import { DropDown } from "../components/DropDown/DropDown";
 import { Pagination } from "../components/Pagination/Pagination";
+import { SearchBar } from "../components/SearchBar/SearchBar";
 
+// 테이블 헤더 (테이블 종류) 가져오기
 import { companyListTableHeader } from "../utils/tableTypes";
 
 import "./Home.css";
 
+// 쿼리 파라미터 초기화 (기본값)
+const INITIAL_QUERY_PARAMS = {
+  orderBy: "revenue_desc",
+  limit: 10,
+  totalPages: 0,
+  page: 1,
+  keyword: "",
+};
+
 function Home() {
-  const [orderBy, setOrderBy] = useState("revenue_desc");
   const [companyList, setCompanyList] = useState([]);
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(10);
-  const [totalPages, setTotalPages] = useState(0);
+  const [queryParams, setQueryParams] = useState(INITIAL_QUERY_PARAMS);
+
+  //쿼리 파라미터 한번에 객체로 관리
+  // 쿼리 파라미터 핸들러 (name = query name, value= query value)
+  const handleQueryParamsChange = (name, value) => {
+    setQueryParams((preValue) => {
+      return {
+        ...preValue,
+        [name]: value,
+      };
+    });
+  };
 
   // 데이터를 불러오는 함수.
   // useCallback 사용해서 필요할 때만 함수를 재생성
   const init = useCallback(async () => {
+    const { orderBy, page, limit, keyword } = queryParams;
     try {
-      const data = await getCompanies({ orderBy, page, limit });
+      const data = await getCompanies({ orderBy, page, limit, keyword });
 
       const { list, totalCount } = data;
       setCompanyList(list);
-      //totalPages = 전체 페이지 버튼 수
-      setTotalPages(Math.ceil(totalCount / limit));
+      handleQueryParamsChange("totalPages", Math.ceil(totalCount / limit));
     } catch (err) {
       console.error(err.message);
 
@@ -33,7 +52,7 @@ function Home() {
         console.log(err.response.data);
       }
     }
-  }, [orderBy, page, limit]); // orderBy, page, keyword가 변경될 때만 함수가 재생성
+  }, [queryParams]); // queryParams가 변경될 때만 함수가 재생성
 
   // 컴포넌트가 처음 렌더링될 때,
   // 그리고 init 함수가 변결될 때 실행
@@ -44,10 +63,12 @@ function Home() {
   return (
     <section className="Home">
       <div className="top-bar">
-        <h2>전체 스타트업 목록</h2>
+        <h2 className="top-bar-title">전체 스타트업 목록</h2>
+
+        <SearchBar setKeyword={handleQueryParamsChange} />
         <DropDown
-          orderBy={orderBy}
-          setOrderBy={setOrderBy}
+          orderBy={queryParams.orderBy}
+          setOrderBy={handleQueryParamsChange}
           buttonType="typeOne"
         />
       </div>
@@ -57,9 +78,8 @@ function Home() {
         tableName="company-list"
       />
       <Pagination
-        currentPage={page}
-        setCurrentPage={setPage}
-        totalPages={totalPages}
+        setCurrentPage={handleQueryParamsChange}
+        queryParams={queryParams}
       />
     </section>
   );

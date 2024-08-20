@@ -7,20 +7,37 @@ import { Pagination } from "../components/Pagination/Pagination";
 import { InvestmentStatusTableHeader } from "../utils/tableTypes";
 import "./Home.css";
 
+// 쿼리 파라미터 초기화 (기본값)
+const INITIAL_QUERY_PARAMS = {
+  orderBy: "virtualInvestment_desc",
+  limit: 10,
+  totalPages: 0,
+  page: 1,
+};
+
 function InvestmentStatus() {
-  const [orderBy, setOrderBy] = useState("virtualInvestment_desc");
   const [companyList, setCompanyList] = useState([]);
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(10);
-  const [totalPages, setTotalPages] = useState(0);
+  const [queryParams, setQueryParams] = useState(INITIAL_QUERY_PARAMS);
+
+  //쿼리 파라미터 한번에 객체로 관리
+  // 쿼리 파라미터 핸들러 (name = query name, value= query value)
+  const handleQueryParamsChange = (name, value) => {
+    setQueryParams((preValue) => {
+      return {
+        ...preValue,
+        [name]: value,
+      };
+    });
+  };
 
   const init = useCallback(async () => {
+    const { orderBy, page, limit } = queryParams;
     try {
       const data = await getInvestmentStatus({ orderBy, page, limit });
 
       const { list, totalCount } = data;
       setCompanyList(list);
-      setTotalPages(Math.ceil(totalCount / limit));
+      handleQueryParamsChange("totalPages", Math.ceil(totalCount / limit));
     } catch (err) {
       console.error(err.message);
 
@@ -29,28 +46,27 @@ function InvestmentStatus() {
         console.log(err.response.data);
       }
     }
-  }, [orderBy, limit, page]);
+  }, [queryParams]);
 
   useEffect(() => {
     init();
   }, [init]);
 
   return (
-    <section className="Home">
+    <section className="InvestmentStatus">
       <div className="top-bar">
         <h2>투자 현황</h2>
         <DropDown
-          orderBy={orderBy}
-          setOrderBy={setOrderBy}
+          orderBy={queryParams.orderBy}
+          setOrderBy={handleQueryParamsChange}
           buttonType="typeThree"
         />
       </div>
       <Table list={companyList} tableHeaders={InvestmentStatusTableHeader} />
 
       <Pagination
-        currentPage={page}
-        setCurrentPage={setPage}
-        totalPages={totalPages}
+        setCurrentPage={handleQueryParamsChange}
+        queryParams={queryParams}
       />
     </section>
   );
