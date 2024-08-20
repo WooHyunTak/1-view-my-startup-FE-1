@@ -53,7 +53,7 @@ function InvestmentStatus() {
   }, [init]);
 
   return (
-    <section className="Home">
+    <section className="InvestmentStatus">
       <div className="top-bar">
         <h2>투자 현황</h2>
         <DropDown

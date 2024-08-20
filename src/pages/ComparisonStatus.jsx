@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { getSelectionStatus } from "../services/companyApi";
+import { getComparisonStatus } from "../services/companyApi";
 import { Table } from "../components/Table/Table";
 import { DropDown } from "../components/DropDown/DropDown";
 import { Pagination } from "../components/Pagination/Pagination";
@@ -33,7 +33,7 @@ function ComparisonStatus() {
   const init = useCallback(async () => {
     const { orderBy, page, limit } = queryParams;
     try {
-      const data = await getSelectionStatus({ orderBy, page, limit });
+      const data = await getComparisonStatus({ orderBy, page, limit });
 
       const { list, totalCount } = data;
       setCompanyList(list);
@@ -53,13 +53,13 @@ function ComparisonStatus() {
   }, [init]);
 
   return (
-    <section className="Home">
+    <section className="ComparisonStatus">
       <div className="top-bar">
         <h2>비교 현황</h2>
         <DropDown
           orderBy={queryParams.orderBy}
           setOrderBy={handleQueryParamsChange}
-          buttonType="typeOne"
+          buttonType="typeTwo"
         />
       </div>
       <Table list={companyList} tableHeaders={comparisonStatusTableHeader} />

@@ -1,13 +1,11 @@
 .DropDown.small,
 .DropDown.small ul {
-  max-width: 168px;
-  width: 100%;
+  width: clamp(146px, 100%, 168px);
 }
 
 .DropDown.large,
 .DropDown.large ul {
-  max-width: 264px;
-  width: 100%;
+  width: clamp(241px, 100%, 264px);
 }
 
 .DropDown {
@@ -73,6 +71,10 @@
   .DropDown.large,
   .DropDown.large ul {
     max-width: 241px;
+  }
+
+  .DropDown.large button {
+    padding: 8px 12px;
   }
   .DropDown,
   .DropDown ul {

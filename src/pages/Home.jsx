@@ -3,7 +3,9 @@ import { getCompanies } from "../services/companyApi";
 import { Table } from "../components/Table/Table";
 import { DropDown } from "../components/DropDown/DropDown";
 import { Pagination } from "../components/Pagination/Pagination";
+import { SearchBar } from "../components/SearchBar/SearchBar";
 
+// 테이블 헤더 (테이블 종류) 가져오기
 import { companyListTableHeader } from "../utils/tableTypes";
 
 import "./Home.css";
@@ -14,6 +16,7 @@ const INITIAL_QUERY_PARAMS = {
   limit: 10,
   totalPages: 0,
   page: 1,
+  keyword: "",
 };
 
 function Home() {
@@ -34,9 +37,9 @@ function Home() {
   // 데이터를 불러오는 함수.
   // useCallback 사용해서 필요할 때만 함수를 재생성
   const init = useCallback(async () => {
-    const { orderBy, page, limit } = queryParams;
+    const { orderBy, page, limit, keyword } = queryParams;
     try {
-      const data = await getCompanies({ orderBy, page, limit });
+      const data = await getCompanies({ orderBy, page, limit, keyword });
 
       const { list, totalCount } = data;
       setCompanyList(list);
@@ -49,7 +52,7 @@ function Home() {
         console.log(err.response.data);
       }
     }
-  }, [queryParams]); // orderBy, page, keyword가 변경될 때만 함수가 재생성
+  }, [queryParams]); // queryParams가 변경될 때만 함수가 재생성
 
   // 컴포넌트가 처음 렌더링될 때,
   // 그리고 init 함수가 변결될 때 실행
@@ -60,7 +63,9 @@ function Home() {
   return (
     <section className="Home">
       <div className="top-bar">
-        <h2>전체 스타트업 목록</h2>
+        <h2 className="top-bar-title">전체 스타트업 목록</h2>
+
+        <SearchBar setKeyword={handleQueryParamsChange} />
         <DropDown
           orderBy={queryParams.orderBy}
           setOrderBy={handleQueryParamsChange}
