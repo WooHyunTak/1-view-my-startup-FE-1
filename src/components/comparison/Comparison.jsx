@@ -7,6 +7,7 @@ import SelectComparisonCompany from "../SelectComparisonCompany/SelectComparison
 import defaultImg from "../../assets/default_company_img.svg";
 import ic_minus from "../../assets/icon/ic_minus.svg";
 import AlertModal from "../AlertModal/AlertModal";
+import { useNavigate } from "react-router-dom";
 
 //내가 선택한 기업의 정보를 리스트에 보여준다
 function CompanyItem({ item }) {
@@ -46,6 +47,7 @@ function ComparisonItem({ item = {}, onDelete }) {
 let alertMessage = "";
 
 function Comparison() {
+  const navigate = useNavigate();
   const [myCompany, setMyCompany] = useState();
   const [comparisonCompanies, setComparisonCompanies] = useState([]);
   const [selectMyCompanyOpen, setSelectMyCompanyOpen] = useState(false);
@@ -119,6 +121,14 @@ function Comparison() {
   const handleAllClear = () => {
     setMyCompany();
     setComparisonCompanies([]);
+  };
+
+  const CheckInNavigate = () => {
+    const navData = {
+      myCompany,
+      comparisonIds: comparisonCompanies.map(({ id }) => id),
+    };
+    navigate("check-id-comparison", { state: navData });
   };
 
   //로컬스토리지 관리
@@ -214,7 +224,9 @@ function Comparison() {
             </div>
           </div>
           <div className="bottom-btn-container">
-            <button className="comparison-submit-btn">기업 비교하기</button>
+            <button onClick={CheckInNavigate} className="comparison-submit-btn">
+              기업 비교하기
+            </button>
           </div>
         </div>
       )}
