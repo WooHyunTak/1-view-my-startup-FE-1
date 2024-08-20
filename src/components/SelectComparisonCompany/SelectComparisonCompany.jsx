@@ -4,6 +4,7 @@ import ic_search from "../../assets/icon/ic_search.svg";
 import default_company_img from "../../assets/default_company_img.svg";
 import "./SelectComparisonCompany.css";
 import { getCompanies } from "../../services/companyApi.js";
+import { Pagination } from "../Pagination/Pagination.jsx";
 
 function CompaniesList({ companyItem = {}, onStorage, onAddClick }) {
   const { name, categories } = companyItem;
@@ -35,21 +36,21 @@ function CompaniesList({ companyItem = {}, onStorage, onAddClick }) {
   );
 }
 
+const defaultParams = {
+  page: 1,
+  limit: 10,
+};
+
 function SelectComparisonCompany({
   isOpen = false,
   onClose,
   onAddClick,
-  resentCompanies,
   onResentCompanies,
   content = {},
 }) {
-  const defaultValues = {
-    limit: 5,
-  };
-
   const { title, subTitle, items = [] } = content;
 
-  const [queryObj, setQueryObj] = useState(defaultValues);
+  const [queryObj, setQueryObj] = useState(defaultParams);
   const [Companies, setCompanies] = useState([]);
   const [keyword, setKeyword] = useState("");
   const [totalCount, setTotalCount] = useState(0);
@@ -144,6 +145,7 @@ function SelectComparisonCompany({
         ))}
         {!Companies.length && <h3>기업정보가 없습니다.</h3>}
       </div>
+      <Pagination></Pagination>
     </dialog>
   );
 }

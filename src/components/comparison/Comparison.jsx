@@ -4,6 +4,7 @@ import restart_icon from "../../assets/icon/ic_restart.svg";
 import "./comparison.css";
 import SelectComparisonCompany from "../SelectComparisonCompany/SelectComparisonCompany";
 import defaultImg from "../../assets/default_company_img.svg";
+import AlertModal from "../AlertModal/AlertModal";
 
 function CompanyItem({ items }) {
   const { name, categories } = items;
@@ -30,10 +31,13 @@ const comparisonModalObj = {
   items: [],
 };
 
+let alertMessage = "";
+
 function Comparison() {
   const [myCompany, setMyCompany] = useState();
   const [comparisonCompanies, setComparisonCompanies] = useState([]);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [alertMeg, setAlertMeg] = useState(false);
   const [resentCompanies, setResentCompanies] = useState([]);
   const [modalContent, setModalContent] = useState(myCompanyModalObj);
 
@@ -56,20 +60,26 @@ function Comparison() {
     handelCloseDialog();
   };
 
-  const handelOpenDialog = () => {
-    setDialogOpen(true);
-  };
-
-  const handelCloseDialog = () => {
-    setDialogOpen(false);
-  };
+  //모달 핸들링
+  const handelOpenDialog = () => setDialogOpen(true);
+  const handelCloseDialog = () => setDialogOpen(false);
+  const handelOpenAlert = () => setAlertMeg(true);
+  const handelCloseAlert = () => setAlertMeg(false);
 
   const handleAddMyCompany = (obj) => {
     if (modalContent.type === "myCompany") {
       setMyCompany(obj);
     } else {
-      console.log(obj);
-      setComparisonCompanies((prev) => [...prev, obj]);
+      if (comparisonCompanies.length >= 5) {
+        alertMessage = "비교할 기업은 최대 5개까지 선택 가능합니다.";
+        handelOpenAlert(true);
+      } else {
+        setComparisonCompanies((prev) => {
+          const nextArray = prev.filter((item) => item.id !== obj.id);
+          nextArray.push(obj);
+          return nextArray;
+        });
+      }
     }
   };
 
@@ -89,7 +99,6 @@ function Comparison() {
   const handleOpenComparisonModal = () => {
     comparisonModalObj.items = comparisonCompanies;
     onModalValues(comparisonModalObj);
-    console.log(comparisonModalObj);
     handelOpenDialog();
   };
 
@@ -122,6 +131,11 @@ function Comparison() {
         resentCompanies={resentCompanies}
         onResentCompanies={handelResentCompanies}
         content={modalContent}
+      />
+      <AlertModal
+        isAlertMeg={alertMeg}
+        message={alertMessage}
+        onClose={handelCloseAlert}
       />
       <div>
         <div className="head-container">
