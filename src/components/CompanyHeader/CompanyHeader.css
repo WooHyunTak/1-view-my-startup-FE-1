@@ -1,0 +1,28 @@
+.CompanyHeader {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  gap: 18px;
+  border-bottom: 1px solid #2e2e2e;
+  padding-bottom: 32px;
+}
+.CompanyHeader img {
+  border-radius: 50%;
+}
+.CompanyHeader .name-category {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.CompanyHeader .name {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28.64px;
+  color: #ffffff;
+}
+.CompanyHeader .category {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23.87px;
+  color: #747474;
+}

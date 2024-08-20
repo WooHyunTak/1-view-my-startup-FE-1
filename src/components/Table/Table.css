@@ -67,6 +67,12 @@
   width: auto;
 }
 
+.Table .col-investor-name,
+.Table .col-investment-amount,
+.Table .col-investment-rank {
+  width: 86px;
+}
+
 @media only screen and (max-width: 1199px) {
   /*전체 스타트업 목록에서 타블렛 사이즈에서 순위 컬럼 제거*/
   .Table.company-list thead th.field-rank,
