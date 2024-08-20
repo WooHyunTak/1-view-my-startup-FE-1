@@ -26,14 +26,14 @@ export function Table({ list, tableHeaders, tableName }) {
         </thead>
 
         <tbody>
-          {list.map((item, index) => {
+          {list.map((item) => {
             return (
               <tr key={item.id} className="table-row">
                 {tableHeaders.map((header) => {
                   const fieldName = `field-${header.className}`;
                   return (
                     <td key={`td-${header.field}`} className={fieldName}>
-                      <TableData item={item} rank={index + 1} header={header} />
+                      <TableData item={item} header={header} />
                     </td>
                   );
                 })}
