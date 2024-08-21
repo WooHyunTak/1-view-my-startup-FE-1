@@ -14,7 +14,6 @@ import "./Home.css";
 const INITIAL_QUERY_PARAMS = {
   orderBy: "revenue_desc",
   limit: 10,
-  totalPages: 0,
   page: 1,
   keyword: "",
 };
@@ -22,6 +21,7 @@ const INITIAL_QUERY_PARAMS = {
 function Home() {
   const [companyList, setCompanyList] = useState([]);
   const [queryParams, setQueryParams] = useState(INITIAL_QUERY_PARAMS);
+  const [totalPages, setTotalPages] = useState(0);
 
   //쿼리 파라미터 한번에 객체로 관리
   // 쿼리 파라미터 핸들러 (name = query name, value= query value)
@@ -42,10 +42,7 @@ function Home() {
 
         const { list, totalCount } = data;
         setCompanyList(list);
-        const newTotalPages = Math.ceil(totalCount / limit);
-        if (newTotalPages !== queryParams.totalPages) {
-          handleQueryParamsChange("totalPages", newTotalPages);
-        }
+        setTotalPages(Math.ceil(totalCount / limit));
       } catch (err) {
         console.error(err.message);
 
@@ -69,7 +66,6 @@ function Home() {
     <section className="Home">
       <div className="top-bar">
         <h2 className="top-bar-title">전체 스타트업 목록</h2>
-
         <SearchBar setKeyword={handleQueryParamsChange} />
         <DropDown
           orderBy={queryParams.orderBy}
@@ -84,6 +80,7 @@ function Home() {
       />
       <Pagination
         setCurrentPage={handleQueryParamsChange}
+        totalPages={totalPages}
         queryParams={queryParams}
       />
     </section>

@@ -11,13 +11,13 @@ import "./Home.css";
 const INITIAL_QUERY_PARAMS = {
   orderBy: "virtualInvestment_desc",
   limit: 10,
-  totalPages: 0,
   page: 1,
 };
 
 function InvestmentStatus() {
   const [companyList, setCompanyList] = useState([]);
   const [queryParams, setQueryParams] = useState(INITIAL_QUERY_PARAMS);
+  const [totalPages, setTotalPages] = useState(0);
 
   //쿼리 파라미터 한번에 객체로 관리
   // 쿼리 파라미터 핸들러 (name = query name, value= query value)
@@ -37,7 +37,7 @@ function InvestmentStatus() {
 
       const { list, totalCount } = data;
       setCompanyList(list);
-      handleQueryParamsChange("totalPages", Math.ceil(totalCount / limit));
+      setTotalPages(Math.ceil(totalCount / limit));
     } catch (err) {
       console.error(err.message);
 
@@ -67,6 +67,7 @@ function InvestmentStatus() {
       <Pagination
         setCurrentPage={handleQueryParamsChange}
         queryParams={queryParams}
+        totalPages={totalPages}
       />
     </section>
   );
