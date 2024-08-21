@@ -125,7 +125,6 @@ function Comparison() {
   };
 
   const CheckInNavigate = async () => {
-    console.log(myCompany);
     const navData = {
       myCompany,
       comparisonIds: comparisonCompanies.map(({ id }) => id),
