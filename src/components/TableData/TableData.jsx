@@ -1,6 +1,7 @@
 import { convertToUnit } from "../../utils/convertToUnit";
 import { Link } from "react-router-dom";
 import defaultImg from "../../assets/default_company_img.svg";
+import DetailPageDropdown from "../DropDown/DetailPageDropdown";
 import "./TableData.css";
 
 export function TableData({ item, header }) {
@@ -59,6 +60,7 @@ export function TableData({ item, header }) {
         return (
           <div className={className}>
             <span>{value}</span>
+            <DetailPageDropdown />
           </div>
         );
 

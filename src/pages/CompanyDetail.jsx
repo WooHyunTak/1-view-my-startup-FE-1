@@ -1,21 +1,68 @@
-import "./CompanyDetail.css";
 import CompanyHeader from "../components/CompanyHeader/CompanyHeader";
+import CompanyInfo from "../components/CompanyInfo/CompanyInfo";
+import CompanyInvestmentTable from "../components/CompanyInvestmentTable/CompanyInvestmentTable";
+
+import formatDescription from "../utils/formatDescription";
 
 import { getCompany } from "../services/companyApi";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+import "./CompanyDetail.css";
+
+// 쿼리 파라미터 초기화 (기본값)
+const INITIAL_QUERY_PARAMS = {
+  limit: 5,
+  totalPages: 0,
+  page: 1,
+};
+
 function CompanyDetail() {
   const { companyId } = useParams(); // URL에서 companyId 추출
-  const [company, setCompany] = useState(null); // 회사 데이터를 저장할 상태
-  const [loading, setLoading] = useState(true); // 로딩 상태 관리
-  const [error, setError] = useState(null); // 에러 상태 관리
+  const [companyData, setCompanyData] = useState({
+    name: "",
+    categoryNames: "",
+    revenue: "",
+    employees: "",
+    description: "",
+    investments: [],
+  });
+
+  const [queryParams, setQueryParams] = useState(INITIAL_QUERY_PARAMS);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  //쿼리 파라미터 한번에 객체로 관리
+  // 쿼리 파라미터 핸들러 (name = query name, value= query value)
+  const handleQueryParamsChange = (name, value) => {
+    setQueryParams((preValue) => {
+      return {
+        ...preValue,
+        [name]: value,
+      };
+    });
+  };
 
   useEffect(() => {
     async function fetchCompany() {
       try {
         const data = await getCompany(companyId);
-        setCompany(data);
+        setCompanyData({
+          name: data.name,
+          categoryNames: data.categories
+            .map((category) => category.name)
+            .join(", "),
+          actual: data.actualInvestment,
+          revenue: data.revenue,
+          employees: data.totalEmployees,
+          description: formatDescription(data.description),
+          investments: data.investments,
+        });
+
+        handleQueryParamsChange(
+          "totalPages",
+          Math.ceil(data.investments.length / queryParams.limit)
+        );
       } catch (err) {
         setError("Failed to load company data");
         console.error(err.message);
@@ -31,22 +78,50 @@ function CompanyDetail() {
 
     // 컴포넌트가 마운트되면 데이터 가져오기 시작
     fetchCompany();
-  }, [companyId]); // companyId가 변결될 때마다 다시 실행
+  }, [companyId, queryParams.page, queryParams.limit]);
 
   if (loading) return <div>Loading...</div>; // 로딩 중일 때 메시지 표시
   if (error) return <div>{error}</div>; // 에러 발생 시 메시지 표시
-  if (!company) return <div>No company data available</div>; // company가 null일 경우 처리
+  if (!companyData) return <div>No company data available</div>; // company가 null일 경우 처리
 
   // 상세페이지에 필요한 정보
-  const name = company.name;
-  const categoryNames = company.categories
-    .map((category) => category.name)
-    .join(", ");
-  const description = company.description;
+  const {
+    name,
+    categoryNames,
+    actual,
+    revenue,
+    employees,
+    description,
+    investments,
+  } = companyData;
+
+  // 페이지네이션 위해서 현재 페이지에 해당하는 투자 데이터 추출
+  const startIdx = (queryParams.page - 1) * queryParams.limit;
+  const currentInvestments = investments.slice(
+    startIdx,
+    startIdx + queryParams.limit
+  );
+
+  // 투자 총 금액
+  const totalAmount = investments
+    .map((investment) => Number(investment.amount))
+    .reduce((sum, amount) => sum + amount, 0);
 
   return (
     <div className="CompanyDetail">
       <CompanyHeader name={name} categoryNames={categoryNames} />
+      <CompanyInfo
+        actualInvestment={actual}
+        revenue={revenue}
+        employees={employees}
+        description={description}
+      />
+      <CompanyInvestmentTable
+        totalAmount={totalAmount}
+        currentInvestments={currentInvestments}
+        setCurrentPage={handleQueryParamsChange}
+        queryParams={queryParams}
+      />
     </div>
   );
 }

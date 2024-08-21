@@ -1,0 +1,23 @@
+.CompanyInvestmentTable .head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23.87px;
+  color: #ffffff;
+}
+.head button {
+  padding: 8px 24px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19.09px;
+  color: #ffffff;
+}
+.body .total-amount {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23.87px;
+  color: #ffffff;
+}

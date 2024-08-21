@@ -34,31 +34,36 @@ function Home() {
     });
   };
 
-  // 데이터를 불러오는 함수.
-  // useCallback 사용해서 필요할 때만 함수를 재생성
-  const init = useCallback(async () => {
-    const { orderBy, page, limit, keyword } = queryParams;
-    try {
-      const data = await getCompanies({ orderBy, page, limit, keyword });
-
-      const { list, totalCount } = data;
-      setCompanyList(list);
-      handleQueryParamsChange("totalPages", Math.ceil(totalCount / limit));
-    } catch (err) {
-      console.error(err.message);
-
-      if (err.response) {
-        console.log(err.response.status);
-        console.log(err.response.data);
-      }
-    }
-  }, [queryParams]); // queryParams가 변경될 때만 함수가 재생성
-
-  // 컴포넌트가 처음 렌더링될 때,
-  // 그리고 init 함수가 변결될 때 실행
   useEffect(() => {
+    const init = async () => {
+      const { orderBy, page, limit, keyword } = queryParams;
+      try {
+        const data = await getCompanies({ orderBy, page, limit, keyword });
+
+        const { list, totalCount } = data;
+        setCompanyList(list);
+        const newTotalPages = Math.ceil(totalCount / limit);
+        if (newTotalPages !== queryParams.totalPages) {
+          handleQueryParamsChange("totalPages", newTotalPages);
+        }
+      } catch (err) {
+        console.error(err.message);
+
+        if (err.response) {
+          console.log(err.response.status);
+          console.log(err.response.data);
+        }
+      }
+    };
+
     init();
-  }, [init]);
+  }, [queryParams]); // queryParams가 변경될 때만 init 함수가 실행되도록 설정
+
+  // // 컴포넌트가 처음 렌더링될 때,
+  // // 그리고 init 함수가 변결될 때 실행
+  // useEffect(() => {
+  //   init();
+  // }, [init]);
 
   return (
     <section className="Home">

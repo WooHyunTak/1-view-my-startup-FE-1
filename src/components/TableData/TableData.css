@@ -51,6 +51,10 @@ tbody .table-row:not(:last-child) {
   white-space: nowrap;
 }
 
+.table-row .investment-comment button {
+  background-color: inherit;
+}
+
 .table-row td {
   padding: 15px;
 }
