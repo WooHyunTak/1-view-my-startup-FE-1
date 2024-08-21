@@ -27,8 +27,7 @@ function CompanyItem({ item }) {
 let alertMessage = "";
 
 const defaultParams = {
-  sortBy: "revenue",
-  order: "asc",
+  orderBy: "revenue_asc",
 };
 
 function CheckInComparison() {
@@ -42,6 +41,20 @@ function CheckInComparison() {
 
   const reqComparison = {
     comparisonIds: [...comparisonIds, myCompany.id],
+  };
+
+  const handleComparisonParams = (name, value) => {
+    setComparisonParams((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleRankParams = (name, value) => {
+    setRankParams((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   //모달 핸들링
@@ -70,7 +83,7 @@ function CheckInComparison() {
   useEffect(() => {
     loadComparisonData();
     loadComparisonRankData();
-  }, []);
+  }, [comparisonParams, rankParams]);
 
   return (
     <div className="CheckInComparison">
@@ -99,27 +112,30 @@ function CheckInComparison() {
       <div>
         <div className="head-container">
           <h2>비교 결과 확인하기</h2>
-          {/* <DropDown /> */}
+          <DropDown
+            orderBy={comparisonParams.orderBy}
+            setOrderBy={handleComparisonParams}
+            buttonType="typeOne"
+          />
         </div>
         <div>
-          <Table
-            list={comparisonItem}
-            tableHeaders={ComparisonTableHeader}
-            //   tableName="company-list"
-          />
+          <Table list={comparisonItem} tableHeaders={ComparisonTableHeader} />
         </div>
       </div>
 
       <div>
         <div className="head-container">
           <h2>기업 순위 확인하기</h2>
-          {/* <DropDown /> */}
+          <DropDown
+            orderBy={rankParams.orderBy}
+            setOrderBy={handleRankParams}
+            buttonType="typeOne"
+          />
         </div>
         <div>
           <Table
             list={comparisonRankItem}
             tableHeaders={companyListTableHeader}
-            //   tableName="company-list"
           />
         </div>
       </div>
