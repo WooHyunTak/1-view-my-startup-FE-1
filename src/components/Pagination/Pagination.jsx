@@ -5,9 +5,9 @@ import nextBtnIcon from "../../assets/icon/ic_arrow_right.svg";
 import "./Pagination.css";
 
 // page, setPage를 currentPage, setCurrentPage로 내려줌
-export function Pagination({ setCurrentPage, queryParams, totalPages, size }) {
+export function Pagination({ setCurrentPage, queryParams, size }) {
   //page이름 currentPage로 re-assign
-  const { page: currentPage } = queryParams;
+  const { page: currentPage, totalPages } = queryParams;
 
   let pageNumbers = [];
 
