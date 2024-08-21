@@ -81,7 +81,10 @@ function SelectMyCompany({
       const { list, totalCount = 0 } = await getCompanies(queryObj);
       setCompanies(list);
       setTotalCount(totalCount);
-      // handleValues("totalPages", Math.ceil(totalCount / queryObj.limit));
+      const newTotalPages = Math.ceil(totalCount / queryObj.limit);
+      if (queryObj.totalPages !== newTotalPages) {
+        handleValues("totalPages", newTotalPages);
+      }
     } catch (error) {
       console.log(error.message);
     }

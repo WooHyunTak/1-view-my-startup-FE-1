@@ -29,3 +29,13 @@ export async function getComparisonRank(params = {}, id) {
 
   return res.data;
 }
+
+export async function patchCounts(params = {}) {
+  const { myCompany, comparisonIds } = params;
+  const res = await instance.patch(`/api/comparisons/comparison-counts`, {
+    myCompanyId: myCompany.id,
+    comparisonIds,
+  });
+
+  return res;
+}

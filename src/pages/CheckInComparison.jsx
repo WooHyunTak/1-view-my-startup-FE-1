@@ -8,7 +8,7 @@ import {
   companyListTableHeader,
 } from "../utils/tableTypes.js";
 import { Table } from "../components/Table/Table.jsx";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./CheckInComparison.css";
 
 //내가 선택한 기업의 정보를 리스트에 보여준다
@@ -27,7 +27,7 @@ function CompanyItem({ item }) {
 let alertMessage = "";
 
 const defaultParams = {
-  orderBy: "revenue_asc",
+  orderBy: "revenue_desc",
 };
 
 function CheckInComparison() {
@@ -95,9 +95,11 @@ function CheckInComparison() {
       <div>
         <div className="head-container">
           <h2>내가 선택한 기업</h2>
-          <button className="check-in-different-btn check-in-btn">
-            다른 기업 비교하기
-          </button>
+          <Link to={"/my-comparison"}>
+            <button className="check-in-different-btn check-in-btn">
+              다른 기업 비교하기
+            </button>
+          </Link>
         </div>
         <div className="out-container">
           <div className="items-container">
