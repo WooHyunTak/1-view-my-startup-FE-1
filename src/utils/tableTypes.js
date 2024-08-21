@@ -71,6 +71,28 @@ export const comparisonStatusTableHeader = [
   },
 ];
 
+//비교결과 테이블 헤더
+export const ComparisonTableHeader = [
+  { colName: "기업명", className: "company-name", field: "name" },
+  {
+    colName: "기업소개",
+    className: "company-description",
+    field: "description",
+  },
+  { colName: "카테고리", className: "category", field: "categories" },
+  {
+    colName: "누적 투자 금액",
+    className: "actual-investment",
+    field: "actualInvestment",
+  },
+  { colName: "매출액", className: "revenue", field: "revenue" },
+  {
+    colName: "고용인원",
+    className: "total-employees",
+    field: "totalEmployees",
+  },
+];
+
 //기업 상세 투자자 테이블
 export const investmentTableHeader = [
   { colName: "투자자 이름", className: "investor-name", field: "name" },

@@ -1,0 +1,21 @@
+.CheckInComparison {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+
+.check-in-investment-btn {
+  padding: 13px 48px;
+  border-radius: 50px;
+}
+
+.check-in-different-btn {
+  padding: 8px 24px;
+  border-radius: 50px;
+}
+
+.check-in-btn {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 19.09px;
+}
