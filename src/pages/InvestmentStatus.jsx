@@ -11,8 +11,8 @@ import "./Home.css";
 const INITIAL_QUERY_PARAMS = {
   orderBy: "virtualInvestment_desc",
   limit: 10,
-  totalPages: 0,
   page: 1,
+  totalPages: 0,
 };
 
 function InvestmentStatus() {
@@ -37,7 +37,10 @@ function InvestmentStatus() {
 
       const { list, totalCount } = data;
       setCompanyList(list);
-      handleQueryParamsChange("totalPages", Math.ceil(totalCount / limit));
+      const newTotalPages = Math.ceil(totalCount / limit);
+      if (queryParams.totalPages !== newTotalPages) {
+        handleQueryParamsChange("totalPages", newTotalPages);
+      }
     } catch (err) {
       console.error(err.message);
 
