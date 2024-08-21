@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import prevBtnIcon from "../../assets/icon/ic_arrow_left.svg";
 import nextBtnIcon from "../../assets/icon/ic_arrow_right.svg";
 
@@ -37,29 +36,25 @@ export function Pagination({ setCurrentPage, queryParams, size }) {
     pageNumbers.push(i);
   }
 
-  //각 함수에 useCallback 추가함 (렌더링시 의존 배열이 바뀌지 않았다면 함수 재랜덩 방지)
-  const handlePageClick = useCallback(
-    (pageNum) => {
-      if (pageNum !== currentPage) {
-        setCurrentPage("page", pageNum);
-      }
-    },
-    [setCurrentPage, currentPage]
-  );
+  const handlePageClick = (pageNum) => {
+    if (pageNum !== currentPage) {
+      setCurrentPage("page", pageNum);
+    }
+  };
 
   //이전 버튼 -1씩 이동
-  const prevBtnClick = useCallback(() => {
+  const prevBtnClick = () => {
     if (currentPage > 1) {
-      setCurrentPage({ page: currentPage - 1 });
+      setCurrentPage("page", currentPage - 1);
     }
-  }, [setCurrentPage, currentPage]);
+  };
 
   // 다음 버튼 +1씩 이동
-  const nextBtnClick = useCallback(() => {
+  const nextBtnClick = () => {
     if (currentPage < totalPages) {
       setCurrentPage("page", currentPage + 1);
     }
-  }, [setCurrentPage, currentPage, totalPages]);
+  };
 
   return (
     <ul className={`Pagination ${size}`}>
