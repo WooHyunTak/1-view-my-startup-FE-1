@@ -55,6 +55,7 @@ function Comparison() {
   const [selectComparisonOpen, setSelectComparisonOpen] = useState(false);
   const [alertMeg, setAlertMeg] = useState(false);
   const [resentCompanies, setResentCompanies] = useState([]);
+  const [btnDisable, setBtnDisable] = useState(true);
 
   //내가 선택한 기업의 로컬스토리지저장 전의 스테이트 관리
   const handelResentCompanies = (obj) => {
@@ -102,6 +103,7 @@ function Comparison() {
         nextArray.push(obj);
         return nextArray;
       });
+      setBtnDisable(false);
     }
   };
 
@@ -231,10 +233,22 @@ function Comparison() {
                   onDelete={handleDeleteComparisonCompany}
                 />
               ))}
+              {comparisonCompanies.length < 1 && (
+                <p className="no-selected-comparison">
+                  아직 추가한 기업이 없어요, <br />
+                  버튼을 눌러 기업을 추가해보세요!
+                </p>
+              )}
             </div>
           </div>
           <div className="bottom-btn-container">
-            <button onClick={CheckInNavigate} className="comparison-submit-btn">
+            <button
+              onClick={CheckInNavigate}
+              className={
+                btnDisable ? "disable-comparison-btn" : "comparison-submit-btn"
+              }
+              disabled={btnDisable}
+            >
               기업 비교하기
             </button>
           </div>
