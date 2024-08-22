@@ -52,7 +52,7 @@ function SelectedCompaniesList({ companyItem = {}, onDeleteClick }) {
 
   //비교기업리스트의 해당 요소를 삭제한다.
   const handleDeleteClick = () => {
-    onDeleteClick(companyItem);
+    onDeleteClick(companyItem.id);
   };
 
   return (
