@@ -3,7 +3,7 @@ import ic_delete from "../../assets/icon/ic_delete.svg";
 import ic_search from "../../assets/icon/ic_search.svg";
 import default_company_img from "../../assets/default_company_img.svg";
 import ic_check from "../../assets/icon/ic_check.svg";
-import "./SelectComparisonCompany.css";
+import "../../utils/globalModal.css";
 import { getCompanies } from "../../services/companyApi.js";
 import { Pagination } from "../Pagination/Pagination.jsx";
 
@@ -137,18 +137,18 @@ function SelectComparisonCompany({
   }, [queryObj]);
 
   return (
-    <dialog ref={dialogRef} className="select-comparison-company">
-      <div className="select-comparison-modal-container">
-        <div className="select-comparison-modal-header">
+    <dialog ref={dialogRef} className="modal-company">
+      <div className="modal-container">
+        <div className="modal-header">
           <h2>비교할 기업 선택하기</h2>
           <img onClick={handleClose} src={ic_delete} alt="닫기 이미지" />
         </div>
-        <div className="search-company-container">
+        <div className="modal-search-company-container">
           <form onSubmit={handleSubmit}>
             <input
               name="keyword"
               onChange={handleKeyword}
-              className="search-company-input"
+              className="modal-input"
               placeholder="기업명을 입력해 주세요"
             ></input>
           </form>
@@ -166,30 +166,34 @@ function SelectComparisonCompany({
           </div>
         </div>
         <h2>선택한 기업 ({comparisonCompanies.length})</h2>
-        {comparisonCompanies.map((item) => (
-          <SelectedCompaniesList
-            key={item.id}
-            companyItem={item}
-            onDeleteClick={onDeleteClick}
-          ></SelectedCompaniesList>
-        ))}
+        <div className="modal-item-list-container">
+          {comparisonCompanies.map((item) => (
+            <SelectedCompaniesList
+              key={item.id}
+              companyItem={item}
+              onDeleteClick={onDeleteClick}
+            ></SelectedCompaniesList>
+          ))}
+        </div>
         {!comparisonCompanies && <h3>선택한 기업이 없습니다.</h3>}
         <h2>검색 결과 ({totalCount})</h2>
-        {Companies.map((item) => (
-          <CompaniesList
-            key={item.id}
-            companyItem={item}
-            comparisonCompaniesItems={comparisonCompanies}
-            onAddClick={onAddClick}
-          ></CompaniesList>
-        ))}
+        <div className="modal-item-list-container">
+          {Companies.map((item) => (
+            <CompaniesList
+              key={item.id}
+              companyItem={item}
+              comparisonCompaniesItems={comparisonCompanies}
+              onAddClick={onAddClick}
+            ></CompaniesList>
+          ))}
+        </div>
         {!Companies.length && <h3>기업정보가 없습니다.</h3>}
         <Pagination
           setCurrentPage={handleValues}
           queryParams={queryObj}
           size="small"
         />
-        <button onClick={handleClose} className="select-comparison-complete">
+        <button onClick={handleClose} className="modal-complete-btn">
           확인
         </button>
       </div>

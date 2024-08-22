@@ -26,7 +26,7 @@ h3 {
   color: #ffffff;
 }
 
-.modal-company-container {
+.modal-search-company-container {
   position: relative;
 }
 
@@ -52,6 +52,7 @@ h3 {
   border-radius: 10px;
   color: #ffffff;
   border: 1px solid var(--grey-200);
+  resize: none;
 }
 
 .search-img-container {
@@ -74,9 +75,14 @@ h3 {
   background-color: var(--grey-300);
 }
 
+.search-company-reset-btn {
+  border-radius: 50%;
+  background-color: var(--grey-300);
+}
+
 .search-company-search {
-  width: 24px;
-  height: 24px;
+  width: 16px;
+  height: 16px;
 }
 
 .item-list-container {
@@ -164,9 +170,54 @@ h3 {
   color: var(--grey-100);
 }
 
+.modal-btn-container {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
 .modal-complete-btn {
   border-radius: 50px;
-  width: 100px;
+  width: 183px;
   height: 48px;
   align-self: center;
+}
+
+.modal-close-btn {
+  border-radius: 50px;
+  width: 183px;
+  height: 48px;
+  align-self: center;
+  color: var(--orange);
+  border: 1px solid var(--orange);
+  background-color: var(--black-300);
+}
+
+.modal-my-company-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.modal-label-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: #ffffff;
+}
+
+.modal-password-visible {
+  position: absolute;
+  background-color: var(--black-300);
+  bottom: 12px;
+  right: 20px;
+  width: 24px;
+  height: 24px;
 }

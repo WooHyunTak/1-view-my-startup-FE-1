@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 import defaultImg from "../assets/default_company_img.svg";
 import AlertModal from "../components/AlertModal/AlertModal.jsx";
 import { DropDown } from "../components/DropDown/DropDown.jsx";
+import CreateInvestment from "../components/CreateInvestment/CreateInvestment.jsx";
+import { Table } from "../components/Table/Table.jsx";
 import * as api from "../services/comparisonApi.js";
 import {
   ComparisonTableHeader,
   companyListTableHeader,
 } from "../utils/tableTypes.js";
-import { Table } from "../components/Table/Table.jsx";
 import { Link, useLocation } from "react-router-dom";
 import "./CheckInComparison.css";
 
@@ -34,6 +35,7 @@ function CheckInComparison() {
   const location = useLocation();
   const { myCompany, comparisonIds } = location.state || {};
   const [alertMeg, setAlertMeg] = useState(false);
+  const [createModal, setCreateModal] = useState(false);
   const [comparisonParams, setComparisonParams] = useState(defaultParams);
   const [rankParams, setRankParams] = useState(defaultParams);
   const [comparisonItem, setComparisonItem] = useState([]);
@@ -60,6 +62,8 @@ function CheckInComparison() {
   //모달 핸들링
   const handelOpenAlert = () => setAlertMeg(true);
   const handelCloseAlert = () => setAlertMeg(false);
+  const handelOpenCreateModal = () => setCreateModal(true);
+  const handelCloseCreateModal = () => setCreateModal(false);
 
   //API호출
   const loadComparisonData = async () => {
@@ -87,6 +91,11 @@ function CheckInComparison() {
 
   return (
     <div className="CheckInComparison">
+      <CreateInvestment
+        isOpen={createModal}
+        myCompany={myCompany}
+        onClose={handelCloseCreateModal}
+      />
       <AlertModal
         isAlertMeg={alertMeg}
         message={alertMessage}
@@ -143,7 +152,10 @@ function CheckInComparison() {
       </div>
 
       <div className="bottom-btn-container">
-        <button className="check-in-investment-btn check-in-btn">
+        <button
+          onClick={handelOpenCreateModal}
+          className="check-in-investment-btn check-in-btn"
+        >
           나의 기업에 투자하기
         </button>
       </div>
