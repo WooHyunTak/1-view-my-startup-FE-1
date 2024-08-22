@@ -22,6 +22,18 @@
   gap: 1rem;
 }
 
+.InvestmentStatus .empty-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--grey-200);
+  text-align: center;
+  font-size: var(--14px);
+  width: 50vw;
+  height: 50vh;
+  width: 100%;
+}
+
 @media only screen and (max-width: 534px) {
   .Home .top-bar {
     grid-template-columns: auto auto;
