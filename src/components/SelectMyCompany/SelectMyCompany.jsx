@@ -8,7 +8,6 @@ import { Pagination } from "../Pagination/Pagination.jsx";
 
 function CompaniesList({ companyItem = {}, onStorage, onAddClick }) {
   const { name, categories } = companyItem;
-
   //로컬스토리지 저장과 나의 기업 상태를 저장한다.
   const onCompanyClick = () => {
     onStorage(companyItem);
