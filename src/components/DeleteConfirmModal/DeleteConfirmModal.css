@@ -1,0 +1,54 @@
+.DeleteConfirmModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  padding: 24px;
+  background-color: var(--black-300);
+  border-radius: 16px;
+  width: 496px;
+}
+.DeleteConfirmModal .deleteModel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23.87px;
+}
+.DeleteConfirmModal .deleteModel-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.DeleteConfirmModal .deleteModel-body label {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21.48px;
+  margin-bottom: 16px;
+}
+.DeleteConfirmModal .deleteModel-body .input-container {
+  position: relative;
+  width: 100%;
+}
+.DeleteConfirmModal .deleteModel-body input {
+  border: 1px solid var(--grey-200);
+  border-radius: 10px;
+  width: 100%;
+  padding: 16px 20px;
+  margin-bottom: 32px;
+  color: #fff;
+}
+.DeleteConfirmModal .deleteModel-body img {
+  position: absolute;
+  top: 14px;
+  right: 20px;
+}
+.DeleteConfirmModal .deleteModel-body .delete-btn {
+  margin: auto;
+  background-color: var(--orange);
+  padding: 13px 48px;
+  border-radius: 50px;
+}

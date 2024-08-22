@@ -23,7 +23,7 @@ function Home() {
   const [companyList, setCompanyList] = useState([]);
   const [queryParams, setQueryParams] = useState(INITIAL_QUERY_PARAMS);
 
-  //쿼리 파라미터 한번에 객체로 관리s
+  //쿼리 파라미터 한번에 객체로 관리
   // 쿼리 파라미터 핸들러 (name = query name, value= query value)
   const handleQueryParamsChange = (name, value) => {
     setQueryParams((preValue) => {
@@ -66,21 +66,10 @@ function Home() {
       <div className="top-bar">
         <h2 className="top-bar-title">전체 스타트업 목록</h2>
         <SearchBar setKeyword={handleQueryParamsChange} />
-        <DropDown
-          orderBy={queryParams.orderBy}
-          setOrderBy={handleQueryParamsChange}
-          buttonType="typeOne"
-        />
+        <DropDown orderBy={queryParams.orderBy} setOrderBy={handleQueryParamsChange} buttonType="typeOne" />
       </div>
-      <Table
-        list={companyList}
-        tableHeaders={companyListTableHeader}
-        tableName="company-list"
-      />
-      <Pagination
-        setCurrentPage={handleQueryParamsChange}
-        queryParams={queryParams}
-      />
+      <Table list={companyList} tableHeaders={companyListTableHeader} tableName="company-list" />
+      <Pagination setCurrentPage={handleQueryParamsChange} queryParams={queryParams} />
     </section>
   );
 }

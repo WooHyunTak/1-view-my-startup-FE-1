@@ -1,12 +1,35 @@
-import { useEffect, useRef, useState } from "react";
-import editBtnImg from "../../assets/ic_kebab.svg";
+import { useEffect, useRef, useState, useContext } from "react";
+import { InvestmentContext } from "../../contexts/InvestmentContext";
+import DeleteConfirmModal from "../DeleteConfirmModal/DeleteConfirmModal";
+import kebabMenu from "../../assets/icon/ic_kebab.svg";
+import "./DetailPageDropdown.css";
 
-function DetailPageDropdown() {
+function DetailPageDropdown({ id, password }) {
   const [visible, setVisible] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { deleteInvestmentById } = useContext(InvestmentContext);
+
   const dropDownRef = useRef(null);
 
   const toggleDropdown = () => {
     setVisible(!visible);
+  };
+
+  const openDeleteModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const confirmDelete = async (inputPassword) => {
+    if (inputPassword === password) {
+      await deleteInvestmentById({ id, password: inputPassword });
+      setIsModalOpen(false);
+    } else {
+      alert("비밀번호가 일치하지 않습니다.");
+    }
   };
 
   // 메뉴 외부 클릭 감지 함수
@@ -28,14 +51,17 @@ function DetailPageDropdown() {
   return (
     <div className="DetailPageDropdown">
       <button onClick={toggleDropdown} ref={dropDownRef} className="edit-btn">
-        <img src={editBtnImg} alt="Edit button" />
+        <img src={kebabMenu} alt="Edit button" />
       </button>
       {visible && (
         <div className="dropdown-menu">
-          <button>수정하기</button>
-          <button>삭제하기</button>
+          <button className="edit">수정하기</button>
+          <button className="delete" onClick={openDeleteModal}>
+            삭제하기
+          </button>
         </div>
       )}
+      {isModalOpen && <DeleteConfirmModal onDeleteConfirm={confirmDelete} onCancel={closeDeleteModal} />}
     </div>
   );
 }
