@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import ic_delete from "../../assets/icon/ic_delete.svg";
 import ic_search from "../../assets/icon/ic_search.svg";
 import default_company_img from "../../assets/default_company_img.svg";
-import "./SelectMyCompany.css";
+import "../../utils/globalModal.css";
 import { getCompanies } from "../../services/companyApi.js";
 import { Pagination } from "../Pagination/Pagination.jsx";
 
@@ -76,12 +76,19 @@ function SelectMyCompany({
     handleValues("keyword", keyword);
   };
 
+  //검색 키워드 인풋 핸들러
+  const handleKeywordClear = () => setKeyword();
+  const handleKeywordSearch = (event) => handleSubmit(event);
+
   const handleSearch = async () => {
     try {
       const { list, totalCount = 0 } = await getCompanies(queryObj);
       setCompanies(list);
       setTotalCount(totalCount);
-      // handleValues("totalPages", Math.ceil(totalCount / queryObj.limit));
+      const newTotalPages = Math.ceil(totalCount / queryObj.limit);
+      if (queryObj.totalPages !== newTotalPages) {
+        handleValues("totalPages", newTotalPages);
+      }
     } catch (error) {
       console.log(error.message);
     }
@@ -97,32 +104,39 @@ function SelectMyCompany({
   }, [queryObj]);
 
   return (
-    <dialog ref={dialogRef} className="select-comparison-company">
-      <div className="select-comparison-modal-container">
-        <div className="select-comparison-modal-header">
+    <dialog ref={dialogRef} className="modal-company">
+      <div className="modal-container">
+        <div className="modal-header">
           <h2>나의 기업 선택하기</h2>
           <img onClick={handleClose} src={ic_delete} alt="닫기 이미지" />
         </div>
-        <div className="search-company-container">
+        <div className="modal-search-company-container">
           <form onSubmit={handleSubmit}>
             <input
               name="keyword"
+              value={keyword || ""}
               onChange={handleKeyword}
-              className="search-company-input"
+              className="modal-input"
               placeholder="기업명을 입력해 주세요"
             ></input>
           </form>
           <div className="search-img-container">
-            <img
-              className="search-company-reset"
-              src={ic_delete}
-              alt="검색지우기 이미지"
-            />
-            <img
-              className="search-company-search"
-              src={ic_search}
-              alt="조회 이미지"
-            />
+            <button className="search-company-reset-btn">
+              <img
+                onClick={handleKeywordClear}
+                className="search-company-reset"
+                src={ic_delete}
+                alt="검색지우기 이미지"
+              />
+            </button>
+            <button className="search-company-reset-btn">
+              <img
+                onClick={handleKeywordSearch}
+                className="search-company-search"
+                src={ic_search}
+                alt="조회 이미지"
+              />
+            </button>
           </div>
         </div>
         <h2>최근 선택된 기업 ({resentCompanies.length})</h2>

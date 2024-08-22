@@ -8,6 +8,7 @@ import defaultImg from "../../assets/default_company_img.svg";
 import ic_minus from "../../assets/icon/ic_minus.svg";
 import AlertModal from "../AlertModal/AlertModal";
 import { useNavigate } from "react-router-dom";
+import { patchCounts } from "../../services/comparisonApi.js";
 
 //내가 선택한 기업의 정보를 리스트에 보여준다
 function CompanyItem({ item }) {
@@ -54,6 +55,7 @@ function Comparison() {
   const [selectComparisonOpen, setSelectComparisonOpen] = useState(false);
   const [alertMeg, setAlertMeg] = useState(false);
   const [resentCompanies, setResentCompanies] = useState([]);
+  const [btnDisable, setBtnDisable] = useState(true);
 
   //내가 선택한 기업의 로컬스토리지저장 전의 스테이트 관리
   const handelResentCompanies = (obj) => {
@@ -101,6 +103,7 @@ function Comparison() {
         nextArray.push(obj);
         return nextArray;
       });
+      setBtnDisable(false);
     }
   };
 
@@ -123,12 +126,21 @@ function Comparison() {
     setComparisonCompanies([]);
   };
 
-  const CheckInNavigate = () => {
+  const CheckInNavigate = async () => {
     const navData = {
       myCompany,
       comparisonIds: comparisonCompanies.map(({ id }) => id),
     };
-    navigate("check-id-comparison", { state: navData });
+    try {
+      const fetchCounts = await patchCounts(navData);
+      if (fetchCounts) {
+        navigate("check-id-comparison", { state: navData });
+      }
+    } catch (error) {
+      alertMessage = "기업 비교의 실패 했습니다 (비교 카운트 오류)";
+      handelOpenAlert();
+      console.log(error.message);
+    }
   };
 
   //로컬스토리지 관리
@@ -221,10 +233,22 @@ function Comparison() {
                   onDelete={handleDeleteComparisonCompany}
                 />
               ))}
+              {comparisonCompanies.length < 1 && (
+                <p className="no-selected-comparison">
+                  아직 추가한 기업이 없어요, <br />
+                  버튼을 눌러 기업을 추가해보세요!
+                </p>
+              )}
             </div>
           </div>
           <div className="bottom-btn-container">
-            <button onClick={CheckInNavigate} className="comparison-submit-btn">
+            <button
+              onClick={CheckInNavigate}
+              className={
+                btnDisable ? "disable-comparison-btn" : "comparison-submit-btn"
+              }
+              disabled={btnDisable}
+            >
               기업 비교하기
             </button>
           </div>
