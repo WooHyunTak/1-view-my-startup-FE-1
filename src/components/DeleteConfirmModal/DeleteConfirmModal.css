@@ -18,6 +18,9 @@
   font-size: 20px;
   line-height: 23.87px;
 }
+.cancel-icon {
+  cursor: pointer;
+}
 .DeleteConfirmModal .deleteModel-body {
   display: flex;
   flex-direction: column;
@@ -29,6 +32,7 @@
   line-height: 21.48px;
   margin-bottom: 16px;
 }
+
 .DeleteConfirmModal .deleteModel-body .input-container {
   position: relative;
   width: 100%;
@@ -36,15 +40,16 @@
 .DeleteConfirmModal .deleteModel-body input {
   border: 1px solid var(--grey-200);
   border-radius: 10px;
-  width: 100%;
+  width: inherit;
   padding: 16px 20px;
   margin-bottom: 32px;
   color: #fff;
 }
-.DeleteConfirmModal .deleteModel-body img {
+.password-visibility {
   position: absolute;
   top: 14px;
   right: 20px;
+  cursor: pointer;
 }
 .DeleteConfirmModal .deleteModel-body .delete-btn {
   margin: auto;

@@ -21,7 +21,7 @@ function DeleteConfirmModal({ onDeleteConfirm, onCancel }) {
       <div className="deleteModal-container">
         <div className="deleteModel-head">
           <h3>삭제 권한 인증</h3>
-          <img src={deleteBtn} alt="delete button" onClick={onCancel} />
+          <img className="cancel-icon" src={deleteBtn} alt="delete button" onClick={onCancel} />
         </div>
         <div className="deleteModel-body">
           <label>비밀번호</label>
@@ -33,6 +33,7 @@ function DeleteConfirmModal({ onDeleteConfirm, onCancel }) {
               onChange={(e) => setPassword(e.target.value)}
             />
             <img
+              className="password-visibility"
               src={isPasswordVisible ? visibleOff : visibleOn}
               alt="toggle visibility"
               onClick={togglePasswordVisibility}
