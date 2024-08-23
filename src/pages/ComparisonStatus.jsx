@@ -13,7 +13,6 @@ const INITIAL_QUERY_PARAMS = {
   orderBy: "selectedCount_desc",
   limit: 10,
   page: 1,
-  totalPages: 0,
 };
 
 function ComparisonStatus() {
@@ -23,8 +22,10 @@ function ComparisonStatus() {
     init,
     list: companyList,
     queryParams,
+    totalPages,
     handleQueryParamsChange,
   } = useApiHandler(getComparisonStatus, INITIAL_QUERY_PARAMS);
+
   useEffect(() => {
     init();
   }, [init]);
@@ -44,7 +45,8 @@ function ComparisonStatus() {
       <Table list={companyList} tableHeaders={comparisonStatusTableHeader} />
       <Pagination
         setCurrentPage={handleQueryParamsChange}
-        queryParams={queryParams}
+        currentPage={queryParams.page}
+        totalPages={totalPages}
       />
     </section>
   );

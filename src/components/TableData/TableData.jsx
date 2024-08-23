@@ -47,7 +47,6 @@ export function TableData({ item, header }) {
         return value.toLocaleString();
 
       case "investment-comment":
-        console.log(item.password);
         return (
           <div className={className}>
             <span>{value}</span>

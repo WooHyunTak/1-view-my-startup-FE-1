@@ -6,6 +6,7 @@ export function useApiHandler(apiCallFunction, INITIAL_QUERY_PARAMS) {
   const [error, setError] = useState(null);
   const [list, setList] = useState([]);
   const [queryParams, setQueryParams] = useState(INITIAL_QUERY_PARAMS);
+  const [totalPages, setTotalPages] = useState(0);
 
   const handleQueryParamsChange = useCallback((name, value) => {
     setQueryParams((preValue) => {
@@ -23,10 +24,7 @@ export function useApiHandler(apiCallFunction, INITIAL_QUERY_PARAMS) {
       const data = await apiCallFunction(queryParams);
       const { list, totalCount } = data;
       setList(list);
-      const newTotalPages = Math.ceil(totalCount / queryParams.limit);
-      if (queryParams.totalPages !== newTotalPages) {
-        handleQueryParamsChange("totalPages", newTotalPages);
-      }
+      setTotalPages(Math.ceil(totalCount / queryParams.limit));
     } catch (err) {
       console.error(err.message);
       setError(err);
@@ -37,6 +35,15 @@ export function useApiHandler(apiCallFunction, INITIAL_QUERY_PARAMS) {
     } finally {
       setLoading(false);
     }
-  }, [apiCallFunction, handleQueryParamsChange, queryParams]);
-  return { loading, error, init, list, queryParams, handleQueryParamsChange };
+  }, [apiCallFunction, queryParams]);
+
+  return {
+    loading,
+    error,
+    init,
+    list,
+    queryParams,
+    handleQueryParamsChange,
+    totalPages,
+  };
 }

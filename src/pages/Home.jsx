@@ -17,7 +17,6 @@ const INITIAL_QUERY_PARAMS = {
   limit: 10,
   page: 1,
   keyword: "",
-  totalPages: 0,
 };
 
 function Home() {
@@ -27,6 +26,7 @@ function Home() {
     init,
     list: companyList,
     queryParams,
+    totalPages,
     handleQueryParamsChange,
   } = useApiHandler(getCompanies, INITIAL_QUERY_PARAMS);
 
@@ -56,7 +56,8 @@ function Home() {
       />
       <Pagination
         setCurrentPage={handleQueryParamsChange}
-        queryParams={queryParams}
+        currentPage={queryParams.page}
+        totalPages={totalPages}
       />
     </section>
   );

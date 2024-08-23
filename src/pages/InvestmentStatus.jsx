@@ -13,7 +13,6 @@ const INITIAL_QUERY_PARAMS = {
   orderBy: "virtualInvestment_desc",
   limit: 10,
   page: 1,
-  totalPages: 0,
 };
 
 function InvestmentStatus() {
@@ -23,6 +22,7 @@ function InvestmentStatus() {
     init,
     list: companyList,
     queryParams,
+    totalPages,
     handleQueryParamsChange,
   } = useApiHandler(getInvestmentStatus, INITIAL_QUERY_PARAMS);
 
@@ -59,7 +59,8 @@ function InvestmentStatus() {
 
           <Pagination
             setCurrentPage={handleQueryParamsChange}
-            queryParams={queryParams}
+            currentPage={queryParams.page}
+            totalPages={totalPages}
           />
         </>
       )}
