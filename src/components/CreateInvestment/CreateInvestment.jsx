@@ -28,6 +28,7 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
     password: "password",
     passwordConfirm: "password",
   });
+  const [error, setError] = useState({});
 
   const handelOpenAlert = () => setAlertMeg(true);
   const handelCloseAlert = () => setAlertMeg(false);
@@ -43,6 +44,20 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
     event.preventDefault();
     const { name, value } = event.target;
     handleChangeValues(name, value);
+  };
+
+  const validationPassword = (e) => {
+    if (investmentValues.password !== e.target.value) {
+      setError((prev) => ({
+        ...prev,
+        [e.target.name]: e.target.value,
+      }));
+    } else {
+      setError((prev) => ({
+        ...prev,
+        [e.target.name]: "",
+      }));
+    }
   };
 
   const handleClose = (e) => {
@@ -160,7 +175,7 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
               <input
                 name="passwordConfirm"
                 type={inputTypes.passwordConfirm}
-                // onChange={onChange}
+                onChange={validationPassword}
                 className="modal-input"
                 placeholder="비밀번호를 다시 한 번 입력해 주세요"
                 autoComplete="new-password"
@@ -172,6 +187,9 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
                 <img src={ic_eyes} alt="비밀번호 보기" />
               </button>
             </div>
+            {error.passwordConfirm && (
+              <p style={{ color: "orange" }}>비밀번호가 일치하지 않습니다.</p>
+            )}
             <div className="modal-btn-container">
               <button onClick={handleClose} className="modal-close-btn">
                 취소
