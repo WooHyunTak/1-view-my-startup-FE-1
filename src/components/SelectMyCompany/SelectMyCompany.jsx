@@ -80,6 +80,7 @@ function SelectMyCompany({
   const handleKeywordSearch = (event) => handleSubmit(event);
 
   const handleSearch = async () => {
+    if (!isOpen) return;
     try {
       const { list, totalCount = 0 } = await getCompanies(queryObj);
       setCompanies(list);
@@ -96,11 +97,12 @@ function SelectMyCompany({
   //모달 다이얼로그 Ref 관리 -> 모달 open상태와 API호루 쿼리의 의존성 부여
   useEffect(() => {
     isOpen ? dialogRef.current.showModal() : dialogRef.current.close();
-  }, [isOpen]);
-
-  useEffect(() => {
     handleSearch();
-  }, [queryObj]);
+  }, [isOpen, queryObj]);
+
+  // useEffect(() => {
+  //   handleSearch();
+  // }, [queryObj]);
 
   return (
     <dialog ref={dialogRef} className="modal-company">
