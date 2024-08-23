@@ -41,6 +41,8 @@ export function Table({
 
         <tbody>
           {list.map((item) => {
+            // 상세페이지 링크해야하는지 boolean으로 받음
+            //isCompanyTable = true면 onClick 이벤트 더해짐
             const isLinkToDetailPage = isCompanyTable;
             return (
               <tr

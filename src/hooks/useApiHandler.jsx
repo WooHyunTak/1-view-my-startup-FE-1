@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 
 //한번에 쿼리 params랑 다 같이 관리
+//useApiHandler(api 호출함수와, 초기 쿼리 파라미터 객체)
 export function useApiHandler(apiCallFunction, INITIAL_QUERY_PARAMS) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
