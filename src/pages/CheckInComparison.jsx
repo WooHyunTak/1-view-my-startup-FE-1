@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import defaultImg from "../assets/default_company_img.svg";
 import AlertModal from "../components/AlertModal/AlertModal.jsx";
 import { DropDown } from "../components/DropDown/DropDown.jsx";
@@ -33,7 +33,13 @@ const defaultParams = {
 
 function CheckInComparison() {
   const location = useLocation();
-  const { myCompany, comparisonIds } = location.state || {};
+  const { myCompany, comparisonIds = [] } = location.state || {};
+
+  // // useMemo로 location.state를 메모이제이션
+  // const state = useMemo(() => location.state || {}, [location.state]);
+  // // state에서 myCompany와 comparisonIds를 구조 분해 할당
+  // const { myCompany, comparisonIds = [] } = state;
+
   const [alertMeg, setAlertMeg] = useState(false);
   const [createModal, setCreateModal] = useState(false);
   const [comparisonParams, setComparisonParams] = useState(defaultParams);

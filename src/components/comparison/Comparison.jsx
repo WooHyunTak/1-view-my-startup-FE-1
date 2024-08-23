@@ -54,14 +54,14 @@ function Comparison() {
   const [selectMyCompanyOpen, setSelectMyCompanyOpen] = useState(false);
   const [selectComparisonOpen, setSelectComparisonOpen] = useState(false);
   const [alertMeg, setAlertMeg] = useState(false);
-  const [resentCompanies, setResentCompanies] = useState([]);
+  const [recentCompanies, setRecentCompanies] = useState([]);
   const [btnDisable, setBtnDisable] = useState(true);
 
   //내가 선택한 기업의 로컬스토리지저장 전의 스테이트 관리
-  const handelResentCompanies = (obj) => {
+  const handelRecentCompanies = (obj) => {
     //로컬스토리지를 5개까지 제한한다.
-    if (resentCompanies.length >= 5) {
-      setResentCompanies((prev) => {
+    if (recentCompanies.length >= 5) {
+      setRecentCompanies((prev) => {
         //객체배열의 같은 아이디가 있다면 기존걸 지우고 최신화 한다.
         const nextArray = prev.filter((item) => item.id !== obj.id);
         nextArray.shift();
@@ -69,7 +69,7 @@ function Comparison() {
         return nextArray;
       });
     } else {
-      setResentCompanies((prev) => {
+      setRecentCompanies((prev) => {
         const nextArray = prev.filter((item) => item.id !== obj.id);
         nextArray.push(obj);
         return nextArray;
@@ -148,7 +148,7 @@ function Comparison() {
     //렌더가 끝나면 로컬스토리지의 값을 로드한다.
     const storageItems = localStorage.getItem("localStorageSelectId");
     if (storageItems) {
-      setResentCompanies(JSON.parse(storageItems));
+      setRecentCompanies(JSON.parse(storageItems));
     }
   }, []);
 
@@ -156,9 +156,9 @@ function Comparison() {
     //최신 선택기업의 상태가 변경되면 로컬스토리지의 값을 저장한다.
     localStorage.setItem(
       "localStorageSelectId",
-      JSON.stringify(resentCompanies)
+      JSON.stringify(recentCompanies)
     );
-  }, [resentCompanies]);
+  }, [recentCompanies]);
 
   return (
     <div className="Comparison">
@@ -166,8 +166,8 @@ function Comparison() {
         isOpen={selectMyCompanyOpen}
         onClose={handelCloseMyCompany}
         onAddClick={handleAddMyCompany}
-        resentCompanies={resentCompanies}
-        onResentCompanies={handelResentCompanies}
+        recentCompanies={recentCompanies}
+        onRecentCompanies={handelRecentCompanies}
       />
       <SelectComparisonCompany
         isOpen={selectComparisonOpen}

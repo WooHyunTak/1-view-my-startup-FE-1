@@ -26,8 +26,10 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
     handleChangeValues(name, value);
   };
 
-  const handleClose = () => onClose();
-
+  const handleClose = (e) => {
+    e.preventDefault();
+    onClose();
+  };
   const handleVisiblePassword = (name, e) => {
     e.preventDefault();
     setInputTypes((prev) => ({
@@ -82,6 +84,7 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
                 onChange={onChange}
                 className="modal-input"
                 placeholder="투자 금액을 입력해 주세요"
+                autoComplete="off"
               ></input>
             </div>
             <div className="modal-label-container">
@@ -91,6 +94,7 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
                 onChange={onChange}
                 className="modal-textarea"
                 placeholder="투자에 대한 코멘트를 입력해 주세요"
+                autoComplete="off"
               ></textarea>
             </div>
             <div className="modal-label-container">
@@ -101,6 +105,7 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
                 onChange={onChange}
                 className="modal-input"
                 placeholder="비밀번호를 입력해 주세요"
+                autoComplete="new-password"
               ></input>
               <button
                 className="modal-password-visible"
@@ -117,6 +122,7 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
                 onChange={onChange}
                 className="modal-input"
                 placeholder="비밀번호를 다시 한 번 입력해 주세요"
+                autoComplete="new-password"
               ></input>
               <button
                 className="modal-password-visible"

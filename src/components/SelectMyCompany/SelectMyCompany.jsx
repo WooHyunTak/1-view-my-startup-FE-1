@@ -43,8 +43,8 @@ function SelectMyCompany({
   isOpen = false,
   onClose,
   onAddClick,
-  resentCompanies,
-  onResentCompanies,
+  recentCompanies,
+  onRecentCompanies,
 }) {
   const [queryObj, setQueryObj] = useState(defaultParams);
   const [Companies, setCompanies] = useState([]);
@@ -56,7 +56,7 @@ function SelectMyCompany({
 
   //최신 선택기업리스트를 로컬스토리지로 저장전에 State로 우선 관리한다.
   const handleStorage = (obj) => {
-    onResentCompanies(obj);
+    onRecentCompanies(obj);
   };
 
   const handleValues = (name, value) => {
@@ -138,8 +138,8 @@ function SelectMyCompany({
             </button>
           </div>
         </div>
-        <h2>최근 선택된 기업 ({resentCompanies.length})</h2>
-        {resentCompanies.map((item) => (
+        <h2>최근 선택된 기업 ({recentCompanies.length})</h2>
+        {recentCompanies.map((item) => (
           <CompaniesList
             key={item.id}
             companyItem={item}
@@ -147,7 +147,7 @@ function SelectMyCompany({
             onAddClick={onAddClick}
           ></CompaniesList>
         ))}
-        {!resentCompanies && <h3>선택한 기업이 없습니다.</h3>}
+        {!recentCompanies && <h3>선택한 기업이 없습니다.</h3>}
         <h2>검색 결과 ({totalCount})</h2>
         {Companies.map((item) => (
           <CompaniesList
