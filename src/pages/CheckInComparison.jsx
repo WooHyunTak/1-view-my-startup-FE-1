@@ -74,27 +74,30 @@ function CheckInComparison() {
   const handelCloseCreateModal = () => setCreateModal(false);
 
   //API호출
-  const loadComparisonData = async () => {
+  const allLoadComparisonData = async () => {
     try {
-      const data = await api.getComparison(comparisonParams, reqComparison);
-      setComparisonItem(data);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+      const comparisonPromise = api.getComparison(
+        comparisonParams,
+        reqComparison
+      );
+      const comparisonRankPromise = api.getComparisonRank(
+        rankParams,
+        myCompany.id
+      );
 
-  const loadComparisonRankData = async () => {
-    try {
-      const data = await api.getComparisonRank(rankParams, myCompany.id);
-      setComparisonRankItem(data);
+      const [comparisonData, comparisonRankData] = await Promise.all([
+        comparisonPromise,
+        comparisonRankPromise,
+      ]);
+      setComparisonItem(comparisonData);
+      setComparisonRankItem(comparisonRankData);
     } catch (error) {
       console.log(error.message);
     }
   };
 
   useEffect(() => {
-    loadComparisonData();
-    loadComparisonRankData();
+    allLoadComparisonData();
   }, [comparisonParams, rankParams]);
 
   return (
