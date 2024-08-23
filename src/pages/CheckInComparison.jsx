@@ -141,7 +141,11 @@ function CheckInComparison() {
           />
         </div>
         <div>
-          <Table list={comparisonItem} tableHeaders={ComparisonTableHeader} />
+          <Table
+            list={comparisonItem}
+            tableHeaders={ComparisonTableHeader}
+            isCompanyTable={false}
+          />
         </div>
       </div>
 
@@ -158,6 +162,7 @@ function CheckInComparison() {
           <Table
             list={comparisonRankItem}
             tableHeaders={companyListTableHeader}
+            isCompanyTable={false}
           />
         </div>
       </div>
