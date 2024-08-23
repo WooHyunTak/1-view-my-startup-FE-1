@@ -50,7 +50,7 @@ function CompanyDetail() {
         const data = await getCompany(companyId);
         setCompanyData({
           name: data.name,
-          categoryNames: data.categories.map((category) => category.name).join(", "),
+          categories: data.categories.map((category) => category.name),
           actual: data.actualInvestment,
           revenue: data.revenue,
           employees: data.totalEmployees,
@@ -82,13 +82,16 @@ function CompanyDetail() {
   if (!companyData) return <div>No company data available</div>; // company가 null일 경우 처리
 
   // 상세페이지에 필요한 정보
-  const { name, categoryNames, actual, revenue, employees, description } = companyData;
-
+  const { name, categories, actual, revenue, employees, description } = companyData;
   return (
     <div className="CompanyDetail">
-      <CompanyHeader name={name} categoryNames={categoryNames} />
+      <CompanyHeader name={name} categoryNames={categories} />
       <CompanyInfo actualInvestment={actual} revenue={revenue} employees={employees} description={description} />
-      <CompanyInvestmentTable setCurrentPage={handleQueryParamsChange} queryParams={queryParams} />
+      <CompanyInvestmentTable
+        setCurrentPage={handleQueryParamsChange}
+        queryParams={queryParams}
+        selectedCompany={companyData}
+      />
     </div>
   );
 }

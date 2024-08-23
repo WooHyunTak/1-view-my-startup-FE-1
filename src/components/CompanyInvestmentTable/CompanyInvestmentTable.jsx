@@ -2,13 +2,18 @@ import { Pagination } from "../Pagination/Pagination";
 import { Table } from "../Table/Table";
 import { investmentTableHeader } from "../../utils/tableTypes";
 import { convertToUnit } from "../../utils/convertToUnit";
+import { useContext, useState } from "react";
+import { InvestmentContext } from "../../contexts/InvestmentContext";
+import CreateInvestment from "../CreateInvestment/CreateInvestment";
 
 import "./CompanyInvestmentTable.css";
-import { useContext } from "react";
-import { InvestmentContext } from "../../contexts/InvestmentContext";
 
-function CompanyInvestmentTable({ setCurrentPage, queryParams }) {
+function CompanyInvestmentTable({ setCurrentPage, queryParams, selectedCompany }) {
   const { investments } = useContext(InvestmentContext);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handelOpenCreateModal = () => setIsModalOpen(true);
+  const handelCloseCreateModal = () => setIsModalOpen(false);
 
   // 투자 총 금액
   const totalAmount = investments
@@ -23,13 +28,16 @@ function CompanyInvestmentTable({ setCurrentPage, queryParams }) {
     <div className="CompanyInvestmentTable">
       <div className="head">
         <span>View My StartUp에서 받은 투자</span>
-        <button>기업투자하기</button>
+        <button onClick={handelOpenCreateModal}>기업투자하기</button>
       </div>
       <div className="body">
         <span className="amount">총 {convertToUnit(totalAmount)} 원</span>
         <Table list={currentInvestments} tableHeaders={investmentTableHeader} tableName="investment-list" />
         <Pagination setCurrentPage={setCurrentPage} queryParams={queryParams} size="big" />
       </div>
+      {isModalOpen && (
+        <CreateInvestment isOpen={isModalOpen} myCompany={selectedCompany} onClose={handelCloseCreateModal} />
+      )}
     </div>
   );
 }

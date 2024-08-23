@@ -20,3 +20,12 @@ export async function createInvestment_ver_tak(investment = {}) {
   const res = await instance.post("api/investments", investment);
   return res.data;
 }
+
+export async function createInvestment(investmentData) {
+  try {
+    const res = await instance.post(`api/investments`, investmentData);
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+}

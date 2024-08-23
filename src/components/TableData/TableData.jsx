@@ -54,7 +54,6 @@ export function TableData({ item, header }) {
       case "investment-comment":
         //저기 <span> 이웃으로 버튼 컴포넌트 넣으시면 될거같아요!
         // <div><span>value</span> <MoreButton/>   </div>
-        console.log(item.password);
         return (
           <div className={className}>
             <span>{value}</span>

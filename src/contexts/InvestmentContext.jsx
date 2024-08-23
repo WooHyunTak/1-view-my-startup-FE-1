@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { deleteInvestment } from "../services/investmentApi";
+import { deleteInvestment, createInvestment } from "../services/investmentApi";
 
 // InvestmentContext 생성
 export const InvestmentContext = createContext();
@@ -9,6 +9,15 @@ export function InvestmentProvider({ children }) {
 
   const loadInvestments = (newInvestments) => {
     setInvestments(newInvestments);
+  };
+
+  const addInvestment = async (investmentData) => {
+    try {
+      const newInvestment = await createInvestment(investmentData);
+      setInvestments((prevInvestments) => [...prevInvestments, newInvestment]);
+    } catch (error) {
+      console.error("Failed to create investment:", error);
+    }
   };
 
   const deleteInvestmentById = async ({ id, password }) => {
@@ -22,7 +31,7 @@ export function InvestmentProvider({ children }) {
   };
 
   return (
-    <InvestmentContext.Provider value={{ investments, loadInvestments, deleteInvestmentById }}>
+    <InvestmentContext.Provider value={{ investments, loadInvestments, deleteInvestmentById, addInvestment }}>
       {children}
     </InvestmentContext.Provider>
   );
