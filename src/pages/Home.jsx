@@ -66,10 +66,21 @@ function Home() {
       <div className="top-bar">
         <h2 className="top-bar-title">전체 스타트업 목록</h2>
         <SearchBar setKeyword={handleQueryParamsChange} />
-        <DropDown orderBy={queryParams.orderBy} setOrderBy={handleQueryParamsChange} buttonType="typeOne" />
+        <DropDown
+          orderBy={queryParams.orderBy}
+          setOrderBy={handleQueryParamsChange}
+          buttonType="typeOne"
+        />
       </div>
-      <Table list={companyList} tableHeaders={companyListTableHeader} tableName="company-list" />
-      <Pagination setCurrentPage={handleQueryParamsChange} queryParams={queryParams} />
+      <Table
+        list={companyList}
+        tableHeaders={companyListTableHeader}
+        tableName="company-list"
+      />
+      <Pagination
+        setCurrentPage={handleQueryParamsChange}
+        queryParams={queryParams}
+      />
     </section>
   );
 }

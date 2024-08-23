@@ -1,5 +1,4 @@
 import { convertToUnit } from "../../utils/convertToUnit";
-import { Link } from "react-router-dom";
 import defaultImg from "../../assets/default_company_img.svg";
 import DetailPageDropdown from "../DropDown/DetailPageDropdown";
 import "./TableData.css";
@@ -21,11 +20,7 @@ export function TableData({ item, header }) {
             <div className="circle-crop">
               <img src={logoImg} alt={`${value} logo`} />
             </div>
-            <span>
-              <Link className="link-to-detail-page" to={`/companies/${item.id}`}>
-                {value}
-              </Link>
-            </span>
+            <span>{value}</span>
           </div>
         );
 
@@ -39,7 +34,7 @@ export function TableData({ item, header }) {
       case "virtual-investment":
       case "actual-investment":
       case "revenue":
-        return convertToUnit(value);
+        return `${convertToUnit(value)} 원`;
 
       case "investment-amount":
         return convertToUnit(value);
@@ -52,8 +47,6 @@ export function TableData({ item, header }) {
         return value.toLocaleString();
 
       case "investment-comment":
-        //저기 <span> 이웃으로 버튼 컴포넌트 넣으시면 될거같아요!
-        // <div><span>value</span> <MoreButton/>   </div>
         console.log(item.password);
         return (
           <div className={className}>
@@ -64,7 +57,9 @@ export function TableData({ item, header }) {
 
       //카테고리가 빈배열이거나 undefined, null 이면 n/a
       case "category":
-        return item.categories && item.categories.length > 0 ? item.categories[0] : "N/A";
+        return item.categories && item.categories.length > 0
+          ? item.categories[0]
+          : "N/A";
 
       default:
         return typeof value === "number" ? value.toLocaleString() : value;
@@ -72,5 +67,11 @@ export function TableData({ item, header }) {
   };
 
   // 테이블 헤더에 순위가 정의된 테이블이면 rank 필드도 렌더 아니면 스킵
-  return <>{header.field === "rank" ? `${item.rank}위` : renderTableData(header.className, header.field)}</>;
+  return (
+    <>
+      {header.field === "rank"
+        ? `${item.rank}위`
+        : renderTableData(header.className, header.field)}
+    </>
+  );
 }

@@ -55,6 +55,11 @@
   white-space: nowrap;
 }
 
+/* 링크 Row */
+.link-to-detail-page:hover {
+  background-color: var(--grey-400);
+}
+
 /*colgroup으로 table 고정 콜럼 3개 순위, 기업명, 기업설명 너비 관리*/
 .Table .col-company-name {
   width: 210px;

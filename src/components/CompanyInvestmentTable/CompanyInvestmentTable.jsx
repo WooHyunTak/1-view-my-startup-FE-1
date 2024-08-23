@@ -17,7 +17,10 @@ function CompanyInvestmentTable({ setCurrentPage, queryParams }) {
 
   // 페이지네이션 위해서 현재 페이지에 해당하는 투자 데이터 추출
   const startIdx = (queryParams.page - 1) * queryParams.limit;
-  const currentInvestments = investments.slice(startIdx, startIdx + queryParams.limit);
+  const currentInvestments = investments.slice(
+    startIdx,
+    startIdx + queryParams.limit
+  );
 
   return (
     <div className="CompanyInvestmentTable">
@@ -27,8 +30,13 @@ function CompanyInvestmentTable({ setCurrentPage, queryParams }) {
       </div>
       <div className="body">
         <span className="amount">총 {convertToUnit(totalAmount)} 원</span>
-        <Table list={currentInvestments} tableHeaders={investmentTableHeader} tableName="investment-list" />
-        <Pagination setCurrentPage={setCurrentPage} queryParams={queryParams} size="big" />
+        <Table
+          list={currentInvestments}
+          tableHeaders={investmentTableHeader}
+          tableName="investment-list"
+          isCompanyTable={false}
+        />
+        <Pagination setCurrentPage={setCurrentPage} queryParams={queryParams} />
       </div>
     </div>
   );
