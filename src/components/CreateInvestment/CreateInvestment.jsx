@@ -3,15 +3,34 @@ import ic_eyes_hidden from "../../assets/btn_visibility_on_24px-1.svg";
 import ic_eyes from "../../assets/btn_visibility_on_24px.svg";
 import ic_delete from "../../assets/icon/ic_delete.svg";
 import default_company_img from "../../assets/default_company_img.svg";
+import { createInvestment_ver_tak } from "../../services/investmentApi";
+import { useNavigate } from "react-router-dom";
+import AlertModal from "../AlertModal/AlertModal";
+
+let alertMessage = "";
 
 function CreateInvestment({ isOpen = false, myCompany, onClose }) {
+  const defaultInvestmentValues = {
+    name: "",
+    comment: "",
+    amount: 0,
+    password: "",
+    companyId: myCompany.id,
+  };
   const dialogRef = useRef(null);
+  const navigate = useNavigate();
+  const [alertMeg, setAlertMeg] = useState(false);
   const { name, categories } = myCompany;
-  const [investmentValues, setInvestmentValues] = useState({});
+  const [investmentValues, setInvestmentValues] = useState(
+    defaultInvestmentValues
+  );
   const [inputTypes, setInputTypes] = useState({
     password: "password",
     passwordConfirm: "password",
   });
+
+  const handelOpenAlert = () => setAlertMeg(true);
+  const handelCloseAlert = () => setAlertMeg(false);
 
   const handleChangeValues = (name, value) => {
     setInvestmentValues((prev) => ({
@@ -21,12 +40,31 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
   };
 
   const onChange = (event) => {
-    const { name, value } = event.target;
     event.preventDefault();
+    const { name, value } = event.target;
     handleChangeValues(name, value);
   };
 
-  const handleClose = () => onClose();
+  const handleClose = (e) => {
+    e.preventDefault();
+    onClose();
+  };
+
+  const createInvestment = async (e) => {
+    e.preventDefault();
+    try {
+      const data = await createInvestment_ver_tak(investmentValues);
+      if (data) {
+        navigate(`/companies/${data.companyId}`);
+      } else {
+        alertMessage = `기업투자의 실패했습니다.`;
+        handelOpenAlert();
+      }
+    } catch (error) {
+      alertMessage = `기업투자의 실패했습니다. (${error})`;
+      handelOpenAlert();
+    }
+  };
 
   const handleVisiblePassword = (name, e) => {
     e.preventDefault();
@@ -43,6 +81,11 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
 
   return (
     <dialog ref={dialogRef} className="modal-company">
+      <AlertModal
+        isAlertMeg={alertMeg}
+        message={alertMessage}
+        onClose={handelCloseAlert}
+      />
       <div className="modal-container">
         <div className="modal-header">
           <h2>기업에 투자하기</h2>
@@ -78,19 +121,21 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
             <div className="modal-label-container">
               <label>투자 금액</label>
               <input
-                name="revenue"
+                name="amount"
                 onChange={onChange}
                 className="modal-input"
                 placeholder="투자 금액을 입력해 주세요"
+                autoComplete="off"
               ></input>
             </div>
             <div className="modal-label-container">
               <label>투자 코멘트</label>
               <textarea
-                name="description"
+                name="comment"
                 onChange={onChange}
                 className="modal-textarea"
                 placeholder="투자에 대한 코멘트를 입력해 주세요"
+                autoComplete="off"
               ></textarea>
             </div>
             <div className="modal-label-container">
@@ -101,6 +146,7 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
                 onChange={onChange}
                 className="modal-input"
                 placeholder="비밀번호를 입력해 주세요"
+                autoComplete="new-password"
               ></input>
               <button
                 className="modal-password-visible"
@@ -114,9 +160,10 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
               <input
                 name="passwordConfirm"
                 type={inputTypes.passwordConfirm}
-                onChange={onChange}
+                // onChange={onChange}
                 className="modal-input"
                 placeholder="비밀번호를 다시 한 번 입력해 주세요"
+                autoComplete="new-password"
               ></input>
               <button
                 className="modal-password-visible"
@@ -129,7 +176,7 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
               <button onClick={handleClose} className="modal-close-btn">
                 취소
               </button>
-              <button onClick={handleClose} className="modal-complete-btn">
+              <button onClick={createInvestment} className="modal-complete-btn">
                 투자하기
               </button>
             </div>
