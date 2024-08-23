@@ -3,7 +3,7 @@ import { getInvestmentStatus } from "../services/companyApi";
 import { Table } from "../components/Table/Table";
 import { DropDown } from "../components/DropDown/DropDown";
 import { Pagination } from "../components/Pagination/Pagination";
-import { useApiHandler } from "../hooks/useAsyncHandler";
+import { useApiHandler } from "../hooks/useApiHandler";
 
 import { InvestmentStatusTableHeader } from "../utils/tableTypes";
 import "./Home.css";
