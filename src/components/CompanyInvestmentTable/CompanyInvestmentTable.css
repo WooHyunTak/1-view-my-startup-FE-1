@@ -5,19 +5,24 @@
   font-weight: 700;
   font-size: 20px;
   line-height: 23.87px;
-  color: #ffffff;
+  color: #fff;
 }
-.head button {
+.CompanyInvestmentTable .head button {
   padding: 8px 24px;
   border-radius: 50px;
   font-weight: 600;
   font-size: 16px;
   line-height: 19.09px;
-  color: #ffffff;
+  color: #fff;
 }
-.body .total-amount {
+.CompanyInvestmentTable .body {
+  border-top: 1px solid var(--black-100);
+  padding-top: 16px;
+}
+
+.CompanyInvestmentTable .body .amount {
   font-weight: 700;
   font-size: 20px;
   line-height: 23.87px;
-  color: #ffffff;
+  color: #fff;
 }

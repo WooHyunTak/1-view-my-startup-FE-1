@@ -32,20 +32,16 @@ export const InvestmentStatusTableHeader = [
     field: "description",
   },
   { colName: "카테고리", className: "category", field: "categories" },
-  {
-    colName: "누적 투자 금액",
-    className: "actual-investment",
-    field: "actualInvestment",
-  },
+
   {
     colName: "View My Startup 투자 금액",
     className: "virtual-investment",
     field: "virtualInvestment",
   },
   {
-    colName: "고용인원",
-    className: "total-employees",
-    field: "totalEmployees",
+    colName: "실제 누적 투자 금액",
+    className: "actual-investment",
+    field: "actualInvestment",
   },
 ];
 
