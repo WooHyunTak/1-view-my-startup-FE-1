@@ -4,6 +4,7 @@ import { Table } from "../components/Table/Table";
 import { DropDown } from "../components/DropDown/DropDown";
 import { Pagination } from "../components/Pagination/Pagination";
 import { SearchBar } from "../components/SearchBar/SearchBar";
+import { useAsync } from "../hooks/useAsync";
 
 // 테이블 헤더 (테이블 종류) 가져오기
 import { companyListTableHeader } from "../utils/tableTypes";
@@ -22,6 +23,8 @@ const INITIAL_QUERY_PARAMS = {
 function Home() {
   const [companyList, setCompanyList] = useState([]);
   const [queryParams, setQueryParams] = useState(INITIAL_QUERY_PARAMS);
+  //useAsync(호출함수이름)
+  const { loading, error, fetchData } = useAsync(getCompanies);
 
   //쿼리 파라미터 한번에 객체로 관리
   // 쿼리 파라미터 핸들러 (name = query name, value= query value)
@@ -36,24 +39,15 @@ function Home() {
 
   const init = useCallback(async () => {
     const { orderBy, page, limit, keyword } = queryParams;
-    try {
-      const data = await getCompanies({ orderBy, page, limit, keyword });
-
-      const { list, totalCount } = data;
-      setCompanyList(list);
-      const newTotalPages = Math.ceil(totalCount / limit);
-      if (queryParams.totalPages !== newTotalPages) {
-        handleQueryParamsChange("totalPages", newTotalPages);
-      }
-    } catch (err) {
-      console.error(err.message);
-
-      if (err.response) {
-        console.log(err.response.status);
-        console.log(err.response.data);
-      }
+    const data = await fetchData({ orderBy, page, limit, keyword });
+    if (!data) return;
+    const { list, totalCount } = data;
+    setCompanyList(list);
+    const newTotalPages = Math.ceil(totalCount / limit);
+    if (queryParams.totalPages !== newTotalPages) {
+      handleQueryParamsChange("totalPages", newTotalPages);
     }
-  }, [queryParams]); // queryParams가 변경될 때만 init 함수가 실행되도록 설정
+  }, [fetchData, queryParams]); // queryParams가 변경될 때만 init 함수가 실행되도록 설정
 
   // // 컴포넌트가 처음 렌더링될 때,
   // // 그리고 init 함수가 변결될 때 실행
@@ -72,6 +66,8 @@ function Home() {
           buttonType="typeOne"
         />
       </div>
+      {loading && "로딩중"}
+      {error && <span>{error.message}</span>}
       <Table
         list={companyList}
         tableHeaders={companyListTableHeader}
