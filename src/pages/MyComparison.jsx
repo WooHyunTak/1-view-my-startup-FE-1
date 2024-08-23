@@ -1,4 +1,4 @@
-import Comparison from "../components/comparison/Comparison.jsx";
+import Comparison from "../components/Comparison/Comparison.jsx";
 
 function MyComparison() {
   return <Comparison />;
