@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 
-export function useAsync(apiCallFunction) {
+//error,loading, api호출 함수 관리
+export function useErrorHandler(apiCallFunction) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 

@@ -1,8 +1,9 @@
-import { useState, useEffect, useCallback } from "react";
+import { useEffect } from "react";
 import { getInvestmentStatus } from "../services/companyApi";
 import { Table } from "../components/Table/Table";
 import { DropDown } from "../components/DropDown/DropDown";
 import { Pagination } from "../components/Pagination/Pagination";
+import { useApiHandler } from "../hooks/useAsyncHandler";
 
 import { InvestmentStatusTableHeader } from "../utils/tableTypes";
 import "./Home.css";
@@ -16,40 +17,14 @@ const INITIAL_QUERY_PARAMS = {
 };
 
 function InvestmentStatus() {
-  const [companyList, setCompanyList] = useState([]);
-  const [queryParams, setQueryParams] = useState(INITIAL_QUERY_PARAMS);
-
-  //쿼리 파라미터 한번에 객체로 관리
-  // 쿼리 파라미터 핸들러 (name = query name, value= query value)
-  const handleQueryParamsChange = (name, value) => {
-    setQueryParams((preValue) => {
-      return {
-        ...preValue,
-        [name]: value,
-      };
-    });
-  };
-
-  const init = useCallback(async () => {
-    const { orderBy, page, limit } = queryParams;
-    try {
-      const data = await getInvestmentStatus({ orderBy, page, limit });
-
-      const { list, totalCount } = data;
-      setCompanyList(list);
-      const newTotalPages = Math.ceil(totalCount / limit);
-      if (queryParams.totalPages !== newTotalPages) {
-        handleQueryParamsChange("totalPages", newTotalPages);
-      }
-    } catch (err) {
-      console.error(err.message);
-
-      if (err.response) {
-        console.log(err.response.status);
-        console.log(err.response.data);
-      }
-    }
-  }, [queryParams]);
+  const {
+    loading,
+    error,
+    init,
+    list: companyList,
+    queryParams,
+    handleQueryParamsChange,
+  } = useApiHandler(getInvestmentStatus, INITIAL_QUERY_PARAMS);
 
   useEffect(() => {
     init();
@@ -75,6 +50,8 @@ function InvestmentStatus() {
               buttonType="typeThree"
             />
           </div>
+          {loading && "로딩중"}
+          {error && <span>{error.message}</span>}
           <Table
             list={companyList}
             tableHeaders={InvestmentStatusTableHeader}
