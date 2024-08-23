@@ -4,8 +4,6 @@ import AlertModal from "../components/AlertModal/AlertModal.jsx";
 import { DropDown } from "../components/DropDown/DropDown.jsx";
 import CreateInvestment from "../components/CreateInvestment/CreateInvestment.jsx";
 import { Table } from "../components/Table/Table.jsx";
-import { useNavigate } from "react-router-dom";
-import { createInvestment_ver_tak } from "../services/investmentApi.js";
 import * as api from "../services/comparisonApi.js";
 import {
   ComparisonTableHeader,

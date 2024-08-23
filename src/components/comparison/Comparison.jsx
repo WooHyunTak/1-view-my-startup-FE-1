@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import add_icon from "../../assets/icon/ic_add.svg";
 import restart_icon from "../../assets/icon/ic_restart.svg";
-import "./comparison.css";
+import "./Comparison.css";
 import SelectMyCompany from "../SelectMyCompany/SelectMyCompany.jsx";
 import SelectComparisonCompany from "../SelectComparisonCompany/SelectComparisonCompany.jsx";
 import defaultImg from "../../assets/default_company_img.svg";
 import ic_minus from "../../assets/icon/ic_minus.svg";
-import AlertModal from "../AlertModal/AlertModal";
+import AlertModal from "../AlertModal/AlertModal.jsx";
 import { useNavigate } from "react-router-dom";
 import { patchCounts } from "../../services/comparisonApi.js";
 
