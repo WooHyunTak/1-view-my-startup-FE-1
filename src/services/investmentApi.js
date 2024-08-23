@@ -16,3 +16,7 @@ export async function deleteInvestment({ id, password }) {
     throw error;
   }
 }
+export async function createInvestment_ver_tak(investment = {}) {
+  const res = await instance.post("api/investments", investment);
+  return res.data;
+}
