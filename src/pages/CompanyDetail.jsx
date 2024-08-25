@@ -50,7 +50,13 @@ function CompanyDetail() {
         const data = await getCompany(companyId);
         setCompanyData({
           name: data.name,
+<<<<<<< HEAD
           categories: data.categories.map((category) => category.name),
+=======
+          categoryNames: data.categories
+            .map((category) => category.name)
+            .join(", "),
+>>>>>>> dev
           actual: data.actualInvestment,
           revenue: data.revenue,
           employees: data.totalEmployees,
@@ -59,7 +65,10 @@ function CompanyDetail() {
 
         loadInvestments(data.investments);
 
-        handleQueryParamsChange("totalPages", Math.ceil(data.investments.length / queryParams.limit));
+        handleQueryParamsChange(
+          "totalPages",
+          Math.ceil(data.investments.length / queryParams.limit)
+        );
       } catch (err) {
         setError("Failed to load company data");
         console.error(err.message);
@@ -82,6 +91,7 @@ function CompanyDetail() {
   if (!companyData) return <div>No company data available</div>; // company가 null일 경우 처리
 
   // 상세페이지에 필요한 정보
+<<<<<<< HEAD
   const { name, categories, actual, revenue, employees, description } = companyData;
   return (
     <div className="CompanyDetail">
@@ -91,6 +101,23 @@ function CompanyDetail() {
         setCurrentPage={handleQueryParamsChange}
         queryParams={queryParams}
         selectedCompany={companyData}
+=======
+  const { name, categoryNames, actual, revenue, employees, description } =
+    companyData;
+
+  return (
+    <div className="CompanyDetail">
+      <CompanyHeader name={name} categoryNames={categoryNames} />
+      <CompanyInfo
+        actualInvestment={actual}
+        revenue={revenue}
+        employees={employees}
+        description={description}
+      />
+      <CompanyInvestmentTable
+        setCurrentPage={handleQueryParamsChange}
+        queryParams={queryParams}
+>>>>>>> dev
       />
     </div>
   );

@@ -4,8 +4,6 @@ import AlertModal from "../components/AlertModal/AlertModal.jsx";
 import { DropDown } from "../components/DropDown/DropDown.jsx";
 import CreateInvestment from "../components/CreateInvestment/CreateInvestment.jsx";
 import { Table } from "../components/Table/Table.jsx";
-import { useNavigate } from "react-router-dom";
-import { createInvestment_ver_tak } from "../services/investmentApi.js";
 import * as api from "../services/comparisonApi.js";
 import { ComparisonTableHeader, companyListTableHeader } from "../utils/tableTypes.js";
 import { Link, useLocation } from "react-router-dom";
@@ -73,27 +71,21 @@ function CheckInComparison() {
   const handelCloseCreateModal = () => setCreateModal(false);
 
   //API호출
-  const loadComparisonData = async () => {
+  const allLoadComparisonData = async () => {
     try {
-      const data = await api.getComparison(comparisonParams, reqComparison);
-      setComparisonItem(data);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+      const comparisonPromise = api.getComparison(comparisonParams, reqComparison);
+      const comparisonRankPromise = api.getComparisonRank(rankParams, myCompany.id);
 
-  const loadComparisonRankData = async () => {
-    try {
-      const data = await api.getComparisonRank(rankParams, myCompany.id);
-      setComparisonRankItem(data);
+      const [comparisonData, comparisonRankData] = await Promise.all([comparisonPromise, comparisonRankPromise]);
+      setComparisonItem(comparisonData);
+      setComparisonRankItem(comparisonRankData);
     } catch (error) {
       console.log(error.message);
     }
   };
 
   useEffect(() => {
-    loadComparisonData();
-    loadComparisonRankData();
+    allLoadComparisonData();
   }, [comparisonParams, rankParams]);
 
   return (
@@ -123,7 +115,7 @@ function CheckInComparison() {
           <DropDown orderBy={comparisonParams.orderBy} setOrderBy={handleComparisonParams} buttonType="typeOne" />
         </div>
         <div>
-          <Table list={comparisonItem} tableHeaders={ComparisonTableHeader} />
+          <Table list={comparisonItem} tableHeaders={ComparisonTableHeader} isCompanyTable={false} />
         </div>
       </div>
 
@@ -133,7 +125,7 @@ function CheckInComparison() {
           <DropDown orderBy={rankParams.orderBy} setOrderBy={handleRankParams} buttonType="typeOne" />
         </div>
         <div>
-          <Table list={comparisonRankItem} tableHeaders={companyListTableHeader} />
+          <Table list={comparisonRankItem} tableHeaders={companyListTableHeader} isCompanyTable={false} />
         </div>
       </div>
 

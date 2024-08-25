@@ -1,0 +1,136 @@
+.UpdateModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  padding: 24px;
+  background-color: var(--black-300);
+  border-radius: 16px;
+  width: 496px;
+}
+
+.updateModal-head {
+  margin-bottom: 24px;
+}
+.head-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23.87px;
+}
+
+.updateModal-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 16px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21.48px;
+}
+.info-detailInfo {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21.48px;
+  gap: 12px;
+}
+.detailInfo-img {
+  border-radius: 50%;
+}
+.detailInfo-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+.text-name {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21.48px;
+}
+.text-category {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19.09px;
+  color: var(--grey-200);
+}
+
+.updateModal-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21.48px;
+}
+.updateModal-body label {
+  margin-bottom: 16px;
+  border-radius: 10px;
+}
+.updateModal-body input {
+  margin-bottom: 24px;
+  padding: 16px 20px;
+  border: 1px solid var(--grey-200);
+  width: 100%;
+  border-radius: 10px;
+  color: #fff;
+}
+.updateModal-body textarea {
+  width: 100%;
+  height: 108px;
+  resize: none;
+  padding: 16px 20px;
+  border: 1px solid var(--grey-200);
+  border-radius: 10px;
+  margin-bottom: 24px;
+  color: #fff;
+}
+.body-password {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  position: relative;
+}
+.body-password .password-visibility {
+  position: absolute;
+  top: 19px;
+  right: 20px;
+  cursor: pointer;
+}
+.body-button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+.button-cancel {
+  padding: 13px 48px;
+  border: 1px solid var(--orange);
+  color: var(--orange);
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 21.48px;
+  width: 183px;
+}
+.UpdateModal .updateModal-body .button-update {
+  padding: 13px 48px;
+  border-radius: 50px;
+  font-weight: 600;
+  background-color: var(--orange);
+  font-size: 18px;
+  line-height: 21.48px;
+  width: 183px;
+}
