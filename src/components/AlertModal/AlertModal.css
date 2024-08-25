@@ -34,7 +34,7 @@
   width: 100%;
 }
 
-.alert-btn {
+.alert-modal-btn-container .alert-btn {
   width: 194px;
   height: 48px;
   padding: 13px 48px;

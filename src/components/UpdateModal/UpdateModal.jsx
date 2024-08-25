@@ -32,7 +32,7 @@ function UpdateModal({ onUpdateConfirm, onCancel }) {
       <div className="updateModal-body">
         <label>투자 금액</label>
         <input
-          type="number"
+          type="text"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
           placeholder="투자 금액을 입력해 주세요"

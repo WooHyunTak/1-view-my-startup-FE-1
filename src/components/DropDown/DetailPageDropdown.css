@@ -22,11 +22,19 @@
   overflow: hidden;
   z-index: 10;
 }
+.kebab-menu {
+  background-color: inherit;
+}
 .dropdown-menu button {
   padding: 12px 24px;
 }
 .dropdown-menu .edit {
   border-bottom: 1px solid var(--grey-200);
+  background-color: inherit;
+}
+.dropdown-menu .delete {
+  border-bottom: 1px solid var(--grey-200);
+  background-color: inherit;
 }
 .dropdown-menu .edit:hover {
   background-color: var(--grey-400);

@@ -23,46 +23,6 @@
   line-height: 23.87px;
 }
 
-.updateModal-info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 16px;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 21.48px;
-}
-.info-detailInfo {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 21.48px;
-  gap: 12px;
-}
-.detailInfo-img {
-  border-radius: 50%;
-}
-.detailInfo-text {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-}
-.text-name {
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 21.48px;
-}
-.text-category {
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 19.09px;
-  color: var(--grey-200);
-}
-
 .updateModal-body {
   display: flex;
   flex-direction: column;
@@ -124,6 +84,7 @@
   font-size: 18px;
   line-height: 21.48px;
   width: 183px;
+  background-color: inherit;
 }
 .UpdateModal .updateModal-body .button-update {
   padding: 13px 48px;
