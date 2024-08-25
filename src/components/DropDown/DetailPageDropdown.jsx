@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState, useContext } from "react";
 import { InvestmentContext } from "../../contexts/InvestmentContext";
 import DeleteConfirmModal from "../DeleteConfirmModal/DeleteConfirmModal";
+import UpdateModal from "../UpdateModal/UpdateModal";
 import kebabMenu from "../../assets/icon/ic_kebab.svg";
 import "./DetailPageDropdown.css";
 
 function DetailPageDropdown({ id, password }) {
   const [visible, setVisible] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const { deleteInvestmentById } = useContext(InvestmentContext);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+  const { deleteInvestmentById, updateInvestmentById } = useContext(InvestmentContext);
 
   const dropDownRef = useRef(null);
 
@@ -16,19 +18,45 @@ function DetailPageDropdown({ id, password }) {
   };
 
   const openDeleteModal = () => {
-    setIsModalOpen(true);
+    setIsDeleteModalOpen(true);
   };
 
   const closeDeleteModal = () => {
-    setIsModalOpen(false);
+    setIsDeleteModalOpen(false);
+  };
+
+  const openUpdateModal = () => {
+    setIsUpdateModalOpen(true);
+  };
+
+  const closeUpdateModal = () => {
+    setIsUpdateModalOpen(false);
   };
 
   const confirmDelete = async (inputPassword) => {
     if (inputPassword === password) {
       await deleteInvestmentById({ id, password: inputPassword });
-      setIsModalOpen(false);
+      setIsDeleteModalOpen(false);
     } else {
       alert("비밀번호가 일치하지 않습니다.");
+      return;
+    }
+  };
+
+  const confirmUpdate = async (updatedData) => {
+    try {
+      const { password: inputPassword } = updatedData;
+
+      if (inputPassword !== password) {
+        alert("비밀번호가 일치하지 않습니다.");
+        return;
+      }
+      await updateInvestmentById({ id, updatedData });
+      setIsUpdateModalOpen(false);
+      window.location.reload();
+    } catch (error) {
+      alert("투자 업데이트에 실패했습니다.");
+      return;
     }
   };
 
@@ -55,13 +83,16 @@ function DetailPageDropdown({ id, password }) {
       </button>
       {visible && (
         <div className="dropdown-menu">
-          <button className="edit">수정하기</button>
+          <button className="edit" onClick={openUpdateModal}>
+            수정하기
+          </button>
           <button className="delete" onClick={openDeleteModal}>
             삭제하기
           </button>
         </div>
       )}
-      {isModalOpen && <DeleteConfirmModal onDeleteConfirm={confirmDelete} onCancel={closeDeleteModal} />}
+      {isUpdateModalOpen && <UpdateModal onUpdateConfirm={confirmUpdate} onCancel={closeUpdateModal} />}
+      {isDeleteModalOpen && <DeleteConfirmModal onDeleteConfirm={confirmDelete} onCancel={closeDeleteModal} />}
     </div>
   );
 }

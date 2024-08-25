@@ -1,5 +1,5 @@
 import { useState } from "react";
-import deleteBtn from "../../assets/icon/ic_delete.svg";
+import cancelBtn from "../../assets/icon/ic_delete.svg";
 import visibleOn from "../../assets/btn_visibility_on_24px.svg";
 import visibleOff from "../../assets/btn_visibility_on_24px-1.svg";
 import "./DeleteConfirmModal.css";
@@ -21,7 +21,7 @@ function DeleteConfirmModal({ onDeleteConfirm, onCancel }) {
       <div className="deleteModal-container">
         <div className="deleteModel-head">
           <h3>삭제 권한 인증</h3>
-          <img className="cancel-icon" src={deleteBtn} alt="delete button" onClick={onCancel} />
+          <img className="cancel-button" src={cancelBtn} alt="delete button" onClick={onCancel} />
         </div>
         <div className="deleteModel-body">
           <label>비밀번호</label>

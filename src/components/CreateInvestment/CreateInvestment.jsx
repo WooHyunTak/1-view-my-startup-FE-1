@@ -10,6 +10,7 @@ import AlertModal from "../AlertModal/AlertModal";
 let alertMessage = "";
 
 function CreateInvestment({ isOpen = false, myCompany, onClose }) {
+  console.log(myCompany);
   const defaultInvestmentValues = {
     name: "",
     comment: "",
@@ -68,6 +69,7 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
     try {
       const data = await createInvestment_ver_tak(investmentValues);
       if (data) {
+        console.log("id check:", data.companyId);
         navigate(`/companies/${data.companyId}`);
       } else {
         alertMessage = `기업투자의 실패했습니다.`;
@@ -171,9 +173,7 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
                 <img src={ic_eyes} alt="비밀번호 보기" />
               </button>
             </div>
-            {error.passwordConfirm && (
-              <p style={{ color: "orange" }}>비밀번호가 일치하지 않습니다.</p>
-            )}
+            {error.passwordConfirm && <p style={{ color: "orange" }}>비밀번호가 일치하지 않습니다.</p>}
             <div className="modal-btn-container">
               <button onClick={handleClose} className="modal-close-btn">
                 취소

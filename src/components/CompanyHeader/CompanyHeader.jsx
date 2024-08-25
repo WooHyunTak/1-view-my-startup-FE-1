@@ -3,7 +3,6 @@ import "./CompanyHeader.css";
 
 function CompanyHeader({ name, categoryNames }) {
   const categories = categoryNames.map((category) => category.name).join(", ");
-
   return (
     <div className="CompanyHeader">
       <img src={default_logo} alt="logo" />
