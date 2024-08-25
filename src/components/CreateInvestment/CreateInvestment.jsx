@@ -10,7 +10,6 @@ import AlertModal from "../AlertModal/AlertModal";
 let alertMessage = "";
 
 function CreateInvestment({ isOpen = false, myCompany, onClose }) {
-  console.log(myCompany);
   const defaultInvestmentValues = {
     name: "",
     comment: "",
@@ -69,7 +68,6 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
     try {
       const data = await createInvestment_ver_tak(investmentValues);
       if (data) {
-        console.log("id check:", data.companyId);
         navigate(`/companies/${data.companyId}`);
       } else {
         alertMessage = `기업투자의 실패했습니다.`;

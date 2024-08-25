@@ -34,24 +34,40 @@ function DetailPageDropdown({ id, password }) {
   };
 
   const confirmDelete = async (inputPassword) => {
-    if (inputPassword === password) {
-      await deleteInvestmentById({ id, password: inputPassword });
-      setIsDeleteModalOpen(false);
-    } else {
+    if (!inputPassword) {
+      alert("비밀번호를 입력해 주세요.");
+      return;
+    }
+
+    if (inputPassword !== password) {
       alert("비밀번호가 일치하지 않습니다.");
       return;
+    }
+
+    try {
+      await deleteInvestmentById({ id, password: inputPassword });
+      alert("삭제가 성공적으로 완료되었습니다.");
+      setIsDeleteModalOpen(false);
+    } catch (error) {
+      alert("삭제에 실패했습니다.");
     }
   };
 
   const confirmUpdate = async (updatedData) => {
-    try {
-      const { password: inputPassword } = updatedData;
+    const { password: inputPassword } = updatedData;
 
-      if (inputPassword !== password) {
-        alert("비밀번호가 일치하지 않습니다.");
-        return;
-      }
+    if (!inputPassword) {
+      alert("비밀번호를 입력해 주세요.");
+      return;
+    }
+    if (inputPassword !== password) {
+      alert("비밀번호가 일치하지 않습니다.");
+      return;
+    }
+
+    try {
       await updateInvestmentById({ id, updatedData });
+      alert("업데이트가 성공적으로 완료되었습니다.");
       setIsUpdateModalOpen(false);
       window.location.reload();
     } catch (error) {

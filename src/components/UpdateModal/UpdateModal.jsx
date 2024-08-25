@@ -1,6 +1,6 @@
 import "./UpdateModal.css";
 import cancelBtn from "../../assets/icon/ic_delete.svg";
-import defaultLogo from "../../assets/default_company_img.svg";
+
 import visibleOn from "../../assets/btn_visibility_on_24px.svg";
 import visibleOff from "../../assets/btn_visibility_on_24px-1.svg";
 
@@ -24,19 +24,8 @@ function UpdateModal({ onUpdateConfirm, onCancel }) {
     <div className="UpdateModal">
       <div className="updateModal-head">
         <div className="head-title">
-          <h3>투자 정보 수정하기</h3>
+          <h3>수정 권한 인증</h3>
           <img className="cancel-button" src={cancelBtn} alt="cancel button img" onClick={onCancel} />
-        </div>
-
-        <div className="updateModal-info">
-          <h4>투자 기업 정보</h4>
-          <div className="info-detailInfo">
-            <img className="detailInfo-img" src={defaultLogo} alt="default log" />
-            <div className="detailInfo-text">
-              <span className="text-name">기업명</span>
-              <span className="text-category">카테고리</span>
-            </div>
-          </div>
         </div>
       </div>
 
