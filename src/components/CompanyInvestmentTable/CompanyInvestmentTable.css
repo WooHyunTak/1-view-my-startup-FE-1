@@ -19,6 +19,14 @@
   border-top: 1px solid var(--black-100);
   padding-top: 16px;
 }
+.CompanyInvestmentTable .body p {
+  font-weight: 400;
+  font-weight: 14px;
+  line-height: 16.71px;
+  color: var(--grey-200);
+  text-align: center;
+  margin-top: 120px;
+}
 
 .CompanyInvestmentTable .body .amount {
   font-weight: 700;

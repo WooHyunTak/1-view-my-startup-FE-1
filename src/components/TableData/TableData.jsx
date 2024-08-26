@@ -50,7 +50,7 @@ export function TableData({ item, header }) {
         return (
           <div className={className}>
             <span>{value}</span>
-            <DetailPageDropdown id={item.id} password={item.password} />
+            <DetailPageDropdown id={item.id} password={item.password} amount={item.amount} comment={item.comment} />
           </div>
         );
 

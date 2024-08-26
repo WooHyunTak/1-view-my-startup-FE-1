@@ -7,7 +7,8 @@
   padding: 24px;
   background-color: var(--black-300);
   border-radius: 16px;
-  width: 496px;
+  width: 93.5%;
+  max-width: 496px;
 }
 
 .updateModal-head {
@@ -54,37 +55,12 @@
   margin-bottom: 24px;
   color: #fff;
 }
-.body-password {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  width: 100%;
-  position: relative;
-}
-.body-password .password-visibility {
-  position: absolute;
-  top: 19px;
-  right: 20px;
-  cursor: pointer;
-}
 .body-button {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 16px;
-}
-.button-cancel {
-  padding: 13px 48px;
-  border: 1px solid var(--orange);
-  color: var(--orange);
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 21.48px;
-  width: 183px;
-  background-color: inherit;
 }
 .UpdateModal .updateModal-body .button-update {
   padding: 13px 48px;
