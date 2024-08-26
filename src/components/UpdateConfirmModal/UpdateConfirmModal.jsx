@@ -1,10 +1,10 @@
-import { useState } from "react";
+import "./UpdateConfirmModal.css";
 import cancelBtn from "../../assets/icon/ic_delete.svg";
 import visibleOn from "../../assets/btn_visibility_on_24px.svg";
 import visibleOff from "../../assets/btn_visibility_on_24px-1.svg";
-import "./DeleteConfirmModal.css";
+import { useState } from "react";
 
-function DeleteConfirmModal({ onDeleteConfirm, onCancel }) {
+function UpdateConfirmModal({ onUpdateConfirm, onCancel }) {
   const [password, setPassword] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
@@ -12,18 +12,18 @@ function DeleteConfirmModal({ onDeleteConfirm, onCancel }) {
     setIsPasswordVisible((prevState) => !prevState);
   };
 
-  const handleDeleteClick = () => {
-    onDeleteConfirm(password);
+  const handleNextClick = () => {
+    onUpdateConfirm({ password });
   };
 
   return (
-    <div className="DeleteConfirmModal">
-      <div className="deleteModal-container">
-        <div className="deleteModel-head">
-          <h3>삭제 권한 인증</h3>
+    <div className="UpdateConfirmModal">
+      <div className="UpdateConfirmModal-container">
+        <div className="UpdateConfirmModal-head">
+          <h3>수정 권한 인증</h3>
           <img className="cancel-button" src={cancelBtn} alt="cancel button" onClick={onCancel} />
         </div>
-        <div className="deleteModel-body">
+        <div className="UpdateConfirmModal-body">
           <label>비밀번호</label>
           <div className="input-container">
             <input
@@ -39,12 +39,13 @@ function DeleteConfirmModal({ onDeleteConfirm, onCancel }) {
               onClick={togglePasswordVisibility}
             />
           </div>
-          <button className="delete-btn" onClick={handleDeleteClick}>
-            삭제하기
+          <button className="next-btn" onClick={handleNextClick}>
+            다음
           </button>
         </div>
       </div>
     </div>
   );
 }
-export default DeleteConfirmModal;
+
+export default UpdateConfirmModal;

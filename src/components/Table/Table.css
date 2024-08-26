@@ -58,6 +58,7 @@
 /* 링크 Row */
 .link-to-detail-page:hover {
   background-color: var(--grey-400);
+  text-decoration: none;
 }
 
 /*colgroup으로 table 고정 콜럼 3개 순위, 기업명, 기업설명 너비 관리*/
