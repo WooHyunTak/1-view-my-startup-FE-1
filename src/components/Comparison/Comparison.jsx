@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import add_icon from "../../assets/icon/ic_add.svg";
 import restart_icon from "../../assets/icon/ic_restart.svg";
-import "./comparison.css";
+import "./Comparison.css";
 import SelectMyCompany from "../SelectMyCompany/SelectMyCompany.jsx";
 import SelectComparisonCompany from "../SelectComparisonCompany/SelectComparisonCompany.jsx";
 import defaultImg from "../../assets/default_company_img.svg";
@@ -31,12 +31,7 @@ function ComparisonItem({ item = {}, onDelete }) {
 
   return (
     <div className="ComparisonItem">
-      <img
-        onClick={handleDelete}
-        className="ComparisonItem-delete"
-        src={ic_minus}
-        alt="삭제"
-      />
+      <img onClick={handleDelete} className="ComparisonItem-delete" src={ic_minus} alt="삭제" />
       <img className="ComparisonItem-img" src={defaultImg} alt="기업 이미지" />
       <span className="ComparisonItem-name ellipsis">{name}</span>
       <p className="ComparisonItem-categories ellipsis">{categories[0]}</p>
@@ -154,10 +149,7 @@ function Comparison() {
 
   useEffect(() => {
     //최신 선택기업의 상태가 변경되면 로컬스토리지의 값을 저장한다.
-    localStorage.setItem(
-      "localStorageSelectId",
-      JSON.stringify(recentCompanies)
-    );
+    localStorage.setItem("localStorageSelectId", JSON.stringify(recentCompanies));
   }, [recentCompanies]);
 
   return (
@@ -176,11 +168,7 @@ function Comparison() {
         comparisonCompanies={comparisonCompanies}
         onDeleteClick={handleDeleteComparisonCompany}
       />
-      <AlertModal
-        isAlertMeg={alertMeg}
-        message={alertMessage}
-        onClose={handelCloseAlert}
-      />
+      <AlertModal isAlertMeg={alertMeg} message={alertMessage} onClose={handelCloseAlert} />
       <div>
         <div className="head-container">
           <h2>나의 기업을 선택해 주세요!</h2>
@@ -201,10 +189,7 @@ function Comparison() {
             )}
             {!myCompany && (
               <div className="add-company">
-                <button
-                  onClick={handelOpenMyCompany}
-                  className="add-company-btn"
-                >
+                <button onClick={handelOpenMyCompany} className="add-company-btn">
                   <img src={add_icon} alt="기업추가하기아이콘" />
                 </button>
                 <p>기업 추가</p>
@@ -217,21 +202,14 @@ function Comparison() {
         <div>
           <div className="head-container">
             <h2>어떤 기업이 궁금하세요? (최대 5개)</h2>
-            <button
-              className="comparison-btn"
-              onClick={handelOpenComparisonCompany}
-            >
+            <button className="comparison-btn" onClick={handelOpenComparisonCompany}>
               기업추가하기
             </button>
           </div>
           <div className="out-container">
             <div className="items-container">
               {comparisonCompanies.map((item) => (
-                <ComparisonItem
-                  key={item.id}
-                  item={item}
-                  onDelete={handleDeleteComparisonCompany}
-                />
+                <ComparisonItem key={item.id} item={item} onDelete={handleDeleteComparisonCompany} />
               ))}
               {comparisonCompanies.length < 1 && (
                 <p className="no-selected-comparison">
@@ -244,9 +222,7 @@ function Comparison() {
           <div className="bottom-btn-container">
             <button
               onClick={CheckInNavigate}
-              className={
-                btnDisable ? "disable-comparison-btn" : "comparison-submit-btn"
-              }
+              className={btnDisable ? "disable-comparison-btn" : "comparison-submit-btn"}
               disabled={btnDisable}
             >
               기업 비교하기
