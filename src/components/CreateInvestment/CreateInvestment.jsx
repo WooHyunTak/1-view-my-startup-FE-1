@@ -7,8 +7,6 @@ import { createInvestment_ver_tak } from "../../services/investmentApi";
 import { useNavigate } from "react-router-dom";
 import AlertModal from "../AlertModal/AlertModal";
 
-let alertMessage = "";
-
 function CreateInvestment({ isOpen = false, myCompany, onClose }) {
   const defaultInvestmentValues = {
     name: "",
@@ -19,17 +17,15 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
   };
   const dialogRef = useRef(null);
   const navigate = useNavigate();
-  const [alertMeg, setAlertMeg] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const { name, categories } = myCompany;
   const [investmentValues, setInvestmentValues] = useState(defaultInvestmentValues);
   const [inputTypes, setInputTypes] = useState({
     password: "password",
     passwordConfirm: "password",
   });
-  const [error, setError] = useState({});
-
-  const handelOpenAlert = () => setAlertMeg(true);
-  const handelCloseAlert = () => setAlertMeg(false);
+  const [error, setError] = useState("");
 
   const handleChangeValues = (name, value) => {
     setInvestmentValues((prev) => ({
@@ -42,40 +38,51 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
     event.preventDefault();
     const { name, value } = event.target;
     handleChangeValues(name, value);
+
+    if (name === "passwordConfirm") {
+      validationPassword(value);
+    }
   };
 
-  const validationPassword = (e) => {
-    if (investmentValues.password !== e.target.value) {
-      setError((prev) => ({
-        ...prev,
-        [e.target.name]: e.target.value,
-      }));
+  const validationPassword = (confirmPassword) => {
+    if (investmentValues.password !== confirmPassword) {
+      setError("비밀번호가 일치하지 않습니다.");
     } else {
-      setError((prev) => ({
-        ...prev,
-        [e.target.name]: "",
-      }));
+      setError("");
     }
   };
 
   const handleClose = (e) => {
     e.preventDefault();
-    onClose();
+    onClose(); // 모든 창을 닫습니다.
   };
 
   const createInvestment = async (e) => {
     e.preventDefault();
+    if (!investmentValues.password) {
+      setAlertMessage("비밀번호를 입력해 주세요.");
+      setIsAlertModalOpen(true);
+      return;
+    }
+
+    if (investmentValues.password !== investmentValues.passwordConfirm) {
+      setAlertMessage("입력하신 비밀번호가 일치하지 않습니다.");
+      setIsAlertModalOpen(true);
+      return;
+    }
+
     try {
       const data = await createInvestment_ver_tak(investmentValues);
       if (data) {
-        navigate(`/companies/${data.companyId}`);
+        setAlertMessage("투자가 성공했습니다.");
+        setIsAlertModalOpen(true);
       } else {
-        alertMessage = `기업투자의 실패했습니다.`;
-        handelOpenAlert();
+        setAlertMessage("기업 투자가 실패했습니다.");
+        setIsAlertModalOpen(true);
       }
     } catch (error) {
-      alertMessage = `기업투자의 실패했습니다. (${error})`;
-      handelOpenAlert();
+      setAlertMessage(`기업 투자가 실패했습니다. (${error})`);
+      setIsAlertModalOpen(true);
     }
   };
 
@@ -87,14 +94,23 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
     }));
   };
 
-  //모달 다이얼로그 Ref 관리 -> 모달 open상태와 API호루 쿼리의 의존성 부여
+  const closeAlertModal = () => {
+    setIsAlertModalOpen(false);
+    if (alertMessage === "투자가 성공했습니다.") {
+      onClose(); // 성공 메시지 후 모든 창을 닫습니다.
+    } else {
+      dialogRef.current.showModal(); // 실패 시 다시 투자 모달을 엽니다.
+    }
+  };
+
+  // 모달 다이얼로그 Ref 관리 -> 모달 open 상태와 API 호출 쿼리의 의존성 부여
   useEffect(() => {
     isOpen ? dialogRef.current.showModal() : dialogRef.current.close();
   }, [isOpen]);
 
   return (
     <dialog ref={dialogRef} className="modal-company">
-      <AlertModal isAlertMeg={alertMeg} message={alertMessage} onClose={handelCloseAlert} />
+      <AlertModal isAlertMeg={isAlertModalOpen} message={alertMessage} onClose={closeAlertModal} />
       <div className="modal-container">
         <div className="modal-header">
           <h2>기업에 투자하기</h2>
@@ -154,7 +170,7 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
                 autoComplete="new-password"
               ></input>
               <button className="modal-password-visible" onClick={(e) => handleVisiblePassword("password", e)}>
-                <img src={ic_eyes} alt="비밀번호 보기" />
+                <img src={inputTypes.password === "text" ? ic_eyes_hidden : ic_eyes} alt="비밀번호 보기" />
               </button>
             </div>
             <div className="modal-label-container">
@@ -162,16 +178,16 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
               <input
                 name="passwordConfirm"
                 type={inputTypes.passwordConfirm}
-                onChange={validationPassword}
+                onChange={onChange}
                 className="modal-input"
                 placeholder="비밀번호를 다시 한 번 입력해 주세요"
                 autoComplete="new-password"
               ></input>
               <button className="modal-password-visible" onClick={(e) => handleVisiblePassword("passwordConfirm", e)}>
-                <img src={ic_eyes} alt="비밀번호 보기" />
+                <img src={inputTypes.passwordConfirm === "text" ? ic_eyes_hidden : ic_eyes} alt="비밀번호 보기" />
               </button>
             </div>
-            {error.passwordConfirm && <p style={{ color: "orange" }}>비밀번호가 일치하지 않습니다.</p>}
+            {error && <p style={{ color: "orange" }}>{error}</p>}
             <div className="modal-btn-container">
               <button onClick={handleClose} className="modal-close-btn">
                 취소

@@ -13,6 +13,7 @@ function DetailPageDropdown({ id, password }) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [shouldReload, setShouldReload] = useState(false);
+  const [previousModal, setPreviousModal] = useState(null); // 새로운 상태 변수 추가
   const { deleteInvestmentById, updateInvestmentById } = useContext(InvestmentContext);
 
   const dropDownRef = useRef(null);
@@ -23,6 +24,7 @@ function DetailPageDropdown({ id, password }) {
 
   const openDeleteModal = () => {
     setIsDeleteModalOpen(true);
+    setPreviousModal("delete"); // 이전 모달로 삭제 모달을 지정
   };
 
   const closeDeleteModal = () => {
@@ -31,6 +33,7 @@ function DetailPageDropdown({ id, password }) {
 
   const openUpdateModal = () => {
     setIsUpdateModalOpen(true);
+    setPreviousModal("update"); // 이전 모달로 업데이트 모달을 지정
   };
 
   const closeUpdateModal = () => {
@@ -41,10 +44,16 @@ function DetailPageDropdown({ id, password }) {
     setIsAlertModalOpen(false);
     if (shouldReload) {
       window.location.reload();
+    } else if (previousModal === "delete") {
+      setIsDeleteModalOpen(true); // 삭제 모달을 다시 열기
+    } else if (previousModal === "update") {
+      setIsUpdateModalOpen(true); // 업데이트 모달을 다시 열기
     }
   };
 
   const confirmDelete = async (inputPassword) => {
+    closeDeleteModal(); // 삭제 모달을 먼저 닫음
+
     if (!inputPassword) {
       setAlertMessage("비밀번호를 입력해 주세요.");
       setIsAlertModalOpen(true);
@@ -61,7 +70,6 @@ function DetailPageDropdown({ id, password }) {
       await deleteInvestmentById({ id, password: inputPassword });
       setAlertMessage("삭제가 성공적으로 완료되었습니다.");
       setIsAlertModalOpen(true);
-      setIsDeleteModalOpen(false);
       setShouldReload(true);
     } catch (error) {
       setAlertMessage("삭제에 실패했습니다.");
@@ -70,6 +78,8 @@ function DetailPageDropdown({ id, password }) {
   };
 
   const confirmUpdate = async (updatedData) => {
+    closeUpdateModal(); // 업데이트 모달을 먼저 닫음
+
     const { password: inputPassword } = updatedData;
 
     if (!inputPassword) {
@@ -87,7 +97,6 @@ function DetailPageDropdown({ id, password }) {
       await updateInvestmentById({ id, updatedData });
       setAlertMessage("업데이트가 성공적으로 완료되었습니다.");
       setIsAlertModalOpen(true);
-      setIsUpdateModalOpen(false);
       setShouldReload(true);
     } catch (error) {
       setAlertMessage("투자 업데이트에 실패했습니다.");
