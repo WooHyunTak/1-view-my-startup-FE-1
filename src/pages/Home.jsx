@@ -5,6 +5,8 @@ import { DropDown } from "../components/DropDown/DropDown";
 import { Pagination } from "../components/Pagination/Pagination";
 import { SearchBar } from "../components/SearchBar/SearchBar";
 import { useApiHandler } from "../hooks/useApiHandler";
+import { ErrorMsg } from "../components/ErrorMsg/ErrorMsg";
+import { Loader } from "../components/Loader/Loader";
 
 // 테이블 헤더 (테이블 종류) 가져오기
 import { companyListTableHeader } from "../utils/tableTypes";
@@ -38,15 +40,28 @@ function Home() {
 
   return (
     <section className="Home">
+      {loading && <Loader />}
+
       <div className="top-bar">
         <h2 className="top-bar-title">전체 스타트업 목록</h2>
         <SearchBar setKeyword={handleQueryParamsChange} />
-        <DropDown orderBy={queryParams.orderBy} setOrderBy={handleQueryParamsChange} buttonType="typeOne" />
+        <DropDown
+          orderBy={queryParams.orderBy}
+          setOrderBy={handleQueryParamsChange}
+          buttonType="typeOne"
+        />
       </div>
-      {loading && "로딩중"}
-      {error && <span>{error.message}</span>}
-      <Table list={companyList} tableHeaders={companyListTableHeader} tableName="company-list" />
-      <Pagination setCurrentPage={handleQueryParamsChange} currentPage={queryParams.page} totalPages={totalPages} />
+      <Table
+        list={companyList}
+        tableHeaders={companyListTableHeader}
+        tableName="company-list"
+      />
+      {error && <ErrorMsg errorMsg={error.message} />}
+      <Pagination
+        setCurrentPage={handleQueryParamsChange}
+        currentPage={queryParams.page}
+        totalPages={totalPages}
+      />
     </section>
   );
 }
