@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import add_icon from "../../assets/icon/ic_add.svg";
 import restart_icon from "../../assets/icon/ic_restart.svg";
-import "./comparison.css";
+import "./Comparison.css";
 import SelectMyCompany from "../SelectMyCompany/SelectMyCompany.jsx";
 import SelectComparisonCompany from "../SelectComparisonCompany/SelectComparisonCompany.jsx";
 import defaultImg from "../../assets/default_company_img.svg";
