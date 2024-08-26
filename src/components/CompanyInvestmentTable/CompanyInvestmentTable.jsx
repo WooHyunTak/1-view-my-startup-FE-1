@@ -29,18 +29,27 @@ function CompanyInvestmentTable({ setCurrentPage, queryParams, selectedCompany, 
         <button onClick={handelOpenCreateModal}>기업투자하기</button>
       </div>
       <div className="body">
-        <span className="amount">총 {convertToUnit(totalAmount)} 원</span>
-        <Table
-          list={currentInvestments}
-          tableHeaders={investmentTableHeader}
-          tableName="investment-list"
-          isCompanyTable={false}
-        />
-        <Pagination
-          setCurrentPage={setCurrentPage}
-          currentPage={queryParams.page}
-          totalPages={queryParams.totalPages}
-        />
+        {investments.length === 0 ? (
+          <p>
+            아직 투자한 기업이 없어요, <br />
+            버튼을 눌러 기업에 투자해보세요!
+          </p>
+        ) : (
+          <>
+            <span className="amount">총 {convertToUnit(totalAmount)} 원</span>
+            <Table
+              list={currentInvestments}
+              tableHeaders={investmentTableHeader}
+              tableName="investment-list"
+              isCompanyTable={false}
+            />
+            <Pagination
+              setCurrentPage={setCurrentPage}
+              currentPage={queryParams.page}
+              totalPages={queryParams.totalPages}
+            />
+          </>
+        )}
       </div>
       {isModalOpen && (
         <CreateInvestment isOpen={isModalOpen} myCompany={selectedCompany} onClose={handelCloseCreateModal} />
