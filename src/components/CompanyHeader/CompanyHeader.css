@@ -18,11 +18,26 @@
   font-weight: 700;
   font-size: 24px;
   line-height: 28.64px;
-  color: #ffffff;
 }
 .CompanyHeader .category {
   font-weight: 500;
   font-size: 20px;
   line-height: 23.87px;
-  color: #747474;
+  color: var(--grey-200);
+}
+
+@media screen and (max-width: 743px) {
+  .CompanyHeader .company-logo {
+    content: url("../../assets/default_logo_companyDetail_small.svg");
+  }
+
+  .CompanyHeader .name {
+    font-size: 20px;
+    line-height: 23.87px;
+  }
+
+  .CompanyHeader .category {
+    font-size: 16px;
+    line-height: 19.09px;
+  }
 }

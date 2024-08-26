@@ -49,6 +49,7 @@ function SelectMyCompany({
   const [queryObj, setQueryObj] = useState(defaultParams);
   const [Companies, setCompanies] = useState([]);
   const [keyword, setKeyword] = useState("");
+  const [totalPages, setTotalPages] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
   const dialogRef = useRef(null);
 
@@ -85,10 +86,7 @@ function SelectMyCompany({
       const { list, totalCount = 0 } = await getCompanies(queryObj);
       setCompanies(list);
       setTotalCount(totalCount);
-      const newTotalPages = Math.ceil(totalCount / queryObj.limit);
-      if (queryObj.totalPages !== newTotalPages) {
-        handleValues("totalPages", newTotalPages);
-      }
+      setTotalPages(Math.ceil(totalCount / queryObj.limit));
     } catch (error) {
       console.log(error.message);
     }
@@ -162,7 +160,8 @@ function SelectMyCompany({
         {!Companies.length && <h3>기업정보가 없습니다.</h3>}
         <Pagination
           setCurrentPage={handleValues}
-          queryParams={queryObj}
+          currentPage={queryObj.page}
+          totalPages={totalPages}
           size="small"
         />
       </div>

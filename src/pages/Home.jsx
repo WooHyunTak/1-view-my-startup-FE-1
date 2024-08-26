@@ -41,24 +41,12 @@ function Home() {
       <div className="top-bar">
         <h2 className="top-bar-title">전체 스타트업 목록</h2>
         <SearchBar setKeyword={handleQueryParamsChange} />
-        <DropDown
-          orderBy={queryParams.orderBy}
-          setOrderBy={handleQueryParamsChange}
-          buttonType="typeOne"
-        />
+        <DropDown orderBy={queryParams.orderBy} setOrderBy={handleQueryParamsChange} buttonType="typeOne" />
       </div>
       {loading && "로딩중"}
       {error && <span>{error.message}</span>}
-      <Table
-        list={companyList}
-        tableHeaders={companyListTableHeader}
-        tableName="company-list"
-      />
-      <Pagination
-        setCurrentPage={handleQueryParamsChange}
-        currentPage={queryParams.page}
-        totalPages={totalPages}
-      />
+      <Table list={companyList} tableHeaders={companyListTableHeader} tableName="company-list" />
+      <Pagination setCurrentPage={handleQueryParamsChange} currentPage={queryParams.page} totalPages={totalPages} />
     </section>
   );
 }

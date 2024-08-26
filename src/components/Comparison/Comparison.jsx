@@ -6,7 +6,7 @@ import SelectMyCompany from "../SelectMyCompany/SelectMyCompany.jsx";
 import SelectComparisonCompany from "../SelectComparisonCompany/SelectComparisonCompany.jsx";
 import defaultImg from "../../assets/default_company_img.svg";
 import ic_minus from "../../assets/icon/ic_minus.svg";
-import AlertModal from "../AlertModal/AlertModal.jsx";
+import AlertModal from "../AlertModal/AlertModal";
 import { useNavigate } from "react-router-dom";
 import { patchCounts } from "../../services/comparisonApi.js";
 

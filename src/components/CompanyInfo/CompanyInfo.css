@@ -34,3 +34,9 @@
   line-height: 16.71px;
   color: #d8d8d8;
 }
+
+@media screen and (max-width: 743px) {
+  .info div {
+    flex-direction: column;
+  }
+}
