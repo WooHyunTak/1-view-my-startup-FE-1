@@ -49,22 +49,21 @@ function CompanyDetail() {
       try {
         const data = await getCompany(companyId);
         setCompanyData({
+          id: data.id,
           name: data.name,
-          categoryNames: data.categories
-            .map((category) => category.name)
-            .join(", "),
+          categories: data.categories.map((category) => category.name),
+          categoryNames: data.categories,
           actual: data.actualInvestment,
           revenue: data.revenue,
           employees: data.totalEmployees,
           description: formatDescription(data.description),
+          investments: data.investments,
         });
 
-        loadInvestments(data.investments);
+        handleQueryParamsChange("totalPages", Math.ceil(data.investments.length / queryParams.limit));
 
-        handleQueryParamsChange(
-          "totalPages",
-          Math.ceil(data.investments.length / queryParams.limit)
-        );
+        // loadInvestments 호출을 이곳에서 한 번만 수행
+        loadInvestments(data.investments);
       } catch (err) {
         setError("Failed to load company data");
         console.error(err.message);
@@ -87,21 +86,18 @@ function CompanyDetail() {
   if (!companyData) return <div>No company data available</div>; // company가 null일 경우 처리
 
   // 상세페이지에 필요한 정보
-  const { name, categoryNames, actual, revenue, employees, description } =
-    companyData;
+  const { id, name, categoryNames, categories, actual, revenue, employees, description, investments } = companyData;
+  const selectedCompany = { id, name, categories };
 
   return (
     <div className="CompanyDetail">
       <CompanyHeader name={name} categoryNames={categoryNames} />
-      <CompanyInfo
-        actualInvestment={actual}
-        revenue={revenue}
-        employees={employees}
-        description={description}
-      />
+      <CompanyInfo actualInvestment={actual} revenue={revenue} employees={employees} description={description} />
       <CompanyInvestmentTable
         setCurrentPage={handleQueryParamsChange}
         queryParams={queryParams}
+        selectedCompany={selectedCompany}
+        investments={investments}
       />
     </div>
   );

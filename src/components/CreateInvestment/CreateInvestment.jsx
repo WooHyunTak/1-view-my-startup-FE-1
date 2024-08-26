@@ -21,9 +21,7 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
   const navigate = useNavigate();
   const [alertMeg, setAlertMeg] = useState(false);
   const { name, categories } = myCompany;
-  const [investmentValues, setInvestmentValues] = useState(
-    defaultInvestmentValues
-  );
+  const [investmentValues, setInvestmentValues] = useState(defaultInvestmentValues);
   const [inputTypes, setInputTypes] = useState({
     password: "password",
     passwordConfirm: "password",
@@ -96,11 +94,7 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
 
   return (
     <dialog ref={dialogRef} className="modal-company">
-      <AlertModal
-        isAlertMeg={alertMeg}
-        message={alertMessage}
-        onClose={handelCloseAlert}
-      />
+      <AlertModal isAlertMeg={alertMeg} message={alertMessage} onClose={handelCloseAlert} />
       <div className="modal-container">
         <div className="modal-header">
           <h2>기업에 투자하기</h2>
@@ -110,11 +104,7 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
           <h2>투자 기업 정보</h2>
           <div className="item-list-container">
             <div className="item-content-container">
-              <img
-                className="select-company-modal-img"
-                src={default_company_img}
-                alt="기업 기본 이미지"
-              />
+              <img className="select-company-modal-img" src={default_company_img} alt="기업 기본 이미지" />
               <p className="select-company-modal-name">{name}</p>
               <div className="select-company-modal-categories">
                 <p>{categories[0]}</p>
@@ -163,10 +153,7 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
                 placeholder="비밀번호를 입력해 주세요"
                 autoComplete="new-password"
               ></input>
-              <button
-                className="modal-password-visible"
-                onClick={(e) => handleVisiblePassword("password", e)}
-              >
+              <button className="modal-password-visible" onClick={(e) => handleVisiblePassword("password", e)}>
                 <img src={ic_eyes} alt="비밀번호 보기" />
               </button>
             </div>
@@ -180,16 +167,11 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
                 placeholder="비밀번호를 다시 한 번 입력해 주세요"
                 autoComplete="new-password"
               ></input>
-              <button
-                className="modal-password-visible"
-                onClick={(e) => handleVisiblePassword("passwordConfirm", e)}
-              >
+              <button className="modal-password-visible" onClick={(e) => handleVisiblePassword("passwordConfirm", e)}>
                 <img src={ic_eyes} alt="비밀번호 보기" />
               </button>
             </div>
-            {error.passwordConfirm && (
-              <p style={{ color: "orange" }}>비밀번호가 일치하지 않습니다.</p>
-            )}
+            {error.passwordConfirm && <p style={{ color: "orange" }}>비밀번호가 일치하지 않습니다.</p>}
             <div className="modal-btn-container">
               <button onClick={handleClose} className="modal-close-btn">
                 취소
