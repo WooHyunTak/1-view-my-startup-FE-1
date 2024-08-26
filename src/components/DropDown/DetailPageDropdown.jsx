@@ -7,7 +7,7 @@ import UpdateModal from "../UpdateModal/UpdateModal";
 import kebabMenu from "../../assets/icon/ic_kebab.svg";
 import "./DetailPageDropdown.css";
 
-function DetailPageDropdown({ id, password }) {
+function DetailPageDropdown({ id, password, amount, comment }) {
   const [visible, setVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
@@ -144,7 +144,13 @@ function DetailPageDropdown({ id, password }) {
         <UpdateConfirmModal onUpdateConfirm={confirmUpdate} onCancel={closeUpdateConfirmModal} />
       )}
       {isUpdateModalOpen && (
-        <UpdateModal onUpdateConfirm={handleUpdate} onCancel={() => setIsUpdateModalOpen(false)} password={password} />
+        <UpdateModal
+          onUpdateConfirm={handleUpdate}
+          onCancel={() => setIsUpdateModalOpen(false)}
+          password={password}
+          initialAmount={amount}
+          initialComment={comment}
+        />
       )}
       {isDeleteModalOpen && <DeleteConfirmModal onDeleteConfirm={confirmDelete} onCancel={closeDeleteModal} />}
       {isAlertModalOpen && (

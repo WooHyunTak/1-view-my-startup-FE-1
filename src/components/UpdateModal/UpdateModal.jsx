@@ -1,11 +1,17 @@
 import "./UpdateModal.css";
 import cancelBtn from "../../assets/icon/ic_delete.svg";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function UpdateModal({ onUpdateConfirm, onCancel, password }) {
-  const [amount, setAmount] = useState("");
-  const [comment, setComment] = useState("");
+function UpdateModal({ onUpdateConfirm, onCancel, password, initialAmount, initialComment }) {
+  const [amount, setAmount] = useState(initialAmount || "");
+  const [comment, setComment] = useState(initialComment || "");
+
+  // 컴포넌트가 마운트될 때 초기 값을 설정
+  useEffect(() => {
+    setAmount(initialAmount || "");
+    setComment(initialComment || "");
+  }, [initialAmount, initialComment]);
 
   const handleUpdateClick = () => {
     onUpdateConfirm({ amount, comment, password });

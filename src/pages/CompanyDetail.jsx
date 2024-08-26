@@ -62,7 +62,6 @@ function CompanyDetail() {
 
         handleQueryParamsChange("totalPages", Math.ceil(data.investments.length / queryParams.limit));
 
-        // loadInvestments 호출을 이곳에서 한 번만 수행
         loadInvestments(data.investments);
       } catch (err) {
         setError("Failed to load company data");

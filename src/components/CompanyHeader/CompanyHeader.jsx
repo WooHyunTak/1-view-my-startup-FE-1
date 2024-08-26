@@ -5,7 +5,7 @@ function CompanyHeader({ name, categoryNames }) {
   const categories = categoryNames.map((category) => category.name).join(", ");
   return (
     <div className="CompanyHeader">
-      <img src={default_logo} alt="logo" />
+      <img src={default_logo} alt="logo" className="company-logo" />
       <div className="name-category">
         <span className="name">{name}</span>
         <span className="category">{categories}</span>
