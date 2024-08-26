@@ -98,8 +98,7 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
     setIsAlertModalOpen(false);
     if (alertMessage === "투자가 성공했습니다.") {
       onClose(); // 성공 메시지 후 모든 창을 닫습니다.
-    } else {
-      dialogRef.current.showModal(); // 실패 시 다시 투자 모달을 엽니다.
+      window.location.reload();
     }
   };
 

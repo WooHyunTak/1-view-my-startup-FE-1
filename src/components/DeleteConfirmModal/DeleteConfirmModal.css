@@ -7,7 +7,8 @@
   padding: 24px;
   background-color: var(--black-300);
   border-radius: 16px;
-  width: 496px;
+  width: 93.5%;
+  max-width: 496px;
 }
 .DeleteConfirmModal .deleteModel-head {
   display: flex;
