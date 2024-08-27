@@ -3,41 +3,41 @@
   justify-items: center;
   align-items: center;
   gap: 18px;
-  border-bottom: 1px solid #2e2e2e;
+  border-bottom: 1px solid var(--black-100);
   padding-bottom: 32px;
 }
-.CompanyHeader img {
+.company-logo {
   border-radius: 50%;
 }
-.CompanyHeader .name-category {
+.name-category {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
-.CompanyHeader .name {
+.name {
   font-weight: 700;
   font-size: 24px;
-  line-height: 28.64px;
+  line-height: 1.19;
 }
-.CompanyHeader .category {
+.category {
   font-weight: 500;
   font-size: 20px;
-  line-height: 23.87px;
+  line-height: 1.19;
   color: var(--grey-200);
 }
 
 @media screen and (max-width: 534px) {
-  .CompanyHeader .company-logo {
+  .company-logo {
     content: url("../../assets/default_logo_companyDetail_small.svg");
   }
 
-  .CompanyHeader .name {
+  .name {
     font-size: 20px;
-    line-height: 23.87px;
+    line-height: 1.19;
   }
 
-  .CompanyHeader .category {
+  .category {
     font-size: 16px;
-    line-height: 19.09px;
+    line-height: 1.19;
   }
 }

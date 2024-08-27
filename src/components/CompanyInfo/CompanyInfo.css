@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 24px;
 }
-.CompanyInfo .info {
+.info {
   display: flex;
   gap: 24px;
 }
@@ -16,20 +16,20 @@
   justify-content: space-between;
   align-items: center;
 }
-.info .label-investment,
-.info .label-revenue,
-.info .label-employees {
+.label-investment,
+.label-revenue,
+.label-employees {
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
   color: var(--grey-100);
 }
-.info .value-investment,
-.info .value-revenue,
-.info .value-employees {
+.value-investment,
+.value-revenue,
+.value-employees {
   font-weight: 600;
   font-size: 16px;
-  line-height: 19.09px;
+  line-height: 1.19;
 }
 
 .description {
@@ -41,12 +41,12 @@
 .description h3 {
   font-weight: 600;
   font-size: 16px;
-  line-height: 19.09px;
+  line-height: 1.19;
 }
 .description span {
   font-weight: 400;
   font-size: 14px;
-  line-height: 16.71px;
+  line-height: 1.19;
   color: var(--grey-100);
 }
 
@@ -55,16 +55,16 @@
     flex-direction: column;
   }
 
-  .info .label-investment,
-  .info .label-revenue,
-  .info .label-employees {
+  .label-investment,
+  .label-revenue,
+  .label-employees {
     font-size: 14px;
   }
-  .info .value-investment,
-  .info .value-revenue,
-  .info .value-employees {
+  .value-investment,
+  .value-revenue,
+  .value-employees {
     font-weight: 600;
     font-size: 14px;
-    line-height: 16.71px;
+    line-height: 1.19;
   }
 }
