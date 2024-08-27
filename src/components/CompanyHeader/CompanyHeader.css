@@ -26,7 +26,7 @@
   color: var(--grey-200);
 }
 
-@media screen and (max-width: 743px) {
+@media screen and (max-width: 534px) {
   .CompanyHeader .company-logo {
     content: url("../../assets/default_logo_companyDetail_small.svg");
   }

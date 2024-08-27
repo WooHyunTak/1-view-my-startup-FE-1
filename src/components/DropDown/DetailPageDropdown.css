@@ -31,6 +31,10 @@
 }
 .dropdown-menu .edit {
   border-bottom: 1px solid var(--grey-200);
+  background-color: inherit;
+}
+.dropdown-menu .delete {
+  background-color: inherit;
 }
 
 .dropdown-menu .edit:hover {

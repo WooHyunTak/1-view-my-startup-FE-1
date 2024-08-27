@@ -2,7 +2,8 @@ import CompanyHeader from "../components/CompanyHeader/CompanyHeader";
 import CompanyInfo from "../components/CompanyInfo/CompanyInfo";
 import CompanyInvestmentTable from "../components/CompanyInvestmentTable/CompanyInvestmentTable";
 import formatDescription from "../utils/formatDescription";
-
+import Loader from "../components/Loader/Loader";
+import ErrorMsg from "../components/ErrorMsg/ErrorMsg";
 import { getCompany } from "../services/companyApi";
 import { useParams } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
@@ -80,8 +81,8 @@ function CompanyDetail() {
     fetchCompany();
   }, [companyId, queryParams.page, queryParams.limit]);
 
-  if (loading) return <div>Loading...</div>; // 로딩 중일 때 메시지 표시
-  if (error) return <div>{error}</div>; // 에러 발생 시 메시지 표시
+  if (loading) return <Loader />; // 로딩 중일 때 메시지 표시
+  if (error) return <ErrorMsg errorMsg={error} />; // 에러 발생 시 메시지 표시
   if (!companyData) return <div>No company data available</div>; // company가 null일 경우 처리
 
   // 상세페이지에 필요한 정보
