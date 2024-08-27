@@ -4,7 +4,8 @@ import { Table } from "../components/Table/Table";
 import { DropDown } from "../components/DropDown/DropDown";
 import { Pagination } from "../components/Pagination/Pagination";
 import { useApiHandler } from "../hooks/useApiHandler";
-
+import ErrorMsg from "../components/ErrorMsg/ErrorMsg";
+import Loader from "../components/Loader/Loader";
 import { comparisonStatusTableHeader } from "../utils/tableTypes";
 import "./Home.css";
 
@@ -39,10 +40,10 @@ function ComparisonStatus() {
           setOrderBy={handleQueryParamsChange}
           buttonType="typeTwo"
         />
-        {loading && "로딩중"}
-        {error && <span>{error.message}</span>}
+        {loading && <Loader />}
       </div>
       <Table list={companyList} tableHeaders={comparisonStatusTableHeader} />
+      {error && <ErrorMsg errorMsg={error.message} />}
       <Pagination
         setCurrentPage={handleQueryParamsChange}
         currentPage={queryParams.page}
