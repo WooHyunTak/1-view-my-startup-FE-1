@@ -10,7 +10,7 @@
   width: 93.5%;
   max-width: 496px;
 }
-.UpdateConfirmModal .UpdateConfirmModal-head {
+.UpdateConfirmModal-head {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -22,23 +22,23 @@
 .cancel-button {
   cursor: pointer;
 }
-.UpdateConfirmModal .UpdateConfirmModal-body {
+.UpdateConfirmModal-body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
-.UpdateConfirmModal .UpdateConfirmModal-body label {
+.UpdateConfirmModal-body label {
   font-weight: 700;
   font-size: 18px;
   line-height: 21.48px;
   margin-bottom: 16px;
 }
 
-.UpdateConfirmModal .UpdateConfirmModal-body .input-container {
+.UpdateConfirmModal-body .input-container {
   position: relative;
   width: 100%;
 }
-.UpdateConfirmModal .UpdateConfirmModal-body input {
+.UpdateConfirmModal-body input {
   border: 1px solid var(--grey-200);
   border-radius: 10px;
   width: inherit;
@@ -52,7 +52,7 @@
   right: 20px;
   cursor: pointer;
 }
-.UpdateConfirmModal .UpdateConfirmModal-body .next-btn {
+.next-btn {
   margin: auto;
   background-color: var(--orange);
   padding: 13px 48px;
