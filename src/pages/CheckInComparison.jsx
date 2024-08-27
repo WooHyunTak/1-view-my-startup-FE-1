@@ -104,8 +104,8 @@ function CheckInComparison() {
 
   return (
     <>
-      {!loading && <Loader />}
-      {loading && (
+      {loading && <Loader />}
+      {!loading && (
         <div className="CheckInComparison">
           <CreateInvestment
             isOpen={createModal}
