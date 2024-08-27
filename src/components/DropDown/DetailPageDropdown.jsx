@@ -63,7 +63,7 @@ function DetailPageDropdown({ id, password, amount, comment }) {
     }
 
     if (inputPassword !== password) {
-      setAlertMessage("잘못된 비밀번호 입니다");
+      setAlertMessage("잘못된 비밀번호로 삭제에 실패하셨습니다.");
       setIsAlertModalOpen(true);
       return;
     }

@@ -6,16 +6,16 @@ function CompanyInfo({ actualInvestment, revenue, employees, description }) {
     <div className="CompanyInfo">
       <div className="info">
         <div>
-          <span>누적 투자 금액</span>
-          <span>{convertToUnit(actualInvestment)}</span>
+          <span class="label-investment">누적 투자 금액</span>
+          <span class="value-investment">{convertToUnit(actualInvestment)}</span>
         </div>
         <div>
-          <span>매출액</span>
-          <span>{convertToUnit(revenue)}</span>
+          <span class="label-revenue">매출액</span>
+          <span class="value-revenue">{convertToUnit(revenue)}</span>
         </div>
         <div>
-          <span>고용 인원</span>
-          <span>{employees}명</span>
+          <span class="label-employees">고용 인원</span>
+          <span class="value-employees">{employees}명</span>
         </div>
       </div>
 
