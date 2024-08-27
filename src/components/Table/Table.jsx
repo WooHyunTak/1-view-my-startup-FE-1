@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { TableData } from "../TableData/TableData";
 import { ColGroup } from "./ColGroup";
 import "./Table.css";
+import ErrorMsg from "../ErrorMsg/ErrorMsg";
 
 export function Table({
   list,
@@ -13,7 +14,7 @@ export function Table({
 
   //list가 없거나 array 아니면 data unavailable
   if (!list || !Array.isArray(list)) {
-    return <div>No data available</div>;
+    return <ErrorMsg errorMsg="No available Data, No list nor Array" />;
   }
 
   const handleRowClick = (id) => {

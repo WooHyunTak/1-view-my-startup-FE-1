@@ -1,6 +1,6 @@
 import "./ErrorMsg.css";
 
-export function ErrorMsg({ errorMsg = "오류가 발생했습니다" }) {
+export default function ErrorMsg({ errorMsg = "오류가 발생했습니다" }) {
   return (
     <div className="ErrorMsg">
       <span>

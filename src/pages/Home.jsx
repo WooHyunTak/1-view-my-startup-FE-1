@@ -5,8 +5,8 @@ import { DropDown } from "../components/DropDown/DropDown";
 import { Pagination } from "../components/Pagination/Pagination";
 import { SearchBar } from "../components/SearchBar/SearchBar";
 import { useApiHandler } from "../hooks/useApiHandler";
-import { ErrorMsg } from "../components/ErrorMsg/ErrorMsg";
-import { Loader } from "../components/Loader/Loader";
+import ErrorMsg from "../components/ErrorMsg/ErrorMsg";
+import Loader from "../components/Loader/Loader";
 
 // 테이블 헤더 (테이블 종류) 가져오기
 import { companyListTableHeader } from "../utils/tableTypes";
