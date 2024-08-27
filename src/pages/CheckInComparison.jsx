@@ -5,7 +5,10 @@ import { DropDown } from "../components/DropDown/DropDown.jsx";
 import CreateInvestment from "../components/CreateInvestment/CreateInvestment.jsx";
 import { Table } from "../components/Table/Table.jsx";
 import * as api from "../services/comparisonApi.js";
-import { ComparisonTableHeader, companyListTableHeader } from "../utils/tableTypes.js";
+import {
+  ComparisonTableHeader,
+  companyListTableHeader,
+} from "../utils/tableTypes.js";
 import { Link, useLocation } from "react-router-dom";
 import "./CheckInComparison.css";
 
@@ -62,8 +65,6 @@ function CheckInComparison() {
     }));
   };
 
-  console.log("check selected Company:", myCompany);
-
   //모달 핸들링
   const handelOpenAlert = () => setAlertMeg(true);
   const handelCloseAlert = () => setAlertMeg(false);
@@ -73,10 +74,19 @@ function CheckInComparison() {
   //API호출
   const allLoadComparisonData = async () => {
     try {
-      const comparisonPromise = api.getComparison(comparisonParams, reqComparison);
-      const comparisonRankPromise = api.getComparisonRank(rankParams, myCompany.id);
+      const comparisonPromise = api.getComparison(
+        comparisonParams,
+        reqComparison
+      );
+      const comparisonRankPromise = api.getComparisonRank(
+        rankParams,
+        myCompany.id
+      );
 
-      const [comparisonData, comparisonRankData] = await Promise.all([comparisonPromise, comparisonRankPromise]);
+      const [comparisonData, comparisonRankData] = await Promise.all([
+        comparisonPromise,
+        comparisonRankPromise,
+      ]);
       setComparisonItem(comparisonData);
       setComparisonRankItem(comparisonRankData);
     } catch (error) {
@@ -90,13 +100,23 @@ function CheckInComparison() {
 
   return (
     <div className="CheckInComparison">
-      <CreateInvestment isOpen={createModal} myCompany={myCompany} onClose={handelCloseCreateModal} />
-      <AlertModal isAlertMeg={alertMeg} message={alertMessage} onClose={handelCloseAlert} />
+      <CreateInvestment
+        isOpen={createModal}
+        myCompany={myCompany}
+        onClose={handelCloseCreateModal}
+      />
+      <AlertModal
+        isAlertMeg={alertMeg}
+        message={alertMessage}
+        onClose={handelCloseAlert}
+      />
       <div>
         <div className="head-container">
           <h2>내가 선택한 기업</h2>
           <Link to={"/my-comparison"}>
-            <button className="check-in-different-btn check-in-btn">다른 기업 비교하기</button>
+            <button className="check-in-different-btn check-in-btn">
+              다른 기업 비교하기
+            </button>
           </Link>
         </div>
         <div className="out-container">
@@ -112,25 +132,44 @@ function CheckInComparison() {
       <div>
         <div className="head-container">
           <h2>비교 결과 확인하기</h2>
-          <DropDown orderBy={comparisonParams.orderBy} setOrderBy={handleComparisonParams} buttonType="typeOne" />
+          <DropDown
+            orderBy={comparisonParams.orderBy}
+            setOrderBy={handleComparisonParams}
+            buttonType="typeOne"
+          />
         </div>
         <div>
-          <Table list={comparisonItem} tableHeaders={ComparisonTableHeader} isCompanyTable={false} />
+          <Table
+            list={comparisonItem}
+            tableHeaders={ComparisonTableHeader}
+            isCompanyTable={false}
+          />
         </div>
       </div>
 
       <div>
         <div className="head-container">
           <h2>기업 순위 확인하기</h2>
-          <DropDown orderBy={rankParams.orderBy} setOrderBy={handleRankParams} buttonType="typeOne" />
+          <DropDown
+            orderBy={rankParams.orderBy}
+            setOrderBy={handleRankParams}
+            buttonType="typeOne"
+          />
         </div>
         <div>
-          <Table list={comparisonRankItem} tableHeaders={companyListTableHeader} isCompanyTable={false} />
+          <Table
+            list={comparisonRankItem}
+            tableHeaders={companyListTableHeader}
+            isCompanyTable={false}
+          />
         </div>
       </div>
 
       <div className="bottom-btn-container">
-        <button onClick={handelOpenCreateModal} className="check-in-investment-btn check-in-btn">
+        <button
+          onClick={handelOpenCreateModal}
+          className="check-in-investment-btn check-in-btn"
+        >
           나의 기업에 투자하기
         </button>
       </div>
