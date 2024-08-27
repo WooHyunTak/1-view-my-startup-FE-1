@@ -4,18 +4,23 @@ import restart_icon from "../../assets/icon/ic_restart.svg";
 import "./Comparison.css";
 import SelectMyCompany from "../SelectMyCompany/SelectMyCompany.jsx";
 import SelectComparisonCompany from "../SelectComparisonCompany/SelectComparisonCompany.jsx";
-import defaultImg from "../../assets/default_company_img.svg";
 import ic_minus from "../../assets/icon/ic_minus.svg";
 import AlertModal from "../AlertModal/AlertModal";
+import LogoImg from "../LogoImg/LogoImg.jsx";
 import { useNavigate } from "react-router-dom";
 import { patchCounts } from "../../services/comparisonApi.js";
 
 //내가 선택한 기업의 정보를 리스트에 보여준다
 function CompanyItem({ item }) {
-  const { name, categories } = item;
+  const { name, categories, brandColor, brandImage } = item;
   return (
     <div className="CompanyItem">
-      <img className="CompanyItem-img" src={defaultImg} alt="기업 이미지" />
+      <LogoImg
+        size="large"
+        brandImg={brandImage}
+        brandName={name}
+        brandColor={brandColor}
+      />
       <h2 className="CompanyItem-name ellipsis">{name}</h2>
       <p className="CompanyItem-categories ellipsis">{categories}</p>
     </div>
@@ -25,7 +30,7 @@ function CompanyItem({ item }) {
 //비교하고자 선택한 기업의 정보를 리스트에 보여준다
 //위 컴포넌트와 디자인은 같지만 기능이 달라 별도로 분리함
 function ComparisonItem({ item = {}, onDelete }) {
-  const { name, categories } = item;
+  const { name, categories, brandColor, brandImage } = item;
 
   const handleDelete = () => onDelete(item.id);
 
@@ -37,7 +42,12 @@ function ComparisonItem({ item = {}, onDelete }) {
         src={ic_minus}
         alt="삭제"
       />
-      <img className="ComparisonItem-img" src={defaultImg} alt="기업 이미지" />
+      <LogoImg
+        size="large"
+        brandImg={brandImage}
+        brandName={name}
+        brandColor={brandColor}
+      />
       <span className="ComparisonItem-name ellipsis">{name}</span>
       <p className="ComparisonItem-categories ellipsis">{categories[0]}</p>
     </div>

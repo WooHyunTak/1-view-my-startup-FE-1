@@ -1,11 +1,9 @@
 import { convertToUnit } from "../../utils/convertToUnit";
 import DetailPageDropdown from "../DropDown/DetailPageDropdown";
-import DefaultImg from "../DefaultImg/DefaultImg";
+import LogoImg from "../LogoImg/LogoImg";
 import "./TableData.css";
 
 export default function TableData({ item, header }) {
-  const logoImg = item.brandImg;
-
   // 테이블 필드마다 필요한 디자인이 다르기 때문에 어느 필드냐에 따라 다르게 렌더.
   const renderTableData = (className, field) => {
     const value = item[field];
@@ -17,13 +15,12 @@ export default function TableData({ item, header }) {
       case "company-name":
         return (
           <div className="company-name-container">
-            <div className="circle-crop">
-              {logoImg ? (
-                <img src={logoImg} alt={`${value} logo`} />
-              ) : (
-                <DefaultImg brandName={value} />
-              )}
-            </div>
+            <LogoImg
+              size="small"
+              brandImg={item.brandImg}
+              brandName={value}
+              brandColor={item.brandColor}
+            />
             <span>{value}</span>
           </div>
         );

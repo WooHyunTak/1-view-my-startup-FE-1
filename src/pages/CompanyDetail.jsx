@@ -52,6 +52,7 @@ function CompanyDetail() {
         setCompanyData({
           id: data.id,
           name: data.name,
+          brandColor: data.brandColor,
           categories: data.categories.map((category) => category.name),
           categoryNames: data.categories,
           actual: data.actualInvestment,
@@ -61,7 +62,10 @@ function CompanyDetail() {
           investments: data.investments,
         });
 
-        handleQueryParamsChange("totalPages", Math.ceil(data.investments.length / queryParams.limit));
+        handleQueryParamsChange(
+          "totalPages",
+          Math.ceil(data.investments.length / queryParams.limit)
+        );
 
         loadInvestments(data.investments);
       } catch (err) {
@@ -86,13 +90,33 @@ function CompanyDetail() {
   if (!companyData) return <div>No company data available</div>; // company가 null일 경우 처리
 
   // 상세페이지에 필요한 정보
-  const { id, name, categoryNames, categories, actual, revenue, employees, description, investments } = companyData;
+  const {
+    id,
+    name,
+    brandColor,
+    categoryNames,
+    categories,
+    actual,
+    revenue,
+    employees,
+    description,
+    investments,
+  } = companyData;
   const selectedCompany = { id, name, categories };
 
   return (
     <div className="CompanyDetail">
-      <CompanyHeader name={name} categoryNames={categoryNames} />
-      <CompanyInfo actualInvestment={actual} revenue={revenue} employees={employees} description={description} />
+      <CompanyHeader
+        name={name}
+        categoryNames={categoryNames}
+        brandColor={brandColor}
+      />
+      <CompanyInfo
+        actualInvestment={actual}
+        revenue={revenue}
+        employees={employees}
+        description={description}
+      />
       <CompanyInvestmentTable
         setCurrentPage={handleQueryParamsChange}
         queryParams={queryParams}
