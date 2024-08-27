@@ -1,15 +1,15 @@
 import { useState, useEffect, useMemo } from "react";
-import defaultImg from "../assets/default_company_img.svg";
-import AlertModal from "../components/AlertModal/AlertModal.jsx";
-import { DropDown } from "../components/DropDown/DropDown.jsx";
-import CreateInvestment from "../components/CreateInvestment/CreateInvestment.jsx";
-import { Table } from "../components/Table/Table.jsx";
-import * as api from "../services/comparisonApi.js";
+import { Link, useLocation } from "react-router-dom";
 import {
   ComparisonTableHeader,
   companyListTableHeader,
 } from "../utils/tableTypes.js";
-import { Link, useLocation } from "react-router-dom";
+import defaultImg from "../assets/default_company_img.svg";
+import AlertModal from "../components/AlertModal/AlertModal.jsx";
+import DropDown from "../components/DropDown/DropDown.jsx";
+import CreateInvestment from "../components/CreateInvestment/CreateInvestment.jsx";
+import Table from "../components/Table/Table.jsx";
+import * as api from "../services/comparisonApi.js";
 import "./CheckInComparison.css";
 
 //내가 선택한 기업의 정보를 리스트에 보여준다

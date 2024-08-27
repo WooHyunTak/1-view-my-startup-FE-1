@@ -1,13 +1,18 @@
-import { Pagination } from "../Pagination/Pagination";
-import { Table } from "../Table/Table";
-import { investmentTableHeader } from "../../utils/tableTypes";
-import { convertToUnit } from "../../utils/convertToUnit";
 import { useState } from "react";
+import { convertToUnit } from "../../utils/convertToUnit";
+import { investmentTableHeader } from "../../utils/tableTypes";
+import Pagination from "../Pagination/Pagination";
+import Table from "../Table/Table";
 import CreateInvestment from "../CreateInvestment/CreateInvestment";
 
 import "./CompanyInvestmentTable.css";
 
-function CompanyInvestmentTable({ setCurrentPage, queryParams, selectedCompany, investments }) {
+function CompanyInvestmentTable({
+  setCurrentPage,
+  queryParams,
+  selectedCompany,
+  investments,
+}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handelOpenCreateModal = () => setIsModalOpen(true);
@@ -20,7 +25,10 @@ function CompanyInvestmentTable({ setCurrentPage, queryParams, selectedCompany, 
 
   // 페이지네이션 위해서 현재 페이지에 해당하는 투자 데이터 추출
   const startIdx = (queryParams.page - 1) * queryParams.limit;
-  const currentInvestments = investments.slice(startIdx, startIdx + queryParams.limit);
+  const currentInvestments = investments.slice(
+    startIdx,
+    startIdx + queryParams.limit
+  );
 
   return (
     <div className="CompanyInvestmentTable">
@@ -52,7 +60,11 @@ function CompanyInvestmentTable({ setCurrentPage, queryParams, selectedCompany, 
         )}
       </div>
       {isModalOpen && (
-        <CreateInvestment isOpen={isModalOpen} myCompany={selectedCompany} onClose={handelCloseCreateModal} />
+        <CreateInvestment
+          isOpen={isModalOpen}
+          myCompany={selectedCompany}
+          onClose={handelCloseCreateModal}
+        />
       )}
     </div>
   );

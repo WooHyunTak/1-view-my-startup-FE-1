@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import { getInvestmentStatus } from "../services/companyApi";
-import { Table } from "../components/Table/Table";
-import { DropDown } from "../components/DropDown/DropDown";
-import { Pagination } from "../components/Pagination/Pagination";
 import { useApiHandler } from "../hooks/useApiHandler";
-
 import { InvestmentStatusTableHeader } from "../utils/tableTypes";
+
+import Table from "../components/Table/Table";
+import DropDown from "../components/DropDown/DropDown";
+import Pagination from "../components/Pagination/Pagination";
+
 import "./Home.css";
 
 // 쿼리 파라미터 초기화 (기본값)

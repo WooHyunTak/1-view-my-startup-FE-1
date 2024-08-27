@@ -23,8 +23,8 @@ tbody .table-row:not(:last-child) {
 }
 
 .table-row .company-name-container .circle-crop {
-  min-width: 32px;
-  height: auto;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -52,10 +52,6 @@ tbody .table-row:not(:last-child) {
   white-space: nowrap;
 }
 
-/* .table-row .investment-comment button {
-  background-color: inherit;
-} */
-
 .table-row td {
   padding: 15px;
 }
@@ -69,13 +65,4 @@ tbody .table-row:not(:last-child) {
   text-overflow: ellipsis;
   white-space: normal;
   text-align: left;
-}
-
-.link-to-detail-page {
-  color: #fff;
-}
-
-.link-to-detail-page:hover {
-  text-decoration: underline;
-  text-underline-offset: 3px;
 }

@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
+import { getCompanies } from "../../services/companyApi.js";
 import ic_delete from "../../assets/icon/ic_delete.svg";
 import ic_search from "../../assets/icon/ic_search.svg";
 import default_company_img from "../../assets/default_company_img.svg";
 import ic_check from "../../assets/icon/ic_check.svg";
+import Pagination from "../Pagination/Pagination.jsx";
 import "../../utils/globalModal.css";
-import { getCompanies } from "../../services/companyApi.js";
-import { Pagination } from "../Pagination/Pagination.jsx";
 
 function CompaniesList({
   companyItem = {},

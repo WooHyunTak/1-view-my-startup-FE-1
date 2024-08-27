@@ -4,7 +4,7 @@ import searchImg from "../../assets/icon/ic_search.svg";
 
 import "./SearchBar.css";
 
-export function SearchBar({ setKeyword }) {
+export default function SearchBar({ setKeyword }) {
   const [search, setSearch] = useState("");
 
   //돋보기 아이콘 눌렀을때도 검색

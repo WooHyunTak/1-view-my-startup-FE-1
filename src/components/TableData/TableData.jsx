@@ -1,10 +1,10 @@
 import { convertToUnit } from "../../utils/convertToUnit";
-import defaultImg from "../../assets/default_company_img.svg";
 import DetailPageDropdown from "../DropDown/DetailPageDropdown";
+import DefaultImg from "../DefaultImg/DefaultImg";
 import "./TableData.css";
 
-export function TableData({ item, header }) {
-  const logoImg = item.brandImg ? item.brandImage : defaultImg;
+export default function TableData({ item, header }) {
+  const logoImg = item.brandImg;
 
   // 테이블 필드마다 필요한 디자인이 다르기 때문에 어느 필드냐에 따라 다르게 렌더.
   const renderTableData = (className, field) => {
@@ -18,7 +18,11 @@ export function TableData({ item, header }) {
         return (
           <div className="company-name-container">
             <div className="circle-crop">
-              <img src={logoImg} alt={`${value} logo`} />
+              {logoImg ? (
+                <img src={logoImg} alt={`${value} logo`} />
+              ) : (
+                <DefaultImg brandName={value} />
+              )}
             </div>
             <span>{value}</span>
           </div>
@@ -50,13 +54,20 @@ export function TableData({ item, header }) {
         return (
           <div className={className}>
             <span>{value}</span>
-            <DetailPageDropdown id={item.id} password={item.password} amount={item.amount} comment={item.comment} />
+            <DetailPageDropdown
+              id={item.id}
+              password={item.password}
+              amount={item.amount}
+              comment={item.comment}
+            />
           </div>
         );
 
       //카테고리가 빈배열이거나 undefined, null 이면 n/a
       case "category":
-        return item.categories && item.categories.length > 0 ? item.categories[0] : "N/A";
+        return item.categories && item.categories.length > 0
+          ? item.categories[0]
+          : "N/A";
 
       default:
         return typeof value === "number" ? value.toLocaleString() : value;
@@ -64,5 +75,11 @@ export function TableData({ item, header }) {
   };
 
   // 테이블 헤더에 순위가 정의된 테이블이면 rank 필드도 렌더 아니면 스킵
-  return <>{header.field === "rank" ? `${item.rank}위` : renderTableData(header.className, header.field)}</>;
+  return (
+    <>
+      {header.field === "rank"
+        ? `${item.rank}위`
+        : renderTableData(header.className, header.field)}
+    </>
+  );
 }

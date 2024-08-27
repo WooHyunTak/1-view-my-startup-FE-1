@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { TableData } from "../TableData/TableData";
-import { ColGroup } from "./ColGroup";
-import "./Table.css";
+import TableData from "../TableData/TableData";
+import ColGroup from "./ColGroup";
 import ErrorMsg from "../ErrorMsg/ErrorMsg";
+import "./Table.css";
 
-export function Table({
+export default function Table({
   list,
   tableHeaders,
   tableName,
