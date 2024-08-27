@@ -183,6 +183,15 @@ h3 {
   align-self: center;
 }
 
+.modal-complete-btn-disabled {
+  background-color: var(--black-300);
+  border: 1px solid var(--grey-200);
+  border-radius: 50px;
+  width: 183px;
+  height: 48px;
+  align-self: center;
+}
+
 .modal-close-btn {
   border-radius: 50px;
   width: 183px;
