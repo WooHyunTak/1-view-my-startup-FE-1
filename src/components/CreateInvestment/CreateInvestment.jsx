@@ -84,7 +84,8 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
     setIsAlertModalOpen(false);
     if (alertMessage === "투자가 성공했습니다.") {
       onClose(); // 성공 메시지 후 모든 창을 닫습니다.
-      const currentUrl = window.location.pathname;
+      const currentUrl = window.location.pathname; //현재 위치하고 있는 url를 가지고 온다.
+      //현재 위치가 기업의 상세페이지라면 리로드 아니라면 기업상세로 이동
       if (currentUrl === `/companies/${myCompany.id}`) {
         window.location.reload();
       } else {
