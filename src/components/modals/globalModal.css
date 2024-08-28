@@ -55,19 +55,24 @@ h3 {
   resize: none;
 }
 
-.search-img-container {
+.input-btns-container {
   align-items: center;
   justify-content: space-between;
   top: 12px;
   right: 12px;
-  width: 52px;
   height: 24px;
   display: flex;
   position: absolute;
   gap: 12px;
 }
 
-.search-company-reset {
+.input-btns-container button {
+  display: flex;
+  justify-content: center;
+  align-items: centers;
+}
+
+.input-btns-container .reset-btn {
   justify-content: center;
   width: 16px;
   height: 16px;
@@ -75,14 +80,11 @@ h3 {
   background-color: var(--grey-300);
 }
 
-.search-company-reset-btn {
-  border-radius: 50%;
-  background-color: var(--grey-300);
-}
-
-.search-company-search {
-  width: 16px;
-  height: 16px;
+.input-btns-container .search-btn {
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
 }
 
 .item-list-container {

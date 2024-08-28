@@ -116,19 +116,17 @@ function SelectMyCompany({
               placeholder="기업명을 입력해 주세요"
             ></input>
           </form>
-          <div className="search-img-container">
-            <button className="search-company-reset-btn">
+          <div className="input-btns-container">
+            <button className="reset-btn">
               <img
                 onClick={handleKeywordClear}
-                className="search-company-reset"
                 src={ic_delete}
                 alt="검색지우기 이미지"
               />
             </button>
-            <button className="search-company-reset-btn">
+            <button className="search-btn">
               <img
                 onClick={handleKeywordSearch}
-                className="search-company-search"
                 src={ic_search}
                 alt="조회 이미지"
               />

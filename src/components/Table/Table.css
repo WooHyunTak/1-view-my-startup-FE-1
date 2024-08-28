@@ -63,6 +63,7 @@
 .Table .link-to-detail-page:hover {
   background-color: var(--grey-400);
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 /*colgroup으로 table 고정 콜럼 3개 순위, 기업명, 기업설명 너비 관리*/
