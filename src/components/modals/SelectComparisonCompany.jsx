@@ -128,6 +128,10 @@ function SelectComparisonCompany({
     }
   };
 
+  //검색 키워드 인풋 핸들러
+  const handleKeywordClear = () => setKeyword();
+  const handleKeywordSearch = (event) => handleSubmit(event);
+
   //모달 다이얼로그 Ref 관리 -> 모달 open상태와 API호루 쿼리의 의존성 부여
   useEffect(() => {
     isOpen ? dialogRef.current.showModal() : dialogRef.current.close();
@@ -154,17 +158,21 @@ function SelectComparisonCompany({
               placeholder="기업명을 입력해 주세요"
             ></input>
           </form>
-          <div className="search-img-container">
-            <img
-              className="search-company-reset"
-              src={ic_delete}
-              alt="검색지우기 이미지"
-            />
-            <img
-              className="search-company-search"
-              src={ic_search}
-              alt="조회 이미지"
-            />
+          <div className="input-btns-container">
+            <button className="reset-btn">
+              <img
+                onClick={handleKeywordClear}
+                src={ic_delete}
+                alt="검색지우기 이미지"
+              />
+            </button>
+            <button className="search-btn">
+              <img
+                onClick={handleKeywordSearch}
+                src={ic_search}
+                alt="조회 이미지"
+              />
+            </button>
           </div>
         </div>
         <h2>선택한 기업 ({comparisonCompanies.length})</h2>
