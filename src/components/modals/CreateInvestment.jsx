@@ -88,7 +88,7 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
       const currentUrl = window.location.pathname; //현재 위치하고 있는 url를 가지고 온다.
       //현재 위치가 기업의 상세페이지라면 리로드 아니라면 기업상세로 이동
       if (currentUrl === `/companies/${myCompany.id}`) {
-        window.location.replace(`/companies/${myCompany.id}`);
+        navigate(0);
       } else {
         navigate(`/companies/${myCompany.id}`);
       }
