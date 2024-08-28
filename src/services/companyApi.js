@@ -45,7 +45,7 @@ export async function getInvestmentStatus({
 }) {
   const { sortBy, order } = splitSortOption(orderBy);
   try {
-    const res = await instance.get("/api/companies/investments/status", {
+    const res = await instance.get("/api/companies/investments-status", {
       params: { page, limit, sortBy, order },
     });
     return res.data;
@@ -61,7 +61,7 @@ export async function getComparisonStatus({
 }) {
   const { sortBy, order } = splitSortOption(orderBy);
   try {
-    const res = await instance.get("/api/comparisons/status", {
+    const res = await instance.get("/api/companies/comparisons-status", {
       params: { page, limit, sortBy, order },
     });
     return res.data;

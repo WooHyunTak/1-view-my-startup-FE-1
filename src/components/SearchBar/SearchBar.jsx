@@ -27,9 +27,9 @@ export default function SearchBar({ setKeyword }) {
     setSearch(value);
 
     //인풋필드가 비어지면 다시 keyword=""로 리셋
-    if (value.trim() === "") {
-      setKeyword("keyword", "");
-    }
+    // if (value.trim() === "") {
+    //   setKeyword("keyword", "");
+    // }
   };
 
   return (
