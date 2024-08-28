@@ -373,6 +373,10 @@ h3 {
 }
 
 /*----for UpdateModal----*/
+.UpdateModal::backdrop {
+  background: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
+}
+
 .UpdateModal {
   position: fixed;
   top: 50%;
