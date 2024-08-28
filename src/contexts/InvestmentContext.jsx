@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useCallback, useState } from "react";
 import { deleteInvestment, createInvestment, updateInvestment } from "../services/investmentApi";
 
 // InvestmentContext 생성
@@ -7,9 +7,9 @@ export const InvestmentContext = createContext();
 export function InvestmentProvider({ children }) {
   const [investments, setInvestments] = useState([]);
 
-  const loadInvestments = (newInvestments) => {
+  const loadInvestments = useCallback((newInvestments) => {
     setInvestments(newInvestments);
-  };
+  }, []);
 
   const addInvestment = async (investmentData) => {
     try {

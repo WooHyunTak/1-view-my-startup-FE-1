@@ -62,10 +62,7 @@ function CompanyDetail() {
           investments: data.investments,
         });
 
-        handleQueryParamsChange(
-          "totalPages",
-          Math.ceil(data.investments.length / queryParams.limit)
-        );
+        handleQueryParamsChange("totalPages", Math.ceil(data.investments.length / queryParams.limit));
 
         loadInvestments(data.investments);
       } catch (err) {
@@ -83,40 +80,21 @@ function CompanyDetail() {
 
     // 컴포넌트가 마운트되면 데이터 가져오기 시작
     fetchCompany();
-  }, [companyId, queryParams.page, queryParams.limit]);
+  }, [companyId, queryParams.page, queryParams.limit, loadInvestments]);
 
   if (loading) return <Loader />; // 로딩 중일 때 메시지 표시
   if (error) return <ErrorMsg errorMsg={error} />; // 에러 발생 시 메시지 표시
   if (!companyData) return <div>No company data available</div>; // company가 null일 경우 처리
 
   // 상세페이지에 필요한 정보
-  const {
-    id,
-    name,
-    brandColor,
-    categoryNames,
-    categories,
-    actual,
-    revenue,
-    employees,
-    description,
-    investments,
-  } = companyData;
-  const selectedCompany = { id, name, categories };
+  const { id, name, brandColor, categoryNames, categories, actual, revenue, employees, description, investments } =
+    companyData;
+  const selectedCompany = { id, name, categories, brandColor };
 
   return (
     <div className="CompanyDetail">
-      <CompanyHeader
-        name={name}
-        categoryNames={categoryNames}
-        brandColor={brandColor}
-      />
-      <CompanyInfo
-        actualInvestment={actual}
-        revenue={revenue}
-        employees={employees}
-        description={description}
-      />
+      <CompanyHeader name={name} categoryNames={categoryNames} brandColor={brandColor} />
+      <CompanyInfo actualInvestment={actual} revenue={revenue} employees={employees} description={description} />
       <CompanyInvestmentTable
         setCurrentPage={handleQueryParamsChange}
         queryParams={queryParams}
