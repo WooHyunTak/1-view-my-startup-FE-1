@@ -57,6 +57,7 @@
 
 .DropDown ul li:hover {
   background-color: var(--grey-400);
+  transition: background-color 0.3s ease;
 }
 
 .DropDown ul li:not(:last-child) {

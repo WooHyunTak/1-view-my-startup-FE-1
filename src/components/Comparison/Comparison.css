@@ -10,18 +10,22 @@
   align-items: center;
 }
 
-.comparison-btn {
+.head-container button {
   display: flex;
-  width: 149px;
-  height: 40px;
-  padding: 8px 24px 8px 24px;
-  gap: 4px;
   border-radius: 50px;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 600;
-  line-height: 19.09px;
   align-items: center;
   justify-content: center;
+  padding: 8px 24px 8px 24px;
+}
+.head-container button img {
+  width: 24px;
+  height: auto;
+}
+
+.head-container .reset-btn {
+  gap: 4px;
 }
 
 .out-container {
@@ -55,10 +59,11 @@
   position: absolute;
   top: 16px;
   right: 16px;
+  font-size: 1rem;
   text-decoration: underline;
-  width: 75px;
-  height: 27px;
-  padding: 0px 0px 8px 15px;
+  color: var(--grey-100);
+  font-weight: 400;
+  text-underline-offset: 2px;
 }
 
 .add-company {
@@ -150,12 +155,6 @@
   right: 10px;
 }
 
-/* .ComparisonItem-img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-} */
-
 .ComparisonItem-name {
   margin-top: 10px;
   font-size: 16px;
@@ -185,5 +184,9 @@
     width: 65px;
     height: 65px;
     font-size: 1.2em;
+  }
+
+  .cancel-btn {
+    font-size: var(--14px);
   }
 }
