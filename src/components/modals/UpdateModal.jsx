@@ -3,7 +3,13 @@ import cancelBtn from "../../assets/icon/ic_delete.svg";
 
 import { useState, useEffect } from "react";
 
-function UpdateModal({ onUpdateConfirm, onCancel, password, initialAmount, initialComment }) {
+function UpdateModal({
+  onUpdateConfirm,
+  onCancel,
+  password,
+  initialAmount,
+  initialComment,
+}) {
   const [amount, setAmount] = useState(initialAmount || "");
   const [comment, setComment] = useState(initialComment || "");
   const [isAmountFocused, setIsAmountFocused] = useState(false);
@@ -24,7 +30,12 @@ function UpdateModal({ onUpdateConfirm, onCancel, password, initialAmount, initi
       <div className="updateModal-head">
         <div className="head-title">
           <h3>수정하기</h3>
-          <img className="cancel-button" src={cancelBtn} alt="cancel button img" onClick={onCancel} />
+          <img
+            className="cancel-button"
+            src={cancelBtn}
+            alt="cancel button img"
+            onClick={onCancel}
+          />
         </div>
       </div>
 
@@ -37,7 +48,9 @@ function UpdateModal({ onUpdateConfirm, onCancel, password, initialAmount, initi
           onBlur={() => setIsAmountFocused(false)}
           onChange={(e) => setAmount(e.target.value)}
           placeholder="투자 금액을 입력해 주세요"
-          className={isAmountFocused || !amount ? "input-active" : "input-filled"}
+          className={
+            isAmountFocused || !amount ? "input-active" : "input-filled"
+          }
         />
         <label>투자 코멘트</label>
         <textarea
@@ -46,7 +59,9 @@ function UpdateModal({ onUpdateConfirm, onCancel, password, initialAmount, initi
           onBlur={() => setIsCommentFocused(false)}
           onChange={(e) => setComment(e.target.value)}
           placeholder="투자에 대한 코멘트를 입력해 주세요"
-          className={isCommentFocused || !comment ? "input-active" : "input-filled"}
+          className={
+            isCommentFocused || !comment ? "input-active" : "input-filled"
+          }
         />
         <div className="body-button">
           <button className="button-update" onClick={handleUpdateClick}>

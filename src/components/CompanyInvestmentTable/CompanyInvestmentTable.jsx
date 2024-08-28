@@ -3,7 +3,7 @@ import { convertToUnit } from "../../utils/convertToUnit";
 import { investmentTableHeader } from "../../utils/tableTypes";
 import Pagination from "../Pagination/Pagination";
 import Table from "../Table/Table";
-import CreateInvestment from "../CreateInvestment/CreateInvestment";
+import CreateInvestment from "../modals/CreateInvestment";
 
 import "./CompanyInvestmentTable.css";
 

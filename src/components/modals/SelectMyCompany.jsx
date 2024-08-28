@@ -4,7 +4,7 @@ import LogoImg from "../LogoImg/LogoImg.jsx";
 import ic_delete from "../../assets/icon/ic_delete.svg";
 import ic_search from "../../assets/icon/ic_search.svg";
 import Pagination from "../Pagination/Pagination.jsx";
-import "../../utils/globalModal.css";
+import "./globalModal.css";
 
 function CompaniesList({ companyItem = {}, onStorage, onAddClick }) {
   const { name, categories, brandImage, brandColor } = companyItem;

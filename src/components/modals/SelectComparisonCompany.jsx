@@ -5,7 +5,7 @@ import ic_search from "../../assets/icon/ic_search.svg";
 import ic_check from "../../assets/icon/ic_check.svg";
 import Pagination from "../Pagination/Pagination.jsx";
 import LogoImg from "../LogoImg/LogoImg.jsx";
-import "../../utils/globalModal.css";
+import "./globalModal.css";
 
 function CompaniesList({
   companyItem = {},

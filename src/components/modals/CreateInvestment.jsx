@@ -4,9 +4,10 @@ import { useNavigate } from "react-router-dom";
 import ic_eyes_hidden from "../../assets/btn_visibility_on_24px-1.svg";
 import ic_eyes from "../../assets/btn_visibility_on_24px.svg";
 import ic_delete from "../../assets/icon/ic_delete.svg";
-import AlertModal from "../AlertModal/AlertModal";
+import AlertModal from "./AlertModal";
 import useFormValidation from "../../hooks/useFormValidation";
 import LogoImg from "../LogoImg/LogoImg";
+import "./globalModal.css";
 
 function CreateInvestment({ isOpen = false, myCompany, onClose }) {
   const dialogRef = useRef(null);

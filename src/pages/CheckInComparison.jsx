@@ -4,11 +4,12 @@ import {
   ComparisonTableHeader,
   companyListTableHeader,
 } from "../utils/tableTypes.js";
-import AlertModal from "../components/AlertModal/AlertModal.jsx";
+import AlertModal from "../components/modals/AlertModal.jsx";
 import DropDown from "../components/DropDown/DropDown.jsx";
-import CreateInvestment from "../components/CreateInvestment/CreateInvestment.jsx";
+import CreateInvestment from "../components/modals/CreateInvestment.jsx";
 import Table from "../components/Table/Table.jsx";
 import LogoImg from "../components/LogoImg/LogoImg.jsx";
+import Loader from "../components/Loader/Loader.jsx";
 import * as api from "../services/comparisonApi.js";
 import "./CheckInComparison.css";
 
@@ -48,6 +49,7 @@ function CheckInComparison() {
   const [alertMeg, setAlertMeg] = useState(false);
   const [createModal, setCreateModal] = useState(false);
   const [comparisonParams, setComparisonParams] = useState(defaultParams);
+  const [loading, setLoading] = useState(false);
   const [rankParams, setRankParams] = useState(defaultParams);
   const [comparisonItem, setComparisonItem] = useState([]);
   const [comparisonRankItem, setComparisonRankItem] = useState([]);
@@ -79,6 +81,7 @@ function CheckInComparison() {
   //API호출
   const allLoadComparisonData = async () => {
     try {
+      setLoading(true);
       const comparisonPromise = api.getComparison(
         comparisonParams,
         reqComparison
@@ -92,6 +95,7 @@ function CheckInComparison() {
         comparisonPromise,
         comparisonRankPromise,
       ]);
+      setLoading(false);
       setComparisonItem(comparisonData);
       setComparisonRankItem(comparisonRankData);
     } catch (error) {
@@ -104,81 +108,86 @@ function CheckInComparison() {
   }, [comparisonParams, rankParams]);
 
   return (
-    <div className="CheckInComparison">
-      <CreateInvestment
-        isOpen={createModal}
-        myCompany={myCompany}
-        onClose={handelCloseCreateModal}
-      />
-      <AlertModal
-        isAlertMeg={alertMeg}
-        message={alertMessage}
-        onClose={handelCloseAlert}
-      />
-      <div>
-        <div className="head-container">
-          <h2>내가 선택한 기업</h2>
-          <Link to={"/my-comparison"}>
-            <button className="check-in-different-btn check-in-btn">
-              다른 기업 비교하기
+    <>
+      {loading && <Loader />}
+      {!loading && (
+        <div className="CheckInComparison">
+          <CreateInvestment
+            isOpen={createModal}
+            myCompany={myCompany}
+            onClose={handelCloseCreateModal}
+          />
+          <AlertModal
+            isAlertMeg={alertMeg}
+            message={alertMessage}
+            onClose={handelCloseAlert}
+          />
+          <div>
+            <div className="head-container">
+              <h2>내가 선택한 기업</h2>
+              <Link to={"/my-comparison"}>
+                <button className="check-in-different-btn check-in-btn">
+                  다른 기업 비교하기
+                </button>
+              </Link>
+            </div>
+            <div className="out-container">
+              <div className="items-container">
+                {myCompany && (
+                  <>
+                    <CompanyItem item={myCompany} />
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+          <div>
+            <div className="head-container">
+              <h2>비교 결과 확인하기</h2>
+              <DropDown
+                orderBy={comparisonParams.orderBy}
+                setOrderBy={handleComparisonParams}
+                buttonType="typeOne"
+              />
+            </div>
+            <div>
+              <Table
+                list={comparisonItem}
+                tableHeaders={ComparisonTableHeader}
+                isCompanyTable={false}
+              />
+            </div>
+          </div>
+
+          <div>
+            <div className="head-container">
+              <h2>기업 순위 확인하기</h2>
+              <DropDown
+                orderBy={rankParams.orderBy}
+                setOrderBy={handleRankParams}
+                buttonType="typeOne"
+              />
+            </div>
+            <div>
+              <Table
+                list={comparisonRankItem}
+                tableHeaders={companyListTableHeader}
+                isCompanyTable={false}
+              />
+            </div>
+          </div>
+
+          <div className="bottom-btn-container">
+            <button
+              onClick={handelOpenCreateModal}
+              className="check-in-investment-btn check-in-btn"
+            >
+              나의 기업에 투자하기
             </button>
-          </Link>
-        </div>
-        <div className="out-container">
-          <div className="items-container">
-            {myCompany && (
-              <>
-                <CompanyItem item={myCompany} />
-              </>
-            )}
           </div>
         </div>
-      </div>
-      <div>
-        <div className="head-container">
-          <h2>비교 결과 확인하기</h2>
-          <DropDown
-            orderBy={comparisonParams.orderBy}
-            setOrderBy={handleComparisonParams}
-            buttonType="typeOne"
-          />
-        </div>
-        <div>
-          <Table
-            list={comparisonItem}
-            tableHeaders={ComparisonTableHeader}
-            isCompanyTable={false}
-          />
-        </div>
-      </div>
-
-      <div>
-        <div className="head-container">
-          <h2>기업 순위 확인하기</h2>
-          <DropDown
-            orderBy={rankParams.orderBy}
-            setOrderBy={handleRankParams}
-            buttonType="typeOne"
-          />
-        </div>
-        <div>
-          <Table
-            list={comparisonRankItem}
-            tableHeaders={companyListTableHeader}
-            isCompanyTable={false}
-          />
-        </div>
-      </div>
-
-      <div className="bottom-btn-container">
-        <button
-          onClick={handelOpenCreateModal}
-          className="check-in-investment-btn check-in-btn"
-        >
-          나의 기업에 투자하기
-        </button>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
 

@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
-import "../AlertModal/AlertModal.css";
-
+import "./AlertModal.css";
+import "./globalModal.css";
 function AlertModal({ message = "", isAlertMeg, onClose }) {
   const dialogRef = useRef(null);
 
