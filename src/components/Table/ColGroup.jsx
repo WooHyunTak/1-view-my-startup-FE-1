@@ -1,4 +1,4 @@
-export function ColGroup({ columns }) {
+export default function ColGroup({ columns }) {
   // 컬럼 너비 커스텀을 위해 colgroup 추가. rank, name, description, amount(투자금액), comment 투자자 코멘트는 고정 너비.
   return (
     <colgroup>

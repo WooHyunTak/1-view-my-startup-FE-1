@@ -21,7 +21,12 @@ function UpdateConfirmModal({ onUpdateConfirm, onCancel }) {
       <div className="UpdateConfirmModal-container">
         <div className="UpdateConfirmModal-head">
           <h3>수정 권한 인증</h3>
-          <img className="cancel-button" src={cancelBtn} alt="cancel button" onClick={onCancel} />
+          <img
+            className="cancel-button"
+            src={cancelBtn}
+            alt="cancel button"
+            onClick={onCancel}
+          />
         </div>
         <div className="UpdateConfirmModal-body">
           <label>비밀번호</label>

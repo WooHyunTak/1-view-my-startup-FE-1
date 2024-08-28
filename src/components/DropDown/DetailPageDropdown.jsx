@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState, useContext } from "react";
 import { InvestmentContext } from "../../contexts/InvestmentContext";
-import DeleteConfirmModal from "../DeleteConfirmModal/DeleteConfirmModal";
-import AlertModal from "../AlertModal/AlertModal";
-import UpdateConfirmModal from "../UpdateConfirmModal/UpdateConfirmModal";
-import UpdateModal from "../UpdateModal/UpdateModal";
+import DeleteConfirmModal from "../modals/DeleteConfirmModal";
+import AlertModal from "../modals/AlertModal";
+import UpdateConfirmModal from "../modals/UpdateConfirmModal";
+import UpdateModal from "../modals/UpdateModal";
 import kebabMenu from "../../assets/icon/ic_kebab.svg";
 import "./DetailPageDropdown.css";
 
@@ -12,11 +12,13 @@ function DetailPageDropdown({ id, password, amount, comment }) {
   const [alertMessage, setAlertMessage] = useState("");
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [isUpdateConfirmModalOpen, setIsUpdateConfirmModalOpen] = useState(false);
+  const [isUpdateConfirmModalOpen, setIsUpdateConfirmModalOpen] =
+    useState(false);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [shouldReload, setShouldReload] = useState(false);
   const [previousModal, setPreviousModal] = useState(null);
-  const { deleteInvestmentById, updateInvestmentById } = useContext(InvestmentContext);
+  const { deleteInvestmentById, updateInvestmentById } =
+    useContext(InvestmentContext);
 
   const dropDownRef = useRef(null);
 
@@ -141,7 +143,10 @@ function DetailPageDropdown({ id, password, amount, comment }) {
         </div>
       )}
       {isUpdateConfirmModalOpen && (
-        <UpdateConfirmModal onUpdateConfirm={confirmUpdate} onCancel={closeUpdateConfirmModal} />
+        <UpdateConfirmModal
+          onUpdateConfirm={confirmUpdate}
+          onCancel={closeUpdateConfirmModal}
+        />
       )}
       {isUpdateModalOpen && (
         <UpdateModal
@@ -152,10 +157,17 @@ function DetailPageDropdown({ id, password, amount, comment }) {
           initialComment={comment}
         />
       )}
-      {isDeleteModalOpen && <DeleteConfirmModal onDeleteConfirm={confirmDelete} onCancel={closeDeleteModal} />}
-      {isAlertModalOpen && (
-        <AlertModal message={alertMessage} isAlertMeg={isAlertModalOpen} onClose={closeAlertModal} />
+      {isDeleteModalOpen && (
+        <DeleteConfirmModal
+          onDeleteConfirm={confirmDelete}
+          onCancel={closeDeleteModal}
+        />
       )}
+      <AlertModal
+        message={alertMessage}
+        isAlertMeg={isAlertModalOpen}
+        onClose={closeAlertModal}
+      />
     </div>
   );
 }

@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { getComparisonStatus } from "../services/companyApi";
-import { Table } from "../components/Table/Table";
-import { DropDown } from "../components/DropDown/DropDown";
-import { Pagination } from "../components/Pagination/Pagination";
 import { useApiHandler } from "../hooks/useApiHandler";
+import { comparisonStatusTableHeader } from "../utils/tableTypes";
+import Table from "../components/Table/Table";
+import DropDown from "../components/DropDown/DropDown";
+import Pagination from "../components/Pagination/Pagination";
 import ErrorMsg from "../components/ErrorMsg/ErrorMsg";
 import Loader from "../components/Loader/Loader";
-import { comparisonStatusTableHeader } from "../utils/tableTypes";
 import "./Home.css";
 
 // 쿼리 파라미터 초기화 (기본값)

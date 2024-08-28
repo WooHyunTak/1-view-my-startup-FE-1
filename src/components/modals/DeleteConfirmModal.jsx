@@ -21,7 +21,12 @@ function DeleteConfirmModal({ onDeleteConfirm, onCancel }) {
       <div className="deleteModal-container">
         <div className="deleteModel-head">
           <h3>삭제 권한 인증</h3>
-          <img className="cancel-button" src={cancelBtn} alt="cancel button" onClick={onCancel} />
+          <img
+            className="cancel-button"
+            src={cancelBtn}
+            alt="cancel button"
+            onClick={onCancel}
+          />
         </div>
         <div className="deleteModel-body">
           <label>비밀번호</label>

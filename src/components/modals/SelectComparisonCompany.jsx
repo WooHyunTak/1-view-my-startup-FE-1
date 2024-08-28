@@ -1,18 +1,18 @@
 import { useEffect, useRef, useState } from "react";
+import { getCompanies } from "../../services/companyApi.js";
 import ic_delete from "../../assets/icon/ic_delete.svg";
 import ic_search from "../../assets/icon/ic_search.svg";
-import default_company_img from "../../assets/default_company_img.svg";
 import ic_check from "../../assets/icon/ic_check.svg";
-import "../../utils/globalModal.css";
-import { getCompanies } from "../../services/companyApi.js";
-import { Pagination } from "../Pagination/Pagination.jsx";
+import Pagination from "../Pagination/Pagination.jsx";
+import LogoImg from "../LogoImg/LogoImg.jsx";
+import "./globalModal.css";
 
 function CompaniesList({
   companyItem = {},
   onAddClick,
   comparisonCompaniesItems = [],
 }) {
-  const { name, categories } = companyItem;
+  const { name, categories, brandImage, brandColor } = companyItem;
 
   //비교기업의 해당 요소를 추가한다.
   const onCompanyClick = () => {
@@ -22,10 +22,11 @@ function CompaniesList({
   return (
     <div className="item-list-container">
       <div className="item-content-container">
-        <img
-          className="select-company-modal-img"
-          src={default_company_img}
-          alt="기업 기본 이미지"
+        <LogoImg
+          size="small"
+          brandImg={brandImage}
+          brandName={name}
+          brandColor={brandColor}
         />
         <p className="select-company-modal-name">{name}</p>
         <div className="select-company-modal-categories">
@@ -48,7 +49,7 @@ function CompaniesList({
 }
 
 function SelectedCompaniesList({ companyItem = {}, onDeleteClick }) {
-  const { name, categories } = companyItem;
+  const { name, categories, brandImage, brandColor } = companyItem;
 
   //비교기업리스트의 해당 요소를 삭제한다.
   const handleDeleteClick = () => {
@@ -58,10 +59,11 @@ function SelectedCompaniesList({ companyItem = {}, onDeleteClick }) {
   return (
     <div className="item-list-container">
       <div className="item-content-container">
-        <img
-          className="select-company-modal-img"
-          src={default_company_img}
-          alt="기업 기본 이미지"
+        <LogoImg
+          size="small"
+          brandImg={brandImage}
+          brandName={name}
+          brandColor={brandColor}
         />
         <p className="select-company-modal-name">{name}</p>
         <div className="select-company-modal-categories">

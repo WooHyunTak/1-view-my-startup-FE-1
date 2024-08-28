@@ -21,7 +21,7 @@
   margin-bottom: 24px;
   font-weight: 700;
   font-size: 20px;
-  line-height: 23.87px;
+  line-height: 1.19;
 }
 
 .updateModal-body {
@@ -31,7 +31,7 @@
   justify-content: center;
   font-weight: 700;
   font-size: 18px;
-  line-height: 21.48px;
+  line-height: 1.19;
 }
 .updateModal-body label {
   margin-bottom: 16px;
@@ -62,12 +62,18 @@
   align-items: center;
   gap: 16px;
 }
-.UpdateModal .updateModal-body .button-update {
+.button-update {
   padding: 13px 48px;
   border-radius: 50px;
   font-weight: 600;
   background-color: var(--orange);
   font-size: 18px;
-  line-height: 21.48px;
+  line-height: 1.19;
   width: 183px;
+}
+.input-active {
+  color: #fff;
+}
+.input-filled {
+  color: var(--grey-200) !important;
 }

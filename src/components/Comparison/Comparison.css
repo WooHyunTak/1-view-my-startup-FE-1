@@ -150,11 +150,11 @@
   right: 10px;
 }
 
-.ComparisonItem-img {
+/* .ComparisonItem-img {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-}
+} */
 
 .ComparisonItem-name {
   margin-top: 10px;
@@ -177,4 +177,13 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* tablet size */
+@media only screen and (max-width: 743px) {
+  .Comparison .LogoImg.large {
+    width: 65px;
+    height: 65px;
+    font-size: 1.2em;
+  }
 }

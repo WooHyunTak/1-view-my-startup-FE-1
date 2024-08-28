@@ -1,19 +1,20 @@
 import { useRef, useState, useEffect } from "react";
+import { createInvestment_ver_tak } from "../../services/investmentApi";
+import { useNavigate } from "react-router-dom";
 import ic_eyes_hidden from "../../assets/btn_visibility_on_24px-1.svg";
 import ic_eyes from "../../assets/btn_visibility_on_24px.svg";
 import ic_delete from "../../assets/icon/ic_delete.svg";
-import default_company_img from "../../assets/default_company_img.svg";
-import { createInvestment_ver_tak } from "../../services/investmentApi";
-import { useNavigate } from "react-router-dom";
-import AlertModal from "../AlertModal/AlertModal";
+import AlertModal from "./AlertModal";
 import useFormValidation from "../../hooks/useFormValidation";
+import LogoImg from "../LogoImg/LogoImg";
+import "./globalModal.css";
 
 function CreateInvestment({ isOpen = false, myCompany, onClose }) {
   const dialogRef = useRef(null);
   const navigate = useNavigate();
   const [alertMessage, setAlertMessage] = useState("");
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
-  const { name, categories } = myCompany;
+  const { name, categories, brandColor, brandImage } = myCompany;
   const [inputTypes, setInputTypes] = useState({
     password: "password",
     passwordConfirm: "password",
@@ -115,10 +116,10 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
           <h2>투자 기업 정보</h2>
           <div className="item-list-container">
             <div className="item-content-container">
-              <img
-                className="select-company-modal-img"
-                src={default_company_img}
-                alt="기업 기본 이미지"
+              <LogoImg
+                brandImg={brandImage}
+                brandName={name}
+                brandColor={brandColor}
               />
               <p className="select-company-modal-name">{name}</p>
               <div className="select-company-modal-categories">
