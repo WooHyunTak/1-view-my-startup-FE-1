@@ -30,26 +30,45 @@ function ComparisonStatus() {
   useEffect(() => {
     init();
   }, [init]);
+  if (error) {
+    return <ErrorMsg errorMsg={error.message} />;
+  }
 
   return (
-    <section className="ComparisonStatus">
-      <div className="top-bar">
-        <h2>비교 현황</h2>
-        <DropDown
-          orderBy={queryParams.orderBy}
-          setOrderBy={handleQueryParamsChange}
-          buttonType="typeTwo"
-        />
-        {loading && <Loader />}
-      </div>
-      <Table list={companyList} tableHeaders={comparisonStatusTableHeader} />
-      {error && <ErrorMsg errorMsg={error.message} />}
-      <Pagination
-        setCurrentPage={handleQueryParamsChange}
-        currentPage={queryParams.page}
-        totalPages={totalPages}
-      />
-    </section>
+    <>
+      {loading && <Loader />}
+      <section className="ComparisonStatus">
+        {!loading && companyList.length === 0 && (
+          <>
+            <h2>비교 현황</h2>
+            <div className="empty-list">
+              <p>아직 비교 현황이 없어요.</p>
+            </div>
+          </>
+        )}
+        {!loading && companyList.length > 0 && (
+          <>
+            <div className="top-bar">
+              <h2>비교 현황</h2>
+              <DropDown
+                orderBy={queryParams.orderBy}
+                setOrderBy={handleQueryParamsChange}
+                buttonType="typeTwo"
+              />
+            </div>
+            <Table
+              list={companyList}
+              tableHeaders={comparisonStatusTableHeader}
+            />
+            <Pagination
+              setCurrentPage={handleQueryParamsChange}
+              currentPage={queryParams.page}
+              totalPages={totalPages}
+            />
+          </>
+        )}
+      </section>
+    </>
   );
 }
 

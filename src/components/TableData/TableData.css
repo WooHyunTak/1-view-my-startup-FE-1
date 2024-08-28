@@ -22,20 +22,6 @@ tbody .table-row:not(:last-child) {
   overflow: hidden;
 }
 
-/* .table-row .company-name-container .circle-crop {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
-.table-row .company-name-container img {
-  width: 100%;
-} */
-
 .table-row .company-description {
   width: 100%;
 }

@@ -37,34 +37,37 @@ function Home() {
   useEffect(() => {
     init();
   }, [init]);
-
+  if (error) {
+    return <ErrorMsg errorMsg={error.message} />;
+  }
   return (
     <>
       {loading && <Loader />}
-      {!loading && (
-        <section className="Home">
-          <div className="top-bar">
-            <h2 className="top-bar-title">전체 스타트업 목록</h2>
-            <SearchBar setKeyword={handleQueryParamsChange} />
-            <DropDown
-              orderBy={queryParams.orderBy}
-              setOrderBy={handleQueryParamsChange}
-              buttonType="typeOne"
+      <section className="Home">
+        {!loading && (
+          <>
+            <div className="top-bar">
+              <h2 className="top-bar-title">전체 스타트업 목록</h2>
+              <SearchBar setKeyword={handleQueryParamsChange} />
+              <DropDown
+                orderBy={queryParams.orderBy}
+                setOrderBy={handleQueryParamsChange}
+                buttonType="typeOne"
+              />
+            </div>
+            <Table
+              list={companyList}
+              tableHeaders={companyListTableHeader}
+              tableName="company-list"
             />
-          </div>
-          <Table
-            list={companyList}
-            tableHeaders={companyListTableHeader}
-            tableName="company-list"
-          />
-          {error && <ErrorMsg errorMsg={error.message} />}
-          <Pagination
-            setCurrentPage={handleQueryParamsChange}
-            currentPage={queryParams.page}
-            totalPages={totalPages}
-          />
-        </section>
-      )}
+            <Pagination
+              setCurrentPage={handleQueryParamsChange}
+              currentPage={queryParams.page}
+              totalPages={totalPages}
+            />
+          </>
+        )}
+      </section>
     </>
   );
 }
