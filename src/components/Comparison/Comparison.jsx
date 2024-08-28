@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import add_icon from "../../assets/icon/ic_add.svg";
-import restart_icon from "../../assets/icon/ic_restart.svg";
+import restart_icon from "../../assets/icon/ic_restart_white.svg";
 import "./Comparison.css";
 import SelectMyCompany from "../modals/SelectMyCompany.jsx";
 import SelectComparisonCompany from "../modals/SelectComparisonCompany.jsx";
@@ -194,7 +194,7 @@ function Comparison() {
       <div>
         <div className="head-container">
           <h2>나의 기업을 선택해 주세요!</h2>
-          <button onClick={handleAllClear} className="comparison-btn">
+          <button onClick={handleAllClear} className="reset-btn">
             <img src={restart_icon} alt="초기화" />
             전체 초기화
           </button>

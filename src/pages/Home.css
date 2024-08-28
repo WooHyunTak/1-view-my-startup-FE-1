@@ -22,7 +22,7 @@
   gap: 1rem;
 }
 
-.InvestmentStatus .empty-list {
+.empty-list {
   display: flex;
   justify-content: center;
   align-items: center;
