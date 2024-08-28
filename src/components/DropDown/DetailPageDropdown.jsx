@@ -12,13 +12,11 @@ function DetailPageDropdown({ id, password, amount, comment }) {
   const [alertMessage, setAlertMessage] = useState("");
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [isUpdateConfirmModalOpen, setIsUpdateConfirmModalOpen] =
-    useState(false);
+  const [isUpdateConfirmModalOpen, setIsUpdateConfirmModalOpen] = useState(false);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [shouldReload, setShouldReload] = useState(false);
   const [previousModal, setPreviousModal] = useState(null);
-  const { deleteInvestmentById, updateInvestmentById } =
-    useContext(InvestmentContext);
+  const { deleteInvestmentById, updateInvestmentById } = useContext(InvestmentContext);
 
   const dropDownRef = useRef(null);
 
@@ -142,32 +140,21 @@ function DetailPageDropdown({ id, password, amount, comment }) {
           </button>
         </div>
       )}
-      {isUpdateConfirmModalOpen && (
-        <UpdateConfirmModal
-          onUpdateConfirm={confirmUpdate}
-          onCancel={closeUpdateConfirmModal}
-        />
-      )}
-      {isUpdateModalOpen && (
-        <UpdateModal
-          onUpdateConfirm={handleUpdate}
-          onCancel={() => setIsUpdateModalOpen(false)}
-          password={password}
-          initialAmount={amount}
-          initialComment={comment}
-        />
-      )}
-      {isDeleteModalOpen && (
-        <DeleteConfirmModal
-          onDeleteConfirm={confirmDelete}
-          onCancel={closeDeleteModal}
-        />
-      )}
-      <AlertModal
-        message={alertMessage}
-        isAlertMeg={isAlertModalOpen}
-        onClose={closeAlertModal}
+      <UpdateConfirmModal
+        isOpen={isUpdateConfirmModalOpen}
+        onUpdateConfirm={confirmUpdate}
+        onCancel={closeUpdateConfirmModal}
       />
+      <UpdateModal
+        isOpen={isUpdateModalOpen}
+        onUpdateConfirm={handleUpdate}
+        onCancel={() => setIsUpdateModalOpen(false)}
+        password={password}
+        initialAmount={amount}
+        initialComment={comment}
+      />
+      <DeleteConfirmModal isOpen={isDeleteModalOpen} onDeleteConfirm={confirmDelete} onCancel={closeDeleteModal} />
+      <AlertModal message={alertMessage} isAlertMeg={isAlertModalOpen} onClose={closeAlertModal} />
     </div>
   );
 }

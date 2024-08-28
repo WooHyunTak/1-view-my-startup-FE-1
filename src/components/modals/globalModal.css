@@ -235,3 +235,225 @@ h3 {
   width: 24px;
   height: 24px;
 }
+
+/*----for DeleteConfirmModal----*/
+
+.DeleteConfirmModal::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.DeleteConfirmModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  padding: 24px;
+  background-color: var(--black-300);
+  border-radius: 16px;
+  width: 93.5%;
+  max-width: 496px;
+}
+.DeleteConfirmModal .deleteModal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23.87px;
+}
+.DeleteConfirmModal .cancel-button {
+  cursor: pointer;
+}
+.DeleteConfirmModal .deleteModal-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.DeleteConfirmModal label {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21.48px;
+  margin-bottom: 16px;
+  color: #fff;
+}
+
+.DeleteConfirmModal .input-container {
+  position: relative;
+  width: 100%;
+}
+.DeleteConfirmModal input {
+  border: 1px solid var(--grey-200);
+  border-radius: 10px;
+  width: inherit;
+  padding: 16px 20px;
+  margin-bottom: 32px;
+  color: #fff;
+}
+.DeleteConfirmModal .password-visibility {
+  position: absolute;
+  top: 14px;
+  right: 20px;
+  cursor: pointer;
+}
+.DeleteConfirmModal .delete-btn {
+  margin: auto;
+  background-color: var(--orange);
+  padding: 13px 48px;
+  border-radius: 50px;
+}
+
+/*----for UpdateConfirmModal----*/
+
+.UpdateConfirmModal::backdrop {
+  background: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
+}
+
+.UpdateConfirmModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  padding: 24px;
+  background-color: var(--black-300);
+  border-radius: 16px;
+  width: 93.5%;
+  max-width: 496px;
+}
+.UpdateConfirmModal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23.87px;
+}
+.cancel-button {
+  cursor: pointer;
+}
+.UpdateConfirmModal-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.UpdateConfirmModal-body label {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21.48px;
+  margin-bottom: 16px;
+  color: #fff;
+}
+
+.UpdateConfirmModal-body .input-container {
+  position: relative;
+  width: 100%;
+}
+.UpdateConfirmModal-body input {
+  border: 1px solid var(--grey-200);
+  border-radius: 10px;
+  width: inherit;
+  padding: 16px 20px;
+  margin-bottom: 32px;
+  color: #fff;
+}
+.password-visibility {
+  position: absolute;
+  top: 14px;
+  right: 20px;
+  cursor: pointer;
+}
+.next-btn {
+  margin: auto;
+  background-color: var(--orange);
+  padding: 13px 48px;
+  border-radius: 50px;
+}
+
+/*----for UpdateModal----*/
+.UpdateModal::backdrop {
+  background: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
+}
+
+.UpdateModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  padding: 24px;
+  background-color: var(--black-300);
+  border-radius: 16px;
+  width: 93.5%;
+  max-width: 496px;
+}
+
+.updateModal-head {
+  margin-bottom: 24px;
+}
+.head-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.19;
+}
+
+.updateModal-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.19;
+}
+.updateModal-body label {
+  margin-bottom: 16px;
+  border-radius: 10px;
+  color: #fff;
+}
+.updateModal-body input {
+  margin-bottom: 24px;
+  padding: 16px 20px;
+  border: 1px solid var(--grey-200);
+  width: 100%;
+  border-radius: 10px;
+  color: #fff;
+}
+.updateModal-body textarea {
+  width: 100%;
+  height: 108px;
+  resize: none;
+  padding: 16px 20px;
+  border: 1px solid var(--grey-200);
+  border-radius: 10px;
+  margin-bottom: 24px;
+  color: #fff;
+}
+.body-button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+.button-update {
+  padding: 13px 48px;
+  border-radius: 50px;
+  font-weight: 600;
+  background-color: var(--orange);
+  font-size: 18px;
+  line-height: 1.19;
+  width: 183px;
+}
+.input-active {
+  color: #fff;
+}
+.input-filled {
+  color: var(--grey-200) !important;
+}
