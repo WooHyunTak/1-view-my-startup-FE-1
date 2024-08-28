@@ -149,6 +149,7 @@ function SelectComparisonCompany({
           <form onSubmit={handleSubmit}>
             <input
               name="keyword"
+              value={keyword || ""}
               onChange={handleKeyword}
               className="modal-input"
               placeholder="기업명을 입력해 주세요"
