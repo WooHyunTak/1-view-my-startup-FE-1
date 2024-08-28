@@ -108,10 +108,15 @@ h3 {
   align-items: center;
 }
 
-.select-company-modal-img {
+/* .select-company-modal-img {
   width: 48px;
   height: 48px;
   border-radius: 50%;
+} */
+
+.modal-my-company-container .LogoImg {
+  width: 40px;
+  height: 40px;
 }
 
 .select-company-modal-name {

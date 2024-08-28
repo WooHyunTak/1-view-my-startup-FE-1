@@ -6,9 +6,7 @@
   border-bottom: 1px solid var(--black-100);
   padding-bottom: 32px;
 }
-.company-logo {
-  border-radius: 50%;
-}
+
 .name-category {
   display: flex;
   flex-direction: column;
