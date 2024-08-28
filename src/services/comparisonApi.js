@@ -20,10 +20,10 @@ export async function getComparison(params = {}, item = {}) {
   return res.data;
 }
 
-export async function getComparisonRank(params = {}, id) {
+export async function getComparisonRank(params = {}, item) {
   const { orderBy } = params;
   const { sortBy, order } = splitSortOption(orderBy);
-  const res = await instance.get(`/api/comparisons/rank/${id}`, {
+  const res = await instance.get(`/api/comparisons/rank/${item.id}`, {
     params: { sortBy, order },
   });
 

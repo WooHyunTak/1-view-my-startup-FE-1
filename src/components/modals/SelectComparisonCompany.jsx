@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { getCompanies } from "../../services/companyApi.js";
 import ic_delete from "../../assets/icon/ic_delete.svg";
 import ic_search from "../../assets/icon/ic_search.svg";
@@ -116,7 +116,7 @@ function SelectComparisonCompany({
     handleValues("keyword", keyword);
   };
 
-  const handleSearch = async () => {
+  const handleSearch = useCallback(async () => {
     if (!isOpen) return;
     try {
       const { list, totalCount = 0 } = await getCompanies(queryObj);
@@ -126,17 +126,13 @@ function SelectComparisonCompany({
     } catch (error) {
       console.log(error.message);
     }
-  };
+  }, [isOpen, queryObj]);
+  handleSearch();
 
   //모달 다이얼로그 Ref 관리 -> 모달 open상태와 API호루 쿼리의 의존성 부여
   useEffect(() => {
     isOpen ? dialogRef.current.showModal() : dialogRef.current.close();
-    handleSearch();
-  }, [isOpen, queryObj]);
-
-  // useEffect(() => {
-  //   handleSearch();
-  // }, [queryObj]);
+  }, [isOpen, handleSearch]);
 
   return (
     <dialog ref={dialogRef} className="modal-company">

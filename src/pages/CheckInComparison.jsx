@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   ComparisonTableHeader,
@@ -30,9 +30,6 @@ function CompanyItem({ item }) {
   );
 }
 
-//Alert모달의 프롭으로 전달하는 메시지...
-let alertMessage = "";
-
 const defaultParams = {
   orderBy: "revenue_desc",
 };
@@ -53,10 +50,10 @@ function CheckInComparison() {
   const [rankParams, setRankParams] = useState(defaultParams);
   const [comparisonItem, setComparisonItem] = useState([]);
   const [comparisonRankItem, setComparisonRankItem] = useState([]);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [reqComparison, setReqComparison] = useState({});
 
-  const reqComparison = {
-    comparisonIds: [...comparisonIds, myCompany.id],
-  };
+  setReqComparison({ comparisonIds: [...comparisonIds, myCompany.id] });
 
   const handleComparisonParams = (name, value) => {
     setComparisonParams((prev) => ({
@@ -79,7 +76,7 @@ function CheckInComparison() {
   const handelCloseCreateModal = () => setCreateModal(false);
 
   //API호출
-  const allLoadComparisonData = async () => {
+  const allLoadComparisonData = useCallback(async () => {
     try {
       setLoading(true);
       const comparisonPromise = api.getComparison(
@@ -88,7 +85,7 @@ function CheckInComparison() {
       );
       const comparisonRankPromise = api.getComparisonRank(
         rankParams,
-        myCompany.id
+        myCompany
       );
 
       const [comparisonData, comparisonRankData] = await Promise.all([
@@ -100,12 +97,14 @@ function CheckInComparison() {
       setComparisonRankItem(comparisonRankData);
     } catch (error) {
       console.log(error.message);
+      setAlertMessage(error.message);
+      handelOpenAlert();
     }
-  };
+  }, [comparisonParams, reqComparison, rankParams, myCompany]);
 
   useEffect(() => {
     allLoadComparisonData();
-  }, [comparisonParams, rankParams]);
+  }, [allLoadComparisonData]);
 
   return (
     <>
