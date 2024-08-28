@@ -1,11 +1,18 @@
-import default_logo from "../../assets/default_logo_companyDetail.svg";
+import LogoImg from "../LogoImg/LogoImg";
+
 import "./CompanyHeader.css";
 
-function CompanyHeader({ name, categoryNames }) {
+function CompanyHeader({ name, categoryNames, brandColor, brandImage }) {
   const categories = categoryNames.map((category) => category.name).join(", ");
   return (
     <div className="CompanyHeader">
-      <img src={default_logo} alt="logo" className="company-logo" />
+      <LogoImg
+        size="large"
+        brandImg={brandImage}
+        brandName={name}
+        brandColor={brandColor}
+      />
+
       <div className="name-category">
         <span className="name">{name}</span>
         <span className="category">{categories}</span>

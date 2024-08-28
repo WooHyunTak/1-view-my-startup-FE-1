@@ -6,9 +6,7 @@
   border-bottom: 1px solid var(--black-100);
   padding-bottom: 32px;
 }
-.company-logo {
-  border-radius: 50%;
-}
+
 .name-category {
   display: flex;
   flex-direction: column;
@@ -26,18 +24,20 @@
   color: var(--grey-200);
 }
 
-@media screen and (max-width: 534px) {
-  .company-logo {
-    content: url("../../assets/default_logo_companyDetail_small.svg");
+@media screen and (max-width: 743px) {
+  .CompanyHeader .LogoImg.large {
+    width: 48px;
+    height: 48px;
+    font-size: 1rem;
   }
 
-  .name {
-    font-size: 20px;
-    line-height: 1.19;
+  .CompanyHeader .name {
+    font-size: var(--20px);
+    line-height: 23.87px;
   }
 
-  .category {
-    font-size: 16px;
-    line-height: 1.19;
+  .CompanyHeader .category {
+    font-size: 1rem;
+    line-height: 19.09px;
   }
 }

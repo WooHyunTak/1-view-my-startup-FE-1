@@ -1,10 +1,10 @@
 import { useState, useRef, useEffect } from "react";
-import dropDownIcon from "../../assets/icon/ic_toggle.svg";
 import { optionsByType } from "../../utils/buttonOptions";
+import dropDownIcon from "../../assets/icon/ic_toggle.svg";
 import "./DropDown.css";
 
 //필요한 props: orderBy, setOrderby, buttonType
-export function DropDown({ orderBy, setOrderBy, buttonType }) {
+export default function DropDown({ orderBy, setOrderBy, buttonType }) {
   // 드롭다운의 상태(열림 or 닫힘)를 저장, 초기값 = false
   const [isOpen, setIsOpen] = useState(false);
 

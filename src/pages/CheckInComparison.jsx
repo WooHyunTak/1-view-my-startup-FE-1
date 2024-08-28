@@ -1,23 +1,28 @@
 import { useState, useEffect, useMemo } from "react";
-import defaultImg from "../assets/default_company_img.svg";
-import AlertModal from "../components/AlertModal/AlertModal.jsx";
-import { DropDown } from "../components/DropDown/DropDown.jsx";
-import CreateInvestment from "../components/CreateInvestment/CreateInvestment.jsx";
-import { Table } from "../components/Table/Table.jsx";
-import * as api from "../services/comparisonApi.js";
+import { Link, useLocation } from "react-router-dom";
 import {
   ComparisonTableHeader,
   companyListTableHeader,
 } from "../utils/tableTypes.js";
-import { Link, useLocation } from "react-router-dom";
+import AlertModal from "../components/AlertModal/AlertModal.jsx";
+import DropDown from "../components/DropDown/DropDown.jsx";
+import CreateInvestment from "../components/CreateInvestment/CreateInvestment.jsx";
+import Table from "../components/Table/Table.jsx";
+import LogoImg from "../components/LogoImg/LogoImg.jsx";
+import * as api from "../services/comparisonApi.js";
 import "./CheckInComparison.css";
 
 //내가 선택한 기업의 정보를 리스트에 보여준다
 function CompanyItem({ item }) {
-  const { name, categories } = item;
+  const { name, categories, brandImage, brandColor } = item;
   return (
     <div className="CompanyItem">
-      <img className="CompanyItem-img" src={defaultImg} alt="기업 이미지" />
+      <LogoImg
+        size="large"
+        brandImg={brandImage}
+        brandName={name}
+        brandColor={brandColor}
+      />
       <h2 className="CompanyItem-name ellipsis">{name}</h2>
       <p className="CompanyItem-categories ellipsis">{categories}</p>
     </div>

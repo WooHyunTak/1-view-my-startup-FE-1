@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
+import { getCompanies } from "../../services/companyApi.js";
+import LogoImg from "../LogoImg/LogoImg.jsx";
 import ic_delete from "../../assets/icon/ic_delete.svg";
 import ic_search from "../../assets/icon/ic_search.svg";
-import default_company_img from "../../assets/default_company_img.svg";
+import Pagination from "../Pagination/Pagination.jsx";
 import "../../utils/globalModal.css";
-import { getCompanies } from "../../services/companyApi.js";
-import { Pagination } from "../Pagination/Pagination.jsx";
 
 function CompaniesList({ companyItem = {}, onStorage, onAddClick }) {
-  const { name, categories } = companyItem;
+  const { name, categories, brandImage, brandColor } = companyItem;
   //로컬스토리지 저장과 나의 기업 상태를 저장한다.
   const onCompanyClick = () => {
     onStorage(companyItem);
@@ -17,10 +17,11 @@ function CompaniesList({ companyItem = {}, onStorage, onAddClick }) {
   return (
     <div className="item-list-container">
       <div className="item-content-container">
-        <img
-          className="select-company-modal-img"
-          src={default_company_img}
-          alt="기업 기본 이미지"
+        <LogoImg
+          size="medium"
+          brandImg={brandImage}
+          brandName={name}
+          brandColor={brandColor}
         />
         <p className="select-company-modal-name">{name}</p>
         <div className="select-company-modal-categories">

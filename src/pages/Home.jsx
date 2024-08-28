@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { getCompanies } from "../services/companyApi";
-import { Table } from "../components/Table/Table";
-import { DropDown } from "../components/DropDown/DropDown";
-import { Pagination } from "../components/Pagination/Pagination";
-import { SearchBar } from "../components/SearchBar/SearchBar";
 import { useApiHandler } from "../hooks/useApiHandler";
+import Table from "../components/Table/Table";
+import DropDown from "../components/DropDown/DropDown";
+import Pagination from "../components/Pagination/Pagination";
+import SearchBar from "../components/SearchBar/SearchBar";
 import ErrorMsg from "../components/ErrorMsg/ErrorMsg";
 import Loader from "../components/Loader/Loader";
 
@@ -39,30 +39,33 @@ function Home() {
   }, [init]);
 
   return (
-    <section className="Home">
+    <>
       {loading && <Loader />}
-
-      <div className="top-bar">
-        <h2 className="top-bar-title">전체 스타트업 목록</h2>
-        <SearchBar setKeyword={handleQueryParamsChange} />
-        <DropDown
-          orderBy={queryParams.orderBy}
-          setOrderBy={handleQueryParamsChange}
-          buttonType="typeOne"
-        />
-      </div>
-      <Table
-        list={companyList}
-        tableHeaders={companyListTableHeader}
-        tableName="company-list"
-      />
-      {error && <ErrorMsg errorMsg={error.message} />}
-      <Pagination
-        setCurrentPage={handleQueryParamsChange}
-        currentPage={queryParams.page}
-        totalPages={totalPages}
-      />
-    </section>
+      {!loading && (
+        <section className="Home">
+          <div className="top-bar">
+            <h2 className="top-bar-title">전체 스타트업 목록</h2>
+            <SearchBar setKeyword={handleQueryParamsChange} />
+            <DropDown
+              orderBy={queryParams.orderBy}
+              setOrderBy={handleQueryParamsChange}
+              buttonType="typeOne"
+            />
+          </div>
+          <Table
+            list={companyList}
+            tableHeaders={companyListTableHeader}
+            tableName="company-list"
+          />
+          {error && <ErrorMsg errorMsg={error.message} />}
+          <Pagination
+            setCurrentPage={handleQueryParamsChange}
+            currentPage={queryParams.page}
+            totalPages={totalPages}
+          />
+        </section>
+      )}
+    </>
   );
 }
 
