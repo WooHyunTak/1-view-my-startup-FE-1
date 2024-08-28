@@ -83,7 +83,7 @@ function CompanyDetail() {
 
     // 컴포넌트가 마운트되면 데이터 가져오기 시작
     fetchCompany();
-  }, [companyId, queryParams.page, queryParams.limit, loadInvestments]);
+  }, [companyId, queryParams.page, queryParams.limit]);
 
   if (loading) return <Loader />; // 로딩 중일 때 메시지 표시
   if (error) return <ErrorMsg errorMsg={error} />; // 에러 발생 시 메시지 표시

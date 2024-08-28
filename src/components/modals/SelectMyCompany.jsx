@@ -41,7 +41,7 @@ const defaultParams = {
   totalPages: 0,
 };
 function SelectMyCompany({
-  isOpen = false,
+  isOpen,
   onClose,
   onAddClick,
   recentCompanies,

@@ -30,6 +30,8 @@ function CompanyItem({ item }) {
   );
 }
 
+//Alert모달의 프롭으로 전달하는 메시지...
+
 const defaultParams = {
   orderBy: "revenue_desc",
 };
@@ -51,9 +53,6 @@ function CheckInComparison() {
   const [comparisonItem, setComparisonItem] = useState([]);
   const [comparisonRankItem, setComparisonRankItem] = useState([]);
   const [alertMessage, setAlertMessage] = useState("");
-  const [reqComparison, setReqComparison] = useState({});
-
-  setReqComparison({ comparisonIds: [...comparisonIds, myCompany.id] });
 
   const handleComparisonParams = (name, value) => {
     setComparisonParams((prev) => ({
@@ -79,6 +78,9 @@ function CheckInComparison() {
   const allLoadComparisonData = useCallback(async () => {
     try {
       setLoading(true);
+      const reqComparison = {
+        comparisonIds: [...comparisonIds, myCompany.id],
+      };
       const comparisonPromise = api.getComparison(
         comparisonParams,
         reqComparison
@@ -96,11 +98,11 @@ function CheckInComparison() {
       setComparisonItem(comparisonData);
       setComparisonRankItem(comparisonRankData);
     } catch (error) {
-      console.log(error.message);
       setAlertMessage(error.message);
       handelOpenAlert();
+      console.log(error.message);
     }
-  }, [comparisonParams, reqComparison, rankParams, myCompany]);
+  }, [comparisonParams, myCompany, rankParams, comparisonIds]);
 
   useEffect(() => {
     allLoadComparisonData();

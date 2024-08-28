@@ -85,7 +85,7 @@ const defaultParams = {
 };
 
 function SelectComparisonCompany({
-  isOpen = false,
+  isOpen,
   onClose,
   onAddClick,
   onDeleteClick,
@@ -127,11 +127,11 @@ function SelectComparisonCompany({
       console.log(error.message);
     }
   }, [isOpen, queryObj]);
-  handleSearch();
 
   //모달 다이얼로그 Ref 관리 -> 모달 open상태와 API호루 쿼리의 의존성 부여
   useEffect(() => {
     isOpen ? dialogRef.current.showModal() : dialogRef.current.close();
+    handleSearch();
   }, [isOpen, handleSearch]);
 
   return (
