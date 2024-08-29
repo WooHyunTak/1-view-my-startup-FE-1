@@ -9,7 +9,6 @@ import DropDown from "../components/DropDown/DropDown.jsx";
 import CreateInvestment from "../components/modals/CreateInvestment.jsx";
 import Table from "../components/Table/Table.jsx";
 import LogoImg from "../components/LogoImg/LogoImg.jsx";
-import Loader from "../components/Loader/Loader.jsx";
 import * as api from "../services/comparisonApi.js";
 import "./CheckInComparison.css";
 
@@ -48,7 +47,6 @@ function CheckInComparison() {
   const [alertMeg, setAlertMeg] = useState(false);
   const [createModal, setCreateModal] = useState(false);
   const [comparisonParams, setComparisonParams] = useState(defaultParams);
-  const [loading, setLoading] = useState(false);
   const [rankParams, setRankParams] = useState(defaultParams);
   const [comparisonItem, setComparisonItem] = useState([]);
   const [comparisonRankItem, setComparisonRankItem] = useState([]);
@@ -75,119 +73,116 @@ function CheckInComparison() {
   const handelCloseCreateModal = () => setCreateModal(false);
 
   //API호출
-  const allLoadComparisonData = useCallback(async () => {
+  const loadComparison = useCallback(async () => {
     try {
-      setLoading(true);
       const reqComparison = {
         comparisonIds: [...comparisonIds, myCompany.id],
       };
-      const comparisonPromise = api.getComparison(
-        comparisonParams,
-        reqComparison
-      );
-      const comparisonRankPromise = api.getComparisonRank(
-        rankParams,
-        myCompany
-      );
-
-      const [comparisonData, comparisonRankData] = await Promise.all([
-        comparisonPromise,
-        comparisonRankPromise,
-      ]);
-      setLoading(false);
-      setComparisonItem(comparisonData);
-      setComparisonRankItem(comparisonRankData);
+      const data = await api.getComparison(comparisonParams, reqComparison);
+      setComparisonItem(data);
     } catch (error) {
       setAlertMessage(error.message);
       handelOpenAlert();
       console.log(error.message);
     }
-  }, [comparisonParams, myCompany, rankParams, comparisonIds]);
+  }, [comparisonParams, comparisonIds, myCompany.id]);
+
+  const loadComparisonRack = useCallback(async () => {
+    try {
+      const data = await api.getComparisonRank(rankParams, myCompany);
+      setComparisonRankItem(data);
+    } catch (error) {
+      setAlertMessage(error.message);
+      handelOpenAlert();
+      console.log(error.message);
+    }
+  }, [rankParams, myCompany]);
 
   useEffect(() => {
-    allLoadComparisonData();
-  }, [allLoadComparisonData]);
+    loadComparison();
+  }, [loadComparison]);
+
+  useEffect(() => {
+    loadComparisonRack();
+  }, [loadComparisonRack]);
 
   return (
     <>
-      {loading && <Loader />}
-      {!loading && (
-        <div className="CheckInComparison">
-          <CreateInvestment
-            isOpen={createModal}
-            myCompany={myCompany}
-            onClose={handelCloseCreateModal}
-          />
-          <AlertModal
-            isAlertMeg={alertMeg}
-            message={alertMessage}
-            onClose={handelCloseAlert}
-          />
-          <div>
-            <div className="head-container">
-              <h2>내가 선택한 기업</h2>
-              <Link to={"/my-comparison"}>
-                <button className="check-in-different-btn check-in-btn">
-                  다른 기업 비교하기
-                </button>
-              </Link>
-            </div>
-            <div className="out-container">
-              <div className="items-container">
-                {myCompany && (
-                  <>
-                    <CompanyItem item={myCompany} />
-                  </>
-                )}
-              </div>
-            </div>
+      <div className="CheckInComparison">
+        <CreateInvestment
+          isOpen={createModal}
+          myCompany={myCompany}
+          onClose={handelCloseCreateModal}
+        />
+        <AlertModal
+          isAlertMeg={alertMeg}
+          message={alertMessage}
+          onClose={handelCloseAlert}
+        />
+        <div>
+          <div className="head-container">
+            <h2>내가 선택한 기업</h2>
+            <Link to={"/my-comparison"}>
+              <button className="check-in-different-btn check-in-btn">
+                다른 기업 비교하기
+              </button>
+            </Link>
           </div>
-          <div>
-            <div className="head-container">
-              <h2>비교 결과 확인하기</h2>
-              <DropDown
-                orderBy={comparisonParams.orderBy}
-                setOrderBy={handleComparisonParams}
-                buttonType="typeOne"
-              />
+          <div className="out-container">
+            <div className="items-container">
+              {myCompany && (
+                <>
+                  <CompanyItem item={myCompany} />
+                </>
+              )}
             </div>
-            <div>
-              <Table
-                list={comparisonItem}
-                tableHeaders={ComparisonTableHeader}
-                isCompanyTable={false}
-              />
-            </div>
-          </div>
-
-          <div>
-            <div className="head-container">
-              <h2>기업 순위 확인하기</h2>
-              <DropDown
-                orderBy={rankParams.orderBy}
-                setOrderBy={handleRankParams}
-                buttonType="typeOne"
-              />
-            </div>
-            <div>
-              <Table
-                list={comparisonRankItem}
-                tableHeaders={companyListTableHeader}
-                isCompanyTable={false}
-              />
-            </div>
-          </div>
-
-          <div className="bottom-btn-container">
-            <button
-              onClick={handelOpenCreateModal}
-              className="check-in-investment-btn check-in-btn"
-            >
-              나의 기업에 투자하기
-            </button>
           </div>
         </div>
-      )}
+        <div>
+          <div className="head-container">
+            <h2>비교 결과 확인하기</h2>
+            <DropDown
+              orderBy={comparisonParams.orderBy}
+              setOrderBy={handleComparisonParams}
+              buttonType="typeOne"
+            />
+          </div>
+          <div>
+            <Table
+              list={comparisonItem}
+              tableHeaders={ComparisonTableHeader}
+              isCompanyTable={false}
+            />
+          </div>
+        </div>
+
+        <div>
+          <div className="head-container">
+            <h2>기업 순위 확인하기</h2>
+            <DropDown
+              orderBy={rankParams.orderBy}
+              setOrderBy={handleRankParams}
+              buttonType="typeOne"
+            />
+          </div>
+          <div>
+            <Table
+              list={comparisonRankItem}
+              tableHeaders={companyListTableHeader}
+              isCompanyTable={false}
+            />
+          </div>
+        </div>
+
+        <div className="bottom-btn-container">
+          <button
+            onClick={handelOpenCreateModal}
+            className="check-in-investment-btn check-in-btn"
+          >
+            나의 기업에 투자하기
+          </button>
+        </div>
+      </div>
     </>
   );
 }
