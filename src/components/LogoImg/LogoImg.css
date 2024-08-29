@@ -1,0 +1,35 @@
+.LogoImg {
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-weight: 700;
+}
+.LogoImg.small {
+  min-width: 32px;
+  height: 32px;
+  font-size: 0.8em;
+}
+.LogoImg img {
+  width: 100%;
+  height: auto;
+}
+.LogoImg.medium {
+  width: 48px;
+  height: 48px;
+  font-size: 1em;
+}
+.LogoImg.large {
+  width: 80px;
+  height: 80px;
+  font-size: 2em;
+}
+
+.LogoImg .DefaultImg {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

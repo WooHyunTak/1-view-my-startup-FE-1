@@ -1,0 +1,192 @@
+.Comparison {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.head-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.head-container button {
+  display: flex;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 24px 8px 24px;
+}
+.head-container button img {
+  width: 24px;
+  height: auto;
+}
+
+.head-container .reset-btn {
+  gap: 4px;
+}
+
+.out-container {
+  height: auto;
+  min-height: 300px;
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px dashed var(--black-300);
+  border-radius: 4px;
+}
+
+.items-container {
+  position: relative;
+  background-color: var(--black-300);
+  border-radius: 4px;
+  min-height: 268px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 16px;
+}
+
+.no-selected-comparison {
+  color: var(--grey-200);
+  text-align: center;
+}
+
+.cancel-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 1rem;
+  text-decoration: underline;
+  color: var(--grey-100);
+  font-weight: 400;
+  text-underline-offset: 2px;
+}
+
+.add-company {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.add-company-btn {
+  width: 48px;
+  height: 48px;
+  background-color: var(--grey-100);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.bottom-btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.comparison-submit-btn {
+  width: 183px;
+  height: 48px;
+  padding: 13px 48px;
+  border-radius: 50px;
+}
+
+.disable-comparison-btn {
+  width: 183px;
+  height: 48px;
+  padding: 13px 48px;
+  background-color: var(--black-300);
+  color: var(--grey-200);
+  border-radius: 50px;
+}
+
+.CompanyItem {
+  width: 126px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.CompanyItem-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.CompanyItem-name {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.09px;
+}
+
+.CompanyItem-categories {
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16.71px;
+  color: var(--grey-200);
+}
+
+.ComparisonItem {
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--grey-400);
+  gap: 4px;
+  width: 126px;
+  height: 187px;
+  border-radius: 8px;
+}
+
+.ComparisonItem-delete {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.ComparisonItem-name {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.09px;
+}
+
+.ComparisonItem-categories {
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16.71px;
+  color: var(--grey-200);
+}
+
+.ellipsis {
+  text-align: center;
+  width: 85%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* tablet size */
+@media only screen and (max-width: 743px) {
+  .Comparison .LogoImg.large {
+    width: 65px;
+    height: 65px;
+    font-size: 1.2em;
+  }
+
+  .cancel-btn {
+    font-size: var(--14px);
+  }
+}

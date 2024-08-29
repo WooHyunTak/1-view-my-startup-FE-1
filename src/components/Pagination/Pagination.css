@@ -1,0 +1,53 @@
+.Pagination {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  margin-top: 40px;
+  gap: 4px;
+}
+
+.Pagination li:first-of-type {
+  margin-right: 4px;
+}
+
+.Pagination li:last-of-type {
+  margin-left: 4px;
+}
+
+/*small size button*/
+.Pagination.small button {
+  font-size: 1rem;
+  width: 32px;
+  height: 32px;
+  margin-top: 0;
+}
+
+.Pagination button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--18px);
+  background-color: var(--black-100);
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  color: var(--grey-200);
+}
+
+.Pagination .active {
+  background-color: var(--orange);
+  color: #fff;
+}
+
+.Pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
+@media only screen and (max-width: 743px) {
+  .Pagination button {
+    font-size: 1rem;
+    width: 32px;
+    height: 32px;
+  }
+}

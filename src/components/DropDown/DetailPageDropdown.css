@@ -1,0 +1,46 @@
+.DetailPageDropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.DetailPageDropdown .dropdown-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  top: 30px;
+  width: 146px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.19;
+  color: var(--grey-100);
+  border-radius: 10px;
+  background-color: var(--black-400);
+  border: 1px solid var(--grey-200);
+  overflow: hidden;
+  z-index: 10;
+}
+
+.kebab-menu {
+  background-color: inherit;
+}
+
+.dropdown-menu button {
+  padding: 12px 24px;
+  background-color: inherit;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-menu button:hover {
+  background-color: var(--grey-400);
+}
+
+.dropdown-menu .edit {
+  border-bottom: 1px solid var(--grey-200);
+}

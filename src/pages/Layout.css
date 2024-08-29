@@ -1,0 +1,28 @@
+main {
+  color: #fff;
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 100%;
+  padding: 40px 0;
+}
+
+main h2 {
+  font-size: var(--20px);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+@media only screen and (max-width: 1199px) {
+  main {
+    padding: 40px 24px;
+  }
+}
+
+@media only screen and (max-width: 743px) {
+  main {
+    padding: 24px 16px;
+  }
+  main h2 {
+    font-size: 1rem;
+  }
+}

@@ -1,0 +1,167 @@
+.table-container {
+  width: 100%;
+}
+
+.Table {
+  font-size: var(--14px);
+  border-collapse: collapse;
+  width: clamp(696px, 100%, 1200px);
+  border-radius: 4px;
+  border-spacing: 0;
+  table-layout: fixed;
+  margin-top: 16px;
+}
+
+.Table,
+.Table th,
+.Table td {
+  border: none;
+}
+
+.Table thead {
+  background-color: var(--black-100);
+  font-weight: 500;
+}
+
+.Table thead::after {
+  content: ".";
+  display: block;
+  background-color: var(--black-400);
+  color: var(--black-400);
+}
+
+.Table thead tr th:first-of-type,
+.Table tbody tr:last-of-type td:first-of-type {
+  border-bottom-left-radius: 4px;
+}
+
+.Table thead tr th:last-of-type,
+.Table tbody tr:last-of-type td:last-of-type {
+  border-bottom-right-radius: 4px;
+}
+.Table thead tr th:first-of-type,
+.Table tbody tr:first-of-type td:first-of-type {
+  border-top-left-radius: 4px;
+}
+.Table thead tr th:last-of-type,
+.Table tbody tr:first-of-type td:last-of-type {
+  border-top-right-radius: 4px;
+}
+
+.Table tbody {
+  background-color: var(--black-300);
+  color: var(--grey-100);
+  font-weight: 400;
+}
+
+.Table th {
+  padding: 11px;
+  white-space: nowrap;
+}
+
+/* 링크 Row */
+.Table .link-to-detail-page:hover {
+  background-color: var(--grey-400);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+/*colgroup으로 table 고정 콜럼 3개 순위, 기업명, 기업설명 너비 관리*/
+.Table .col-company-name {
+  width: 210px;
+  color: #fff;
+  font-weight: 500;
+}
+.Table .col-company-description {
+  width: 304px;
+}
+.Table .col-rank {
+  width: 68px;
+}
+.Table .col-rest {
+  width: auto;
+}
+
+.Table .col-investor-name,
+.Table .col-investment-amount,
+.Table .col-investment-rank {
+  width: 86px;
+}
+.table-container .empty-list {
+  display: flex;
+  width: clamp(696px, 100%, 1200px);
+  justify-content: center;
+  align-items: center;
+  color: var(--grey-200);
+  font-size: 1rem;
+  height: 200px;
+  background-color: rgba(33, 33, 33, 0.3);
+  border-radius: 4px;
+}
+
+@media only screen and (max-width: 1199px) {
+  /*전체 스타트업 목록에서 타블렛 사이즈에서 순위 컬럼 제거*/
+  .Table.company-list thead th.field-rank,
+  .Table.company-list tbody td.field-rank,
+  .Table.company-list .col-rank {
+    display: none;
+  }
+
+  /*제거된 첫번째 컬럼 대신 두번째 컬럼에 border-radius 재추가*/
+
+  .Table.company-list thead tr th:nth-of-type(2) {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+  }
+  .Table.company-list tbody tr:first-of-type td:nth-of-type(2) {
+    border-top-left-radius: 4px;
+  }
+
+  .Table.company-list tbody tr:last-of-type td:nth-of-type(2) {
+    border-bottom-left-radius: 4px;
+  }
+
+  .Table .col-company-name {
+    width: 150px;
+  }
+  .Table .col-company-description {
+    width: 180px;
+  }
+
+  .Table thead tr .field-virtual-investment {
+    white-space: normal;
+    padding: 0;
+    line-height: 16.71px;
+  }
+  .Table thead tr .field-actual-investment {
+    padding-left: 0;
+  }
+}
+
+@media only screen and (max-width: 743px) {
+  .Table {
+    font-size: var(--13px);
+  }
+
+  .table-container {
+    overflow-x: scroll;
+    padding-bottom: 12px;
+  }
+
+  /* 스크롤바 커스텀 디자인 */
+  .table-container::-webkit-scrollbar {
+    min-height: 12px;
+    min-width: 12px;
+  }
+  .table-container::-webkit-scrollbar-track {
+    background: var(--black-300);
+    border-radius: 8px;
+  }
+  .table-container::-webkit-scrollbar-thumb {
+    background: var(--black-400);
+    background-clip: padding-box;
+    border-radius: 8px;
+    border: 3px solid transparent;
+    max-width: 50px;
+  }
+}

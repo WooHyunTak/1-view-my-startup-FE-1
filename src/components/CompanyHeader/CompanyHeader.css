@@ -1,0 +1,43 @@
+.CompanyHeader {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  gap: 18px;
+  border-bottom: 1px solid var(--black-100);
+  padding-bottom: 32px;
+}
+
+.name-category {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.name {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.19;
+}
+.category {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.19;
+  color: var(--grey-200);
+}
+
+@media screen and (max-width: 743px) {
+  .CompanyHeader .LogoImg.large {
+    width: 48px;
+    height: 48px;
+    font-size: 1rem;
+  }
+
+  .CompanyHeader .name {
+    font-size: var(--20px);
+    line-height: 23.87px;
+  }
+
+  .CompanyHeader .category {
+    font-size: 1rem;
+    line-height: 19.09px;
+  }
+}

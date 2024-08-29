@@ -1,0 +1,36 @@
+.CompanyInvestmentTable .head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.19;
+  color: #fff;
+}
+.CompanyInvestmentTable .head button {
+  padding: 8px 24px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.19;
+  color: #fff;
+}
+.CompanyInvestmentTable .body {
+  border-top: 1px solid var(--black-100);
+  padding-top: 16px;
+}
+.CompanyInvestmentTable .body p {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.19;
+  color: var(--grey-200);
+  text-align: center;
+  margin-top: 120px;
+}
+
+.CompanyInvestmentTable .body .amount {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.19;
+  color: #fff;
+}
