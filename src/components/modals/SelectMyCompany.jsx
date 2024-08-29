@@ -78,7 +78,10 @@ function SelectMyCompany({
   };
 
   //검색 키워드 인풋 핸들러
-  const handleKeywordClear = () => setKeyword();
+  const handleKeywordClear = () => {
+    setKeyword();
+    handleValues("keyword", "");
+  };
   const handleKeywordSearch = (event) => handleSubmit(event);
 
   const handleSearch = useCallback(async () => {

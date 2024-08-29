@@ -129,7 +129,10 @@ function SelectComparisonCompany({
   }, [isOpen, queryObj]);
 
   //검색 키워드 인풋 핸들러
-  const handleKeywordClear = () => setKeyword();
+  const handleKeywordClear = () => {
+    setKeyword();
+    handleValues("keyword", "");
+  };
   const handleKeywordSearch = (event) => handleSubmit(event);
 
   //모달 다이얼로그 Ref 관리 -> 모달 open상태와 API호루 쿼리의 의존성 부여
