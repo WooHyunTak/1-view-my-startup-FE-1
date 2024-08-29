@@ -15,6 +15,7 @@
   width: 100%;
   height: auto;
 }
+
 .LogoImg.medium {
   width: 48px;
   height: 48px;
@@ -23,7 +24,7 @@
 .LogoImg.large {
   width: 80px;
   height: 80px;
-  font-size: 2em;
+  font-size: 1.5em;
 }
 
 .LogoImg .DefaultImg {
@@ -32,4 +33,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media only screen and (max-width: 743px) {
+  .LogoImg.medium {
+    width: 40px;
+    height: 40px;
+  }
 }

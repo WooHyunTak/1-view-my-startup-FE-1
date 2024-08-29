@@ -24,7 +24,7 @@ function CompaniesList({ companyItem = {}, onStorage, onAddClick }) {
           brandColor={brandColor}
         />
         <p className="select-company-modal-name">{name}</p>
-        <div className="select-company-modal-categories">
+        <div className="select-company-modal-category">
           <p>{categories[0]}</p>
         </div>
       </div>
@@ -136,7 +136,7 @@ function SelectMyCompany({
             </button>
           </div>
         </div>
-        <h2>최근 선택된 기업 ({recentCompanies.length})</h2>
+        <h3>최근 선택된 기업 ({recentCompanies.length})</h3>
         {recentCompanies.map((item) => (
           <CompaniesList
             key={item.id}
@@ -146,7 +146,7 @@ function SelectMyCompany({
           ></CompaniesList>
         ))}
         {!recentCompanies && <h3>선택한 기업이 없습니다.</h3>}
-        <h2>검색 결과 ({totalCount})</h2>
+        <h3>검색 결과 ({totalCount})</h3>
         {Companies.map((item) => (
           <CompaniesList
             key={item.id}

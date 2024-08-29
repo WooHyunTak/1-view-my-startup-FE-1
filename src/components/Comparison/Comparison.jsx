@@ -36,12 +36,9 @@ function ComparisonItem({ item = {}, onDelete }) {
 
   return (
     <div className="ComparisonItem">
-      <img
-        onClick={handleDelete}
-        className="ComparisonItem-delete"
-        src={ic_minus}
-        alt="삭제"
-      />
+      <button onClick={handleDelete} className="ComparisonItem-delete">
+        <img src={ic_minus} alt="삭제" />
+      </button>
       <LogoImg
         size="large"
         brandImg={brandImage}
