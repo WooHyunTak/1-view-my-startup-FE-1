@@ -44,6 +44,7 @@ export default function SearchBar({ setKeyword }) {
         name="search"
         onKeyDown={handleKeyDown}
         onChange={handleValueChange}
+        autoComplete="off"
       />
     </div>
   );
