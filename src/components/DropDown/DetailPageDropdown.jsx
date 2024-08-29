@@ -57,7 +57,8 @@ function DetailPageDropdown({ id, password, amount, comment }) {
     if (previousModal === "delete") {
       setIsDeleteModalOpen(true); // 삭제 모달을 다시 열기
     } else if (previousModal === "updateConfirm") {
-      setIsUpdateConfirmModalOpen(true); // 업데이트 모달을 다시 열기
+      setIsUpdateConfirmModalOpen(false); // 업데이트 모달을 다시 열기
+      setIsUpdateModalOpen(false);
     }
   };
 
