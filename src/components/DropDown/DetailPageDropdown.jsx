@@ -9,41 +9,32 @@ import "./DetailPageDropdown.css";
 
 function DetailPageDropdown({ id, password, amount, comment }) {
   const [visible, setVisible] = useState(false);
-  const [alertMessage, setAlertMessage] = useState("");
-  const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [isUpdateConfirmModalOpen, setIsUpdateConfirmModalOpen] = useState(false);
-  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
-  const [previousModal, setPreviousModal] = useState(null);
-  const [pendingDelete, setPendingDelete] = useState(false); // 삭제 상태를 관리하기 위한 상태 추가
-  const { deleteInvestmentById, updateInvestmentById, version } = useContext(InvestmentContext);
+  const [alertState, setAlertState] = useState({
+    message: "",
+    isOpen: false,
+  });
+  const [modalState, setModalState] = useState({
+    delete: false,
+    updateConfirm: false,
+    update: false,
+  });
+  const [pendingDelete, setPendingDelete] = useState(false);
+  const { deleteInvestmentById, updateInvestmentById } = useContext(InvestmentContext);
 
   const dropDownRef = useRef(null);
 
-  const toggleDropdown = () => {
-    setVisible(!visible);
+  const toggleDropdown = () => setVisible((prev) => !prev);
+
+  const handleModalOpen = (type) => {
+    setModalState((prev) => ({ ...prev, [type]: true }));
   };
 
-  const openDeleteModal = () => {
-    setIsDeleteModalOpen(true);
-    setPreviousModal("delete");
+  const handleModalClose = (type) => {
+    setModalState((prev) => ({ ...prev, [type]: false }));
   };
 
-  const closeDeleteModal = () => {
-    setIsDeleteModalOpen(false);
-  };
-
-  const openUpdateConfirmModal = () => {
-    setIsUpdateConfirmModalOpen(true);
-    setPreviousModal("updateConfirm");
-  };
-
-  const closeUpdateConfirmModal = () => {
-    setIsUpdateConfirmModalOpen(false);
-  };
-
-  const closeAlertModal = async () => {
-    setIsAlertModalOpen(false);
+  const handleAlertClose = async () => {
+    setAlertState({ message: "", isOpen: false });
 
     if (pendingDelete) {
       try {
@@ -54,66 +45,56 @@ function DetailPageDropdown({ id, password, amount, comment }) {
       }
     }
 
-    if (previousModal === "delete") {
-      setIsDeleteModalOpen(true); // 삭제 모달을 다시 열기
-    } else if (previousModal === "updateConfirm") {
-      setIsUpdateConfirmModalOpen(false); // 업데이트 모달을 다시 열기
-      setIsUpdateModalOpen(false);
+    if (modalState.update) {
+      handleModalClose("update");
+    }
+
+    if (modalState.delete) {
+      handleModalOpen("delete");
+    } else if (modalState.updateConfirm) {
+      handleModalClose("updateConfirm");
+      handleModalClose("update");
     }
   };
 
   const confirmDelete = async (inputPassword) => {
-    closeDeleteModal();
+    handleModalClose("delete");
 
-    if (!inputPassword) {
-      setAlertMessage("비밀번호를 입력해 주세요");
-      setIsAlertModalOpen(true);
+    if (!inputPassword || inputPassword !== password) {
+      setAlertState({
+        message: inputPassword ? "잘못된 비밀번호로 삭제에 실패하셨습니다." : "비밀번호를 입력해 주세요",
+        isOpen: true,
+      });
       return;
     }
 
-    if (inputPassword !== password) {
-      setAlertMessage("잘못된 비밀번호로 삭제에 실패하셨습니다.");
-      setIsAlertModalOpen(true);
+    setAlertState({ message: "삭제가 성공적으로 완료되었습니다", isOpen: true });
+    setPendingDelete(true);
+  };
+
+  const confirmUpdate = ({ password: inputPassword }) => {
+    handleModalClose("updateConfirm");
+
+    if (!inputPassword || inputPassword !== password) {
+      setAlertState({
+        message: inputPassword ? "비밀번호가 일치하지 않습니다" : "비밀번호를 입력해 주세요",
+        isOpen: true,
+      });
       return;
     }
 
-    setAlertMessage("삭제가 성공적으로 완료되었습니다");
-    setPendingDelete(true); // 삭제 대기 상태로 설정
-    setIsAlertModalOpen(true); // 삭제 성공 메시지 모달 열기
+    handleModalOpen("update");
   };
 
   const handleUpdate = async (updatedData) => {
     try {
       await updateInvestmentById({ id, updatedData });
-      setAlertMessage("업데이트가 성공적으로 완료되었습니다");
-      setIsAlertModalOpen(true);
+      setAlertState({ message: "업데이트가 성공적으로 완료되었습니다", isOpen: true });
     } catch (error) {
-      setAlertMessage("투자 업데이트에 실패했습니다");
-      setIsAlertModalOpen(true);
+      setAlertState({ message: "투자 업데이트에 실패했습니다", isOpen: true });
     }
   };
 
-  const confirmUpdate = ({ password: inputPassword }) => {
-    if (!inputPassword) {
-      setAlertMessage("비밀번호를 입력해 주세요");
-      setIsAlertModalOpen(true);
-      setIsUpdateConfirmModalOpen(false);
-      return;
-    }
-
-    if (inputPassword !== password) {
-      setAlertMessage("비밀번호가 일치하지 않습니다");
-      setIsAlertModalOpen(true);
-      setIsUpdateConfirmModalOpen(false);
-      return;
-    }
-
-    // 비밀번호가 일치하면 UpdateModal을 엽니다.
-    setIsUpdateModalOpen(true);
-    setIsUpdateConfirmModalOpen(false);
-  };
-
-  // 메뉴 외부 클릭 감지 함수
   const handleClickOutside = (e) => {
     if (dropDownRef.current && !dropDownRef.current.contains(e.target)) {
       setVisible(false);
@@ -127,8 +108,6 @@ function DetailPageDropdown({ id, password, amount, comment }) {
     };
   }, []);
 
-  useEffect(() => {}, [version]);
-
   return (
     <div className="DetailPageDropdown">
       <button onClick={toggleDropdown} ref={dropDownRef} className="kebab-menu">
@@ -136,29 +115,33 @@ function DetailPageDropdown({ id, password, amount, comment }) {
       </button>
       {visible && (
         <div className="dropdown-menu">
-          <button className="edit" onClick={openUpdateConfirmModal}>
+          <button className="edit" onClick={() => handleModalOpen("updateConfirm")}>
             수정하기
           </button>
-          <button className="delete" onClick={openDeleteModal}>
+          <button className="delete" onClick={() => handleModalOpen("delete")}>
             삭제하기
           </button>
         </div>
       )}
       <UpdateConfirmModal
-        isOpen={isUpdateConfirmModalOpen}
+        isOpen={modalState.updateConfirm}
         onUpdateConfirm={confirmUpdate}
-        onCancel={closeUpdateConfirmModal}
+        onCancel={() => handleModalClose("updateConfirm")}
       />
       <UpdateModal
-        isOpen={isUpdateModalOpen}
+        isOpen={modalState.update}
         onUpdateConfirm={handleUpdate}
-        onCancel={() => setIsUpdateModalOpen(false)}
+        onCancel={() => handleModalClose("update")}
         password={password}
         initialAmount={amount}
         initialComment={comment}
       />
-      <DeleteConfirmModal isOpen={isDeleteModalOpen} onDeleteConfirm={confirmDelete} onCancel={closeDeleteModal} />
-      <AlertModal message={alertMessage} isAlertMeg={isAlertModalOpen} onClose={closeAlertModal} />
+      <DeleteConfirmModal
+        isOpen={modalState.delete}
+        onDeleteConfirm={confirmDelete}
+        onCancel={() => handleModalClose("delete")}
+      />
+      <AlertModal message={alertState.message} isAlertMeg={alertState.isOpen} onClose={handleAlertClose} />
     </div>
   );
 }

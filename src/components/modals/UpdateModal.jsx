@@ -38,7 +38,7 @@ function UpdateModal({ isOpen, onUpdateConfirm, onCancel, password, initialAmoun
   };
 
   return (
-    <dialog ref={dialogRef} className="UpdateModal" tabindex="-1">
+    <dialog ref={dialogRef} className="UpdateModal">
       <div className="updateModal-head">
         <div className="head-title">
           <h3>수정하기</h3>

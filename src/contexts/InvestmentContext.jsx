@@ -1,4 +1,4 @@
-import { createContext, useCallback, useState } from "react";
+import { createContext, useCallback, useState, useRef } from "react";
 import { deleteInvestment, createInvestment, updateInvestment } from "../services/investmentApi";
 
 // InvestmentContext 생성
@@ -7,17 +7,26 @@ export const InvestmentContext = createContext();
 export function InvestmentProvider({ children }) {
   const [investments, setInvestments] = useState([]);
   const [version, setVersion] = useState(0);
+  const previousInvestments = useRef([]); // 이전 상태 저장
+
+  const updateVersionIfNeeded = (newInvestments) => {
+    if (JSON.stringify(previousInvestments.current) !== JSON.stringify(newInvestments)) {
+      setVersion((prevVersion) => prevVersion + 1);
+      previousInvestments.current = newInvestments;
+    }
+  };
 
   const loadInvestments = useCallback((newInvestments) => {
     setInvestments(newInvestments);
-    setVersion((preVersion) => preVersion + 1);
+    updateVersionIfNeeded(newInvestments); // 조건부로 version 업데이트
   }, []);
 
   const addInvestment = async (investmentData) => {
     try {
       const newInvestment = await createInvestment(investmentData);
-      setInvestments((prevInvestments) => [...prevInvestments, newInvestment]);
-      setVersion((preVersion) => preVersion + 1);
+      const updatedInvestments = [...investments, newInvestment];
+      setInvestments(updatedInvestments);
+      updateVersionIfNeeded(updatedInvestments); // 조건부로 version 업데이트
     } catch (error) {
       console.error("Failed to create investment:", error);
     }
@@ -26,10 +35,11 @@ export function InvestmentProvider({ children }) {
   const updateInvestmentById = async ({ id, updatedData }) => {
     try {
       const updatedInvestment = await updateInvestment({ id, updatedData });
-      setInvestments((prevInvestments) =>
-        prevInvestments.map((investment) => (investment.id === id ? updatedInvestment : investment))
+      const updatedInvestments = investments.map((investment) =>
+        investment.id === id ? updatedInvestment : investment
       );
-      setVersion((preVersion) => preVersion + 1);
+      setInvestments(updatedInvestments);
+      updateVersionIfNeeded(updatedInvestments); // 조건부로 version 업데이트
     } catch (error) {
       console.error("Failed to update investment:", error);
     }
@@ -38,8 +48,9 @@ export function InvestmentProvider({ children }) {
   const deleteInvestmentById = async ({ id, password }) => {
     try {
       await deleteInvestment({ id, password });
-      setInvestments((prevInvestments) => prevInvestments.filter((investment) => investment.id !== id));
-      setVersion((preVersion) => preVersion + 1);
+      const updatedInvestments = investments.filter((investment) => investment.id !== id);
+      setInvestments(updatedInvestments);
+      updateVersionIfNeeded(updatedInvestments); // 조건부로 version 업데이트
     } catch (error) {
       console.error("Failed to delete investment:", error);
     }
