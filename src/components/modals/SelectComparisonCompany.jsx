@@ -156,6 +156,7 @@ function SelectComparisonCompany({
               onChange={handleKeyword}
               className="modal-input"
               placeholder="기업명을 입력해 주세요"
+              autoComplete="off"
             ></input>
           </form>
           <div className="input-btns-container">
