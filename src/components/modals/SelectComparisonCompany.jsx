@@ -23,13 +23,13 @@ function CompaniesList({
     <div className="item-list-container">
       <div className="item-content-container">
         <LogoImg
-          size="small"
+          size="medium"
           brandImg={brandImage}
           brandName={name}
           brandColor={brandColor}
         />
         <p className="select-company-modal-name">{name}</p>
-        <div className="select-company-modal-categories">
+        <div className="select-company-modal-category">
           <p>{categories[0]}</p>
         </div>
       </div>
@@ -60,13 +60,13 @@ function SelectedCompaniesList({ companyItem = {}, onDeleteClick }) {
     <div className="item-list-container">
       <div className="item-content-container">
         <LogoImg
-          size="small"
+          size="medium"
           brandImg={brandImage}
           brandName={name}
           brandColor={brandColor}
         />
         <p className="select-company-modal-name">{name}</p>
-        <div className="select-company-modal-categories">
+        <div className="select-company-modal-category">
           <p>{categories[0]}</p>
         </div>
       </div>
@@ -175,7 +175,7 @@ function SelectComparisonCompany({
             </button>
           </div>
         </div>
-        <h2>선택한 기업 ({comparisonCompanies.length})</h2>
+        <h3>선택한 기업 ({comparisonCompanies.length})</h3>
         <div className="modal-item-list-container">
           {comparisonCompanies.map((item) => (
             <SelectedCompaniesList
@@ -186,7 +186,7 @@ function SelectComparisonCompany({
           ))}
         </div>
         {!comparisonCompanies && <h3>선택한 기업이 없습니다.</h3>}
-        <h2>검색 결과 ({totalCount})</h2>
+        <h3>검색 결과 ({totalCount})</h3>
         <div className="modal-item-list-container">
           {Companies.map((item) => (
             <CompaniesList
@@ -204,9 +204,11 @@ function SelectComparisonCompany({
           totalPages={totalPages}
           size="small"
         />
-        <button onClick={handleClose} className="modal-complete-btn">
-          확인
-        </button>
+        <div className="modal-btn-container">
+          <button onClick={handleClose} className="modal-complete-btn">
+            확인
+          </button>
+        </div>
       </div>
     </dialog>
   );

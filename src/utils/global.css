@@ -109,7 +109,8 @@ textarea:not([rows]) {
 
 input:focus,
 textarea:focus {
-  outline: 1px solid var(--blue);
+  border: 1px solid var(--blue);
+  outline: none;
 }
 
 ::placeholder {

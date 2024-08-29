@@ -119,7 +119,7 @@ function CheckInComparison() {
           message={alertMessage}
           onClose={handelCloseAlert}
         />
-        <div>
+        <div className="top-section">
           <div className="head-container">
             <h2>내가 선택한 기업</h2>
             <Link to={"/my-comparison"}>
