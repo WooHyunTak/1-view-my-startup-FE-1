@@ -6,15 +6,18 @@ export const InvestmentContext = createContext();
 
 export function InvestmentProvider({ children }) {
   const [investments, setInvestments] = useState([]);
+  const [version, setVersion] = useState(0);
 
   const loadInvestments = useCallback((newInvestments) => {
     setInvestments(newInvestments);
+    setVersion((preVersion) => preVersion + 1);
   }, []);
 
   const addInvestment = async (investmentData) => {
     try {
       const newInvestment = await createInvestment(investmentData);
       setInvestments((prevInvestments) => [...prevInvestments, newInvestment]);
+      setVersion((preVersion) => preVersion + 1);
     } catch (error) {
       console.error("Failed to create investment:", error);
     }
@@ -26,6 +29,7 @@ export function InvestmentProvider({ children }) {
       setInvestments((prevInvestments) =>
         prevInvestments.map((investment) => (investment.id === id ? updatedInvestment : investment))
       );
+      setVersion((preVersion) => preVersion + 1);
     } catch (error) {
       console.error("Failed to update investment:", error);
     }
@@ -35,7 +39,7 @@ export function InvestmentProvider({ children }) {
     try {
       await deleteInvestment({ id, password });
       setInvestments((prevInvestments) => prevInvestments.filter((investment) => investment.id !== id));
-      console.log(`Investment with id: ${id} deleted successfully`);
+      setVersion((preVersion) => preVersion + 1);
     } catch (error) {
       console.error("Failed to delete investment:", error);
     }
@@ -43,7 +47,15 @@ export function InvestmentProvider({ children }) {
 
   return (
     <InvestmentContext.Provider
-      value={{ investments, loadInvestments, updateInvestmentById, deleteInvestmentById, addInvestment }}
+      value={{
+        investments,
+        loadInvestments,
+        updateInvestmentById,
+        deleteInvestmentById,
+        addInvestment,
+        version,
+        setVersion,
+      }}
     >
       {children}
     </InvestmentContext.Provider>

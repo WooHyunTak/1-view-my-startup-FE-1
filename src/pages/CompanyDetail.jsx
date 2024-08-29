@@ -32,7 +32,7 @@ function CompanyDetail() {
   const [queryParams, setQueryParams] = useState(INITIAL_QUERY_PARAMS);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const { loadInvestments } = useContext(InvestmentContext);
+  const { loadInvestments, version } = useContext(InvestmentContext);
 
   //쿼리 파라미터 한번에 객체로 관리
   // 쿼리 파라미터 핸들러 (name = query name, value= query value)
@@ -80,16 +80,16 @@ function CompanyDetail() {
 
     // 컴포넌트가 마운트되면 데이터 가져오기 시작
     fetchCompany();
-  }, [companyId, queryParams.page, queryParams.limit, loadInvestments]);
-
-  if (loading) return <Loader />; // 로딩 중일 때 메시지 표시
-  if (error) return <ErrorMsg errorMsg={error} />; // 에러 발생 시 메시지 표시
-  if (!companyData) return <div>No company data available</div>; // company가 null일 경우 처리
+  }, [companyId, queryParams.page, queryParams.limit, loadInvestments, version]);
 
   // 상세페이지에 필요한 정보
   const { id, name, brandColor, categoryNames, categories, actual, revenue, employees, description, investments } =
     companyData;
   const selectedCompany = { id, name, categories, brandColor };
+
+  if (loading) return <Loader />; // 로딩 중일 때 메시지 표시
+  if (error) return <ErrorMsg errorMsg={error} />; // 에러 발생 시 메시지 표시
+  if (!companyData) return <div>No company data available</div>; // company가 null일 경우 처리
 
   return (
     <div className="CompanyDetail">
