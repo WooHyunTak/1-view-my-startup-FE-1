@@ -14,9 +14,9 @@ function DetailPageDropdown({ id, password, amount, comment }) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isUpdateConfirmModalOpen, setIsUpdateConfirmModalOpen] = useState(false);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
-  const [shouldReload, setShouldReload] = useState(false);
   const [previousModal, setPreviousModal] = useState(null);
-  const { deleteInvestmentById, updateInvestmentById } = useContext(InvestmentContext);
+  const [pendingDelete, setPendingDelete] = useState(false); // 삭제 상태를 관리하기 위한 상태 추가
+  const { deleteInvestmentById, updateInvestmentById, version } = useContext(InvestmentContext);
 
   const dropDownRef = useRef(null);
 
@@ -42,11 +42,19 @@ function DetailPageDropdown({ id, password, amount, comment }) {
     setIsUpdateConfirmModalOpen(false);
   };
 
-  const closeAlertModal = () => {
+  const closeAlertModal = async () => {
     setIsAlertModalOpen(false);
-    if (shouldReload) {
-      window.location.reload();
-    } else if (previousModal === "delete") {
+
+    if (pendingDelete) {
+      try {
+        await deleteInvestmentById({ id, password });
+        setPendingDelete(false);
+      } catch (error) {
+        console.error("삭제 실패:", error);
+      }
+    }
+
+    if (previousModal === "delete") {
       setIsDeleteModalOpen(true); // 삭제 모달을 다시 열기
     } else if (previousModal === "updateConfirm") {
       setIsUpdateConfirmModalOpen(true); // 업데이트 모달을 다시 열기
@@ -68,15 +76,9 @@ function DetailPageDropdown({ id, password, amount, comment }) {
       return;
     }
 
-    try {
-      await deleteInvestmentById({ id, password: inputPassword });
-      setAlertMessage("삭제가 성공적으로 완료되었습니다");
-      setIsAlertModalOpen(true);
-      setShouldReload(true);
-    } catch (error) {
-      setAlertMessage("삭제에 실패했습니다");
-      setIsAlertModalOpen(true);
-    }
+    setAlertMessage("삭제가 성공적으로 완료되었습니다");
+    setPendingDelete(true); // 삭제 대기 상태로 설정
+    setIsAlertModalOpen(true); // 삭제 성공 메시지 모달 열기
   };
 
   const handleUpdate = async (updatedData) => {
@@ -84,7 +86,6 @@ function DetailPageDropdown({ id, password, amount, comment }) {
       await updateInvestmentById({ id, updatedData });
       setAlertMessage("업데이트가 성공적으로 완료되었습니다");
       setIsAlertModalOpen(true);
-      setShouldReload(true);
     } catch (error) {
       setAlertMessage("투자 업데이트에 실패했습니다");
       setIsAlertModalOpen(true);
@@ -124,6 +125,8 @@ function DetailPageDropdown({ id, password, amount, comment }) {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {}, [version]);
 
   return (
     <div className="DetailPageDropdown">
