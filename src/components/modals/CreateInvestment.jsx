@@ -22,12 +22,13 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
   });
   const [error, setError] = useState("");
 
-  const { values, errors, disabled, handleChange, handleSubmit } = useFormValidation({
-    name: "",
-    amount: 0,
-    comment: "",
-    password: "",
-  });
+  const { values, errors, disabled, handleChange, handleSubmit } =
+    useFormValidation({
+      name: "",
+      amount: 0,
+      comment: "",
+      password: "",
+    });
 
   const { setVersion } = useContext(InvestmentContext);
 
@@ -107,21 +108,33 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
     isOpen ? dialogRef.current.showModal() : dialogRef.current.close();
   }, [isOpen]);
 
+  const modalInputClassName = (name) => {
+    return errors[name] ? "modal-input error-border" : "modal-input";
+  };
+
   return (
     <dialog ref={dialogRef} className="modal-company">
-      <AlertModal isAlertMeg={isAlertModalOpen} message={alertMessage} onClose={closeAlertModal} />
-      <div className="modal-container">
+      <AlertModal
+        isAlertMeg={isAlertModalOpen}
+        message={alertMessage}
+        onClose={closeAlertModal}
+      />
+      <div className="CreateInvestment modal-container">
         <div className="modal-header">
           <h2>기업에 투자하기</h2>
           <img onClick={handleClose} src={ic_delete} alt="닫기 이미지" />
         </div>
         <div className="modal-my-company-container">
-          <h2>투자 기업 정보</h2>
+          <h3>투자 기업 정보</h3>
           <div className="item-list-container">
             <div className="item-content-container">
-              <LogoImg brandImg={brandImage} brandName={name} brandColor={brandColor} />
+              <LogoImg
+                brandImg={brandImage}
+                brandName={name}
+                brandColor={brandColor}
+              />
               <p className="select-company-modal-name">{name}</p>
-              <div className="select-company-modal-categories">
+              <div className="select-company-modal-category">
                 <p>{categories[0]}</p>
               </div>
             </div>
@@ -135,36 +148,45 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
                 name="name"
                 onChange={handleChange}
                 value={values.name || ""}
-                className="modal-input"
+                className={modalInputClassName("name")}
                 placeholder="투자자 이름을 입력해 주세요"
                 autoComplete="off"
               ></input>
+              {errors.name && (
+                <p style={{ color: "var(--orange)" }}>{errors.name}</p>
+              )}
             </div>
-            {errors.name && <p style={{ color: "orange" }}>{errors.name}</p>}
+
             <div className="modal-label-container">
               <label>투자 금액</label>
               <input
                 name="amount"
                 onChange={handleChange}
                 value={values.amount || ""}
-                className="modal-input"
+                className={modalInputClassName("amount")}
                 placeholder="투자 금액을 입력해 주세요"
                 autoComplete="off"
               ></input>
+              {errors.amount && (
+                <p style={{ color: "var(--orange)" }}>{errors.amount}</p>
+              )}
             </div>
-            {errors.amount && <p style={{ color: "orange" }}>{errors.amount}</p>}
+
             <div className="modal-label-container">
               <label>투자 코멘트</label>
               <textarea
                 name="comment"
                 onChange={handleChange}
                 value={values.comment || ""}
-                className="modal-textarea"
+                className={modalInputClassName("comment")}
                 placeholder="투자에 대한 코멘트를 입력해 주세요"
                 autoComplete="off"
               ></textarea>
+              {errors.comment && (
+                <p style={{ color: "var(--orange)" }}>{errors.comment}</p>
+              )}
             </div>
-            {errors.comment && <p style={{ color: "orange" }}>{errors.comment}</p>}
+
             <div className="modal-label-container">
               <label>비밀번호</label>
               <input
@@ -172,37 +194,63 @@ function CreateInvestment({ isOpen = false, myCompany, onClose }) {
                 type={inputTypes.password}
                 onChange={handleChange}
                 value={values.password || ""}
-                className="modal-input"
+                className={modalInputClassName("password")}
                 placeholder="비밀번호를 입력해 주세요"
                 autoComplete="new-password"
               ></input>
-              <button className="modal-password-visible" onClick={(e) => handleVisiblePassword("password", e)}>
-                <img src={inputTypes.password === "text" ? ic_eyes_hidden : ic_eyes} alt="비밀번호 보기" />
+              <button
+                className="modal-password-visible"
+                onClick={(e) => handleVisiblePassword("password", e)}
+              >
+                <img
+                  src={
+                    inputTypes.password === "text" ? ic_eyes_hidden : ic_eyes
+                  }
+                  alt="비밀번호 보기"
+                />
               </button>
+              {errors.password && (
+                <p style={{ color: "var(--orange)" }}>{errors.password}</p>
+              )}
             </div>
-            {errors.password && <p style={{ color: "orange" }}>{errors.password}</p>}
+
             <div className="modal-label-container">
               <label>비밀번호 확인</label>
               <input
                 name="passwordConfirm"
                 type={inputTypes.passwordConfirm}
                 onChange={onChange}
-                className="modal-input"
+                className={error ? "modal-input error-border" : "modal-input"}
                 placeholder="비밀번호를 다시 한 번 입력해 주세요"
                 autoComplete="new-password"
               ></input>
-              <button className="modal-password-visible" onClick={(e) => handleVisiblePassword("passwordConfirm", e)}>
-                <img src={inputTypes.passwordConfirm === "text" ? ic_eyes_hidden : ic_eyes} alt="비밀번호 보기" />
+              <button
+                className="modal-password-visible"
+                onClick={(e) => handleVisiblePassword("passwordConfirm", e)}
+              >
+                <img
+                  src={
+                    inputTypes.passwordConfirm === "text"
+                      ? ic_eyes_hidden
+                      : ic_eyes
+                  }
+                  alt="비밀번호 보기"
+                />
               </button>
+              {error && <p style={{ color: "var(--orange)" }}>{error}</p>}
             </div>
-            {error && <p style={{ color: "orange" }}>{error}</p>}
+
             <div className="modal-btn-container">
               <button onClick={handleClose} className="modal-close-btn">
                 취소
               </button>
               <button
                 onClick={createInvestment}
-                className={disabled ? "modal-complete-btn-disabled" : "modal-complete-btn"}
+                className={
+                  disabled
+                    ? "modal-complete-btn-disabled"
+                    : "modal-complete-btn"
+                }
                 disabled={disabled}
               >
                 투자하기

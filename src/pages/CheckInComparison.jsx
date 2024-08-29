@@ -108,53 +108,55 @@ function CheckInComparison() {
 
   return (
     <>
-      <div className="CheckInComparison">
-        <CreateInvestment
-          isOpen={createModal}
-          myCompany={myCompany}
-          onClose={handelCloseCreateModal}
-        />
-        <AlertModal
-          isAlertMeg={alertMeg}
-          message={alertMessage}
-          onClose={handelCloseAlert}
-        />
-        <div>
-          <div className="head-container">
-            <h2>내가 선택한 기업</h2>
-            <Link to={"/my-comparison"}>
-              <button className="check-in-different-btn check-in-btn">
-                다른 기업 비교하기
-              </button>
-            </Link>
-          </div>
-          <div className="out-container">
-            <div className="items-container">
-              {myCompany && (
-                <>
-                  <CompanyItem item={myCompany} />
-                </>
-              )}
+      {loading && <Loader />}
+      {!loading && (
+        <div className="CheckInComparison">
+          <CreateInvestment
+            isOpen={createModal}
+            myCompany={myCompany}
+            onClose={handelCloseCreateModal}
+          />
+          <AlertModal
+            isAlertMeg={alertMeg}
+            message={alertMessage}
+            onClose={handelCloseAlert}
+          />
+          <div className="top-section">
+            <div className="head-container">
+              <h2>내가 선택한 기업</h2>
+              <Link to={"/my-comparison"}>
+                <button className="check-in-different-btn check-in-btn">
+                  다른 기업 비교하기
+                </button>
+              </Link>
+            </div>
+            <div className="out-container">
+              <div className="items-container">
+                {myCompany && (
+                  <>
+                    <CompanyItem item={myCompany} />
+                  </>
+                )}
+              </div>
             </div>
           </div>
-        </div>
-        <div>
-          <div className="head-container">
-            <h2>비교 결과 확인하기</h2>
-            <DropDown
-              orderBy={comparisonParams.orderBy}
-              setOrderBy={handleComparisonParams}
-              buttonType="typeOne"
-            />
-          </div>
           <div>
-            <Table
-              list={comparisonItem}
-              tableHeaders={ComparisonTableHeader}
-              isCompanyTable={false}
-            />
+            <div className="head-container">
+              <h2>비교 결과 확인하기</h2>
+              <DropDown
+                orderBy={comparisonParams.orderBy}
+                setOrderBy={handleComparisonParams}
+                buttonType="typeOne"
+              />
+            </div>
+            <div>
+              <Table
+                list={comparisonItem}
+                tableHeaders={ComparisonTableHeader}
+                isCompanyTable={false}
+              />
+            </div>
           </div>
-        </div>
 
         <div>
           <div className="head-container">

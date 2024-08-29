@@ -8,6 +8,11 @@
   gap: 24px;
 }
 
+.CreateInvestment.modal-container .LogoImg {
+  width: 40px;
+  height: 40px;
+}
+
 .modal-company {
   width: 496px;
   margin: auto;
@@ -24,6 +29,15 @@
 .modal-company h2,
 h3 {
   color: #ffffff;
+  font-weight: 700;
+}
+
+.modal-company h2 {
+  font-size: var(--20px);
+}
+
+.modal-company h3 {
+  font-size: var(--18px);
 }
 
 .modal-search-company-container {
@@ -93,47 +107,32 @@ h3 {
   align-items: center;
 }
 
-.item-list-container p {
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 19.09px;
-}
-
-.select-company-modal-category {
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 16.71px;
-}
-
 .item-content-container {
   display: flex;
   align-items: center;
 }
 
-/* .select-company-modal-img {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-} */
-
-.modal-my-company-container .LogoImg {
-  width: 40px;
-  height: 40px;
-}
-
 .select-company-modal-name {
   margin-left: 16px;
   color: #ffffff;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
-.select-company-modal-categories {
+.select-company-modal-category {
+  font-size: 14px;
+  font-weight: 400;
   margin-left: 8px;
   display: flex;
   gap: 5px;
   color: var(--grey-200);
 }
 
-.select-company-modal-btn {
+/* select랑 selected buttons */
+.item-list-container button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 104px;
   height: 48px;
   border-radius: 10px;
@@ -142,37 +141,21 @@ h3 {
   color: var(--orange);
   font-size: 16px;
   font-weight: 500;
-  line-height: 19.09px;
 }
 
-.selected-company-modal-btn {
-  display: flex;
-  align-items: center;
-  width: 104px;
-  height: 48px;
-  border-radius: 10px;
+.item-list-container .selected-company-modal-btn {
   border: 1px solid var(--grey-100);
-  background-color: var(--black-300);
   color: var(--grey-100);
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 19.09px;
-  padding: 12px 11px;
+  gap: 2px;
 }
 
-.delete-company-modal-btn {
-  width: 104px;
-  height: 48px;
-  border-radius: 10px;
+.item-list-container .delete-company-modal-btn {
   border: 1px solid var(--grey-200);
   background-color: var(--black-300);
   color: var(--grey-200);
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 19.09px;
 }
 
-.select-company-modal-btn:hover {
+.item-list-container .select-company-modal-btn:hover {
   border: 1px solid var(--grey-100);
   color: var(--grey-100);
 }
@@ -181,29 +164,25 @@ h3 {
   display: flex;
   gap: 16px;
   justify-content: center;
+  padding: 4px 27.5px;
 }
 
-.modal-complete-btn {
+.modal-company .modal-btn-container button {
   border-radius: 50px;
-  width: 183px;
-  height: 48px;
+  justify-content: center;
+  align-items: center;
   align-self: center;
+  width: 100%;
+  padding: 13.5px;
 }
 
 .modal-complete-btn-disabled {
-  background-color: var(--black-300);
-  border: 1px solid var(--grey-200);
-  border-radius: 50px;
-  width: 183px;
-  height: 48px;
-  align-self: center;
+  background-color: var(--black-100);
+  border: 1px solid var(--black-100);
+  color: var(--grey-200);
 }
 
 .modal-close-btn {
-  border-radius: 50px;
-  width: 183px;
-  height: 48px;
-  align-self: center;
   color: var(--orange);
   border: 1px solid var(--orange);
   background-color: var(--black-300);
@@ -221,19 +200,41 @@ h3 {
   gap: 24px;
 }
 
+.modal-form-container p {
+  font-size: var(--14px);
+  padding-left: 14px;
+}
+
+.modal-form-container label {
+  font-size: var(--18px);
+}
+
+.modal-form-container input,
+.modal-form-container textarea {
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.error-border {
+  border: 1px solid var(--orange);
+}
+
+.modal-form-container::placeholder {
+  font-size: var(--14px);
+}
+
 .modal-label-container {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 16px;
   color: #ffffff;
 }
 
 .modal-password-visible {
   position: absolute;
   background-color: var(--black-300);
-  bottom: 12px;
-  right: 20px;
+  right: 14px;
+  top: 56px;
   width: 24px;
   height: 24px;
 }
@@ -458,4 +459,59 @@ h3 {
 }
 .input-filled {
   color: var(--grey-200) !important;
+}
+
+@media only screen and (max-width: 743px) {
+  .modal-password-visible {
+    right: 14px;
+    top: 47px;
+  }
+  .modal-company h2 {
+    font-size: 1rem;
+  }
+
+  .modal-company h3 {
+    font-size: var(--14px);
+  }
+  .select-company-modal-name {
+    font-size: var(--14px);
+  }
+
+  .select-company-modal-category {
+    font-size: var(--12px);
+    margin-left: 8px;
+  }
+
+  .select-company-modal-btn {
+    padding: 7px 12px;
+    font-size: 14px;
+  }
+
+  .item-list-container button {
+    width: 73px;
+    height: 32px;
+    font-size: var(--14px);
+  }
+
+  .item-list-container .selected-company-modal-btn {
+    gap: 0px;
+  }
+
+  .item-list-container .selected-company-modal-btn img {
+    width: 16px;
+  }
+
+  .modal-company .modal-btn-container button {
+    padding: 11.5px;
+  }
+
+  .modal-form-container label {
+    font-size: var(--14px);
+  }
+
+  .modal-form-container input,
+  .modal-form-container textarea {
+    margin-top: 12px;
+    margin-bottom: 8px;
+  }
 }

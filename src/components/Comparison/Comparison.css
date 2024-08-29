@@ -10,21 +10,21 @@
   align-items: center;
 }
 
-.head-container button {
+.Comparison .head-container button {
   display: flex;
   border-radius: 50px;
   font-size: 1rem;
   font-weight: 600;
   align-items: center;
   justify-content: center;
-  padding: 8px 24px 8px 24px;
+  padding: 8px 24px;
 }
-.head-container button img {
+.Comparison .head-container button img {
   width: 24px;
   height: auto;
 }
 
-.head-container .reset-btn {
+.Comparison .head-container .reset-btn {
   gap: 4px;
 }
 
@@ -53,9 +53,11 @@
 .no-selected-comparison {
   color: var(--grey-200);
   text-align: center;
+  font-size: 14px;
+  font-weight: 400;
 }
 
-.cancel-btn {
+.Comparison .cancel-btn {
   position: absolute;
   top: 16px;
   right: 16px;
@@ -66,15 +68,16 @@
   text-underline-offset: 2px;
 }
 
-.add-company {
+.Comparison .add-company {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 16px;
+  font-size: var(--18px);
 }
 
-.add-company-btn {
+.Comparison .add-company-btn {
   width: 48px;
   height: 48px;
   background-color: var(--grey-100);
@@ -84,28 +87,24 @@
   border-radius: 50%;
 }
 
-.bottom-btn-container {
+.Comparison .bottom-btn-container {
   display: flex;
   justify-content: center;
   margin-top: 24px;
 }
 
-.comparison-submit-btn {
+.Comparison .bottom-btn-container button {
   width: 183px;
   height: 48px;
   padding: 13px 48px;
   border-radius: 50px;
 }
-
-.disable-comparison-btn {
-  width: 183px;
-  height: 48px;
-  padding: 13px 48px;
+.Comparison .bottom-btn-container .disable-comparison-btn {
   background-color: var(--black-300);
   color: var(--grey-200);
-  border-radius: 50px;
 }
 
+/* 비교할 기업 정보 카드 */
 .CompanyItem {
   width: 126px;
   justify-content: center;
@@ -143,30 +142,32 @@
   display: flex;
   flex-direction: column;
   background-color: var(--grey-400);
-  gap: 4px;
   width: 126px;
   height: 187px;
   border-radius: 8px;
 }
 
+.ComparisonItem .LogoImg {
+  margin-top: 12px;
+}
+
 .ComparisonItem-delete {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 8px;
+  right: 8px;
+  background-color: transparent;
 }
 
 .ComparisonItem-name {
   margin-top: 10px;
   font-size: 16px;
   font-weight: 500;
-  line-height: 19.09px;
 }
 
 .ComparisonItem-categories {
   margin-top: 4px;
   font-size: 14px;
   font-weight: 500;
-  line-height: 16.71px;
   color: var(--grey-200);
 }
 
@@ -180,13 +181,35 @@
 
 /* tablet size */
 @media only screen and (max-width: 743px) {
+  .Comparison .head-container button {
+    font-size: var(--14px);
+    padding: 4px 12px;
+  }
+
   .Comparison .LogoImg.large {
     width: 65px;
     height: 65px;
     font-size: 1.2em;
   }
 
-  .cancel-btn {
+  .Comparison .add-company {
     font-size: var(--14px);
+  }
+
+  .Comparison .cancel-btn {
+    font-size: var(--12px);
+  }
+
+  .ComparisonItem {
+    width: 104px;
+    height: 163px;
+  }
+
+  .ComparisonItem-name {
+    font-size: var(--14px);
+  }
+
+  .ComparisonItem-categories {
+    font-size: var(--12px);
   }
 }

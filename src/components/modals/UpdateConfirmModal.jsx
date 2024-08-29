@@ -48,7 +48,12 @@ function UpdateConfirmModal({ isOpen, onUpdateConfirm, onCancel }) {
       <div className="UpdateConfirmModal-container">
         <div className="UpdateConfirmModal-head">
           <h3>수정 권한 인증</h3>
-          <img className="cancel-button" src={cancelBtn} alt="cancel button" onClick={handleCancelClick} />
+          <img
+            className="cancel-button"
+            src={cancelBtn}
+            alt="cancel button"
+            onClick={handleCancelClick}
+          />
         </div>
         <div className="UpdateConfirmModal-body">
           <label>비밀번호</label>
@@ -67,6 +72,7 @@ function UpdateConfirmModal({ isOpen, onUpdateConfirm, onCancel }) {
               onClick={togglePasswordVisibility}
             />
           </div>
+
           <button className="next-btn" onClick={handleNextClick}>
             다음
           </button>
