@@ -2,7 +2,7 @@ import cancelBtn from "../../assets/icon/ic_delete.svg";
 import { useState, useEffect, useRef } from "react";
 import "./globalModal.css";
 
-function UpdateModal({ isOpen, onUpdateConfirm, onCancel, initialAmount, initialComment }) {
+function UpdateModal({ isOpen, onUpdateConfirm, onCancel, password, initialAmount, initialComment }) {
   const [amount, setAmount] = useState(initialAmount || "");
   const [comment, setComment] = useState(initialComment || "");
   const [isAmountFocused, setIsAmountFocused] = useState(false);
@@ -87,7 +87,7 @@ function UpdateModal({ isOpen, onUpdateConfirm, onCancel, initialAmount, initial
 
   const handleUpdateClick = () => {
     if (!isDisabled) {
-      onUpdateConfirm({ amount, comment });
+      onUpdateConfirm({ amount, comment, password });
     }
   };
 
