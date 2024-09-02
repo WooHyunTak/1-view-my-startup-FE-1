@@ -6,9 +6,12 @@
 
 ## **팀원 구성**
 
-## 탁우현 [개인 Github 링크: https://github.com/WooHyunTak] 
-## 박상훈 [개인 Github 링크: https://github.com/dieuaimer] 
-## 임송이 [개인 Github 링크: https://github.com/Im-amberim] 
+탁우현 [개인 Github 링크: https://github.com/WooHyunTak] 
+
+박상훈 [개인 Github 링크: https://github.com/dieuaimer] 
+
+임송이 [개인 Github 링크: https://github.com/Im-amberim] 
+
 ---
 
 ## **프로젝트 소개**
