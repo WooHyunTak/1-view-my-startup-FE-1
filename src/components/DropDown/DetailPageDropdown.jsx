@@ -13,12 +13,14 @@ function DetailPageDropdown({ id, password, amount, comment }) {
   const [alertMessage, setAlertMessage] = useState(""); // 알림 메시지 관리
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false); // 알림 모달의 가시성 관리
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // 삭제 확인 모달의 가시성 관리
-  const [isUpdateConfirmModalOpen, setIsUpdateConfirmModalOpen] = useState(false); // 업데이트 확인 모달의 가시성 관리
+  const [isUpdateConfirmModalOpen, setIsUpdateConfirmModalOpen] =
+    useState(false); // 업데이트 확인 모달의 가시성 관리
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false); // 업데이트 모달의 가시성 관리
   const [previousModal, setPreviousModal] = useState(null); // 이전에 열렸던 모달을 추적하기 위한 상태
   const [pendingDelete, setPendingDelete] = useState(false); // 삭제 대기 상태 관리
 
-  const { deleteInvestmentById, updateInvestmentById, version } = useContext(InvestmentContext);
+  const { deleteInvestmentById, updateInvestmentById, version } =
+    useContext(InvestmentContext);
   const dropDownRef = useRef(null); // 드롭다운 메뉴 참조
 
   // 드롭다운 메뉴의 가시성을 토글하는 함수
@@ -144,20 +146,7 @@ function DetailPageDropdown({ id, password, amount, comment }) {
   useEffect(() => {}, [version]);
 
   return (
-    <div className="DetailPageDropdown">
-      <button onClick={toggleDropdown} ref={dropDownRef} className="kebab-menu">
-        <img src={kebabMenu} alt="Edit button" />
-      </button>
-      {visible && (
-        <div className="dropdown-menu">
-          <button className="edit" onClick={openUpdateConfirmModal}>
-            수정하기
-          </button>
-          <button className="delete" onClick={openDeleteModal}>
-            삭제하기
-          </button>
-        </div>
-      )}
+    <>
       <UpdateConfirmModal
         isOpen={isUpdateConfirmModalOpen}
         onUpdateConfirm={confirmUpdate}
@@ -171,9 +160,36 @@ function DetailPageDropdown({ id, password, amount, comment }) {
         initialAmount={amount}
         initialComment={comment}
       />
-      <DeleteConfirmModal isOpen={isDeleteModalOpen} onDeleteConfirm={confirmDelete} onCancel={closeDeleteModal} />
-      <AlertModal message={alertMessage} isAlertMeg={isAlertModalOpen} onClose={closeAlertModal} />
-    </div>
+      <DeleteConfirmModal
+        isOpen={isDeleteModalOpen}
+        onDeleteConfirm={confirmDelete}
+        onCancel={closeDeleteModal}
+      />
+      <AlertModal
+        message={alertMessage}
+        isAlertMeg={isAlertModalOpen}
+        onClose={closeAlertModal}
+      />
+      <div className="DetailPageDropdown">
+        <button
+          onClick={toggleDropdown}
+          ref={dropDownRef}
+          className="kebab-menu"
+        >
+          <img src={kebabMenu} alt="Edit button" />
+        </button>
+        {visible && (
+          <div className="dropdown-menu">
+            <button className="edit" onClick={openUpdateConfirmModal}>
+              수정하기
+            </button>
+            <button className="delete" onClick={openDeleteModal}>
+              삭제하기
+            </button>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
 

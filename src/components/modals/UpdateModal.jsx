@@ -7,6 +7,8 @@ function UpdateModal({ isOpen, onUpdateConfirm, onCancel, password, initialAmoun
   const [comment, setComment] = useState(initialComment || "");
   const [isAmountFocused, setIsAmountFocused] = useState(false);
   const [isCommentFocused, setIsCommentFocused] = useState(false);
+  const [errors, setErrors] = useState({ amount: "", comment: "" });
+  const [isDisabled, setIsDisabled] = useState(true);
   const dialogRef = useRef(null);
 
   // 컴포넌트가 마운트될 때 초기 값을 설정
@@ -33,8 +35,60 @@ function UpdateModal({ isOpen, onUpdateConfirm, onCancel, password, initialAmoun
     };
   }, [isOpen]);
 
+  // 유효성 검사 함수
+  const validateAmount = (value) => {
+    const num = Number(value);
+    if (isNaN(num)) {
+      return "투자 금액은 숫자만 입력 가능합니다.";
+    } else if (num < 10000000) {
+      return "투자 금액은 최소 1,000만 원 이상이어야 합니다.";
+    }
+    return "";
+  };
+
+  const validateComment = (value) => {
+    if (value.length < 10) {
+      return "투자 코멘트는 최소 10자리 이상이어야 합니다.";
+    }
+    return "";
+  };
+
+  // 입력값 변경 핸들러
+  const handleAmountChange = (e) => {
+    const value = e.target.value;
+    setAmount(value);
+
+    const error = validateAmount(value);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      amount: error,
+    }));
+
+    validateForm({ ...errors, amount: error });
+  };
+
+  const handleCommentChange = (e) => {
+    const value = e.target.value;
+    setComment(value);
+
+    const error = validateComment(value);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      comment: error,
+    }));
+
+    validateForm({ ...errors, comment: error });
+  };
+
+  const validateForm = (updatedErrors) => {
+    const hasErrors = Object.values(updatedErrors).some((error) => error !== "");
+    setIsDisabled(hasErrors);
+  };
+
   const handleUpdateClick = () => {
-    onUpdateConfirm({ amount, comment, password });
+    if (!isDisabled) {
+      onUpdateConfirm({ amount, comment, password });
+    }
   };
 
   return (
@@ -53,21 +107,29 @@ function UpdateModal({ isOpen, onUpdateConfirm, onCancel, password, initialAmoun
           value={amount}
           onFocus={() => setIsAmountFocused(true)}
           onBlur={() => setIsAmountFocused(false)}
-          onChange={(e) => setAmount(e.target.value)}
+          onChange={handleAmountChange}
           placeholder="투자 금액을 입력해 주세요"
-          className={isAmountFocused || !amount ? "input-active" : "input-filled"}
+          className={`${isAmountFocused || !amount ? "input-active" : "input-filled"} ${
+            errors.amount ? "error-border" : ""
+          }`}
         />
+        {errors.amount && <span className="error-text">{errors.amount}</span>}
+
         <label>투자 코멘트</label>
         <textarea
           value={comment}
           onFocus={() => setIsCommentFocused(true)}
           onBlur={() => setIsCommentFocused(false)}
-          onChange={(e) => setComment(e.target.value)}
+          onChange={handleCommentChange}
           placeholder="투자에 대한 코멘트를 입력해 주세요"
-          className={isCommentFocused || !comment ? "input-active" : "input-filled"}
+          className={`${isCommentFocused || !comment ? "input-active" : "input-filled"} ${
+            errors.comment ? "error-border" : ""
+          }`}
         />
+        {errors.comment && <span className="error-text">{errors.comment}</span>}
+
         <div className="body-button">
-          <button className="button-update" onClick={handleUpdateClick}>
+          <button className="button-update" onClick={handleUpdateClick} disabled={isDisabled}>
             수정하기
           </button>
         </div>
