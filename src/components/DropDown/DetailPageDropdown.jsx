@@ -139,12 +139,14 @@ function DetailPageDropdown({ id, password, amount, comment }) {
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
+    console.log("확인");
   }, []);
 
   useEffect(() => {}, [version]);
 
   return (
     <div className="DetailPageDropdown">
+      <AlertModal message={alertMessage} isAlertMeg={isAlertModalOpen} onClose={closeAlertModal} />
       <button onClick={toggleDropdown} ref={dropDownRef} className="kebab-menu">
         <img src={kebabMenu} alt="Edit button" />
       </button>
@@ -172,7 +174,6 @@ function DetailPageDropdown({ id, password, amount, comment }) {
         initialComment={comment}
       />
       <DeleteConfirmModal isOpen={isDeleteModalOpen} onDeleteConfirm={confirmDelete} onCancel={closeDeleteModal} />
-      <AlertModal message={alertMessage} isAlertMeg={isAlertModalOpen} onClose={closeAlertModal} />
     </div>
   );
 }
