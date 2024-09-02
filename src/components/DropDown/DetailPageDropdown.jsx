@@ -141,7 +141,6 @@ function DetailPageDropdown({ id, password, amount, comment }) {
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
-    console.log("확인");
   }, []);
 
   useEffect(() => {}, [version]);

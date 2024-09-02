@@ -1,4 +1,6 @@
 import { useRef, useEffect } from "react";
+import ReactDOM from "react-dom";
+
 import "./AlertModal.css";
 function AlertModal({ message = "", isAlertMeg, onClose }) {
   const dialogRef = useRef(null);
@@ -9,7 +11,7 @@ function AlertModal({ message = "", isAlertMeg, onClose }) {
     isAlertMeg ? dialogRef.current.showModal() : dialogRef.current.close();
   }, [isAlertMeg]);
 
-  return (
+  return ReactDOM.createPortal(
     <dialog ref={dialogRef} className="alert-modal">
       <div className="alert-modal-container">
         <div className="alert-modal-message">
@@ -21,7 +23,8 @@ function AlertModal({ message = "", isAlertMeg, onClose }) {
           </button>
         </div>
       </div>
-    </dialog>
+    </dialog>,
+    document.body // document.body에 모달을 렌더링
   );
 }
 
