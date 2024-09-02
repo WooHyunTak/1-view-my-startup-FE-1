@@ -413,7 +413,11 @@ h3 {
   margin-bottom: 24px;
 }
 .updateModal-body .error-border {
-  border: 1px solid var(--orange1);
+  border: 1px solid var(--orange);
+}
+.updateModal-body input:focus,
+.updateModal-body textarea:focus {
+  border: 1px solid var(--blue);
 }
 
 @media only screen and (max-width: 743px) {
