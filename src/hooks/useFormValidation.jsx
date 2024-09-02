@@ -11,10 +11,10 @@ const validateField = (name, value) => {
       if (isNaN(num)) {
         return "투자 금액은 숫자만 입력 가능합니다.";
       } else {
-        return value.length >= 1 ? "" : "투자 금액은 1자리 이상 입니다.";
+        return value.length >= 8 ? "" : "투자 금액은 1천만원 이상 입니다.";
       }
     case "comment":
-      return value.length >= 1 ? "" : "투자 설명은 1자리 이상입니다.";
+      return value.length >= 10 ? "" : "투자 설명은 10자리 이상입니다.";
     case "password":
       return value.length >= 1 ? "" : "비밀번호를 입력해 주세요";
     default:
