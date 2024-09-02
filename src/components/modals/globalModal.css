@@ -411,6 +411,7 @@ h3 {
   color: var(--orange);
   font-size: var(--14px);
   margin-bottom: 24px;
+  padding-left: 14px;
 }
 .updateModal-body .error-border {
   border: 1px solid var(--orange);
