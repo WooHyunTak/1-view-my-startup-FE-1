@@ -236,22 +236,6 @@ h3 {
 
 /*----for DeleteConfirmModal----*/
 
-.DeleteConfirmModal::backdrop {
-  background: rgba(0, 0, 0, 0.5);
-}
-
-.DeleteConfirmModal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 20;
-  padding: 24px;
-  background-color: var(--black-300);
-  border-radius: 16px;
-  width: 93.5%;
-  max-width: 496px;
-}
 .DeleteConfirmModal .deleteModal-head {
   display: flex;
   justify-content: space-between;
@@ -304,22 +288,6 @@ h3 {
 
 /*----for UpdateConfirmModal----*/
 
-.UpdateConfirmModal::backdrop {
-  background: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
-}
-
-.UpdateConfirmModal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 20;
-  padding: 24px;
-  background-color: var(--black-300);
-  border-radius: 16px;
-  width: 93.5%;
-  max-width: 496px;
-}
 .UpdateConfirmModal-head {
   display: flex;
   justify-content: space-between;
@@ -371,23 +339,6 @@ h3 {
 }
 
 /*----for UpdateModal----*/
-.UpdateModal::backdrop {
-  background: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
-}
-
-.UpdateModal,
-.alert-modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 20;
-  padding: 24px;
-  background-color: var(--black-300);
-  border-radius: 16px;
-  width: 93.5%;
-  max-width: 496px;
-}
 
 .updateModal-head {
   margin-bottom: 24px;
