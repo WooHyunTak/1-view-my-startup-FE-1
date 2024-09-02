@@ -24,11 +24,11 @@
   z-index: 10;
 }
 
-.kebab-menu {
+.DetailPageDropdown .kebab-menu {
   background-color: inherit;
 }
 
-.dropdown-menu button {
+.DetailPageDropdown .dropdown-menu button {
   padding: 12px 24px;
   background-color: inherit;
   border: none;
@@ -37,10 +37,10 @@
   transition: background-color 0.3s ease;
 }
 
-.dropdown-menu button:hover {
+.DetailPageDropdown .dropdown-menu button:hover {
   background-color: var(--grey-400);
 }
 
-.dropdown-menu .edit {
+.DetailPageDropdown .dropdown-menu .edit {
   border-bottom: 1px solid var(--grey-200);
 }
