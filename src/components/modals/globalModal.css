@@ -368,7 +368,7 @@ h3 {
   color: #fff;
 }
 .updateModal-body input {
-  margin-bottom: 24px;
+  margin-bottom: 10px;
   padding: 16px 20px;
   border: 1px solid var(--grey-200);
   width: 100%;
@@ -382,7 +382,7 @@ h3 {
   padding: 16px 20px;
   border: 1px solid var(--grey-200);
   border-radius: 10px;
-  margin-bottom: 24px;
+  margin-bottom: 10px;
   color: #fff;
 }
 .body-button {
@@ -406,6 +406,14 @@ h3 {
 }
 .input-filled {
   color: var(--grey-200) !important;
+}
+.error-text {
+  color: var(--orange);
+  font-size: var(--14px);
+  margin-bottom: 24px;
+}
+.updateModal-body .error-border {
+  border: 1px solid var(--orange1);
 }
 
 @media only screen and (max-width: 743px) {
